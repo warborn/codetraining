@@ -11,6 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require tether
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+//= require highlightjs/highlight.pack.min
+//= require perfect-scrollbar/js/perfect-scrollbar.jquery.min
+//= require perfect-scrollbar/js/perfect-scrollbar.min
+//= require marked/lib/marked
+//= require CodeMirror/lib/codemirror
+//= require CodeMirror/mode/javascript/javascript
+//= require CodeMirror/addon/scroll/simplescrollbars
 //= require_tree .

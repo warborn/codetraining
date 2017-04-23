@@ -1,0 +1,33 @@
+{
+  "name": "codetraining",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "authors": [
+    "Iván Munguía"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "code",
+    "training",
+    "katas",
+    "programming",
+    "challenges",
+    "code-runner"
+  ],
+  "homepage": "https://github.com/warborn/codetraining",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "marked": "^0.3.6",
+    "highlightjs": "^9.10.0",
+    "perfect-scrollbar": "^0.6.16",
+    "codemirror": "^5.25.2"
+  }
+}

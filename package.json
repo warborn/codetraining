@@ -1,0 +1,30 @@
+{
+  "name": "codetraining",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warborn/codetraining.git"
+  },
+  "keywords": [
+    "code",
+    "training",
+    "katas",
+    "programming",
+    "challenges",
+    "code-runner"
+  ],
+  "author": "Iván Munguía",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warborn/codetraining/issues"
+  },
+  "homepage": "https://github.com/warborn/codetraining#readme",
+  "dependencies": {
+    "bower": "^1.8.0"
+  }
+}

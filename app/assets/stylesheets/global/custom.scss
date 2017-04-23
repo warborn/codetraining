@@ -1,0 +1,123 @@
+/** @form-control
+ 		@button
+		@card
+ 		@list-group
+ 		@progress-bar
+ 		@nav-tabs
+*/
+
+/** @group form-control */
+.form-control {
+	background-color: #434857;
+	color: #EBEBED;
+	padding: 0.5rem 0.75rem;
+	font-size: 0.9rem;
+}
+
+.form-control:focus {
+  color: #555555;
+  background-color: #fff;
+  border-color: #fff;
+  outline: none;
+}
+
+/** @group button */
+.btn-outline-primary {
+	color: #1997C6;
+	border-color: #1997C6;
+}
+
+.btn-outline-primary:hover {
+	color: #fff;
+	background-color: #1997C6;
+	border-color: #1997C6;
+}
+
+.btn-outline-success {
+	color: #E64759;
+	border-color: #E64759;
+}
+
+.btn-outline-success:hover {
+	color: #fff;
+	background-color: #E64759;
+	border-color: #E64759;
+}
+.btn-outline-secondary {
+	color: #606060;
+	border-color: #606060;
+}
+
+.btn-outline-secondary:hover {
+	color: #C8C8C8;
+	background-color: transparent;
+	border-color: #606060;
+}
+
+/** @group card */
+.card {
+	background-color: #22252E;
+}
+
+.card-header {
+	background-color: #2C2F37;
+}
+
+/** @group list-group */
+.list-group-item {
+  background-color: transparent;
+  color: #cfd2da;
+}
+
+.list-group-item:hover {
+	background-color: #2C2F38;
+  color: #cfd2da;
+}
+
+/** @group progress-bar */
+.progress-bar {
+	background-color: #1997C6;
+}
+
+/** @group nav-tabs */
+.nav.nav-tabs {
+	background-color: #2C2F37;
+	border-color: transparent;
+}
+
+.nav.nav-tabs a {
+	color: #C4C7D0;
+}
+
+.nav-tabs .nav-link {
+
+	border-radius: 0;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+	background-color: #434448;
+	color: #DADADA;
+	border-color: transparent;
+}
+
+/** @group nav */
+.nav {
+	background-color: #131414;
+}
+
+.nav-link {
+	color: #C4C7D0;
+}
+
+.nav-item:hover {
+	background-color: #4E90C7;
+}
+
+.nav-item:hover .nav-link {
+	color: #fff;
+}

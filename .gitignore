@@ -15,3 +15,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore npm dependencies
+/node_modules
+# Ignore bower dependencies
+/vendor/assets/bower_components
