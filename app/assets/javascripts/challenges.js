@@ -1,16 +1,9 @@
 $(document).ready(function() {
   // setup perfectScrollbar for practice exercise section
-  $('#markdown-description').perfectScrollbar({wheelSpeed: 0.3, maxScrollbarLength: 80});
-  $('#preview').perfectScrollbar({wheelSpeed: 0.3, maxScrollbarLength: 80});
+  setupScrollbars(['#markdown-description', '#preview']);
 
   // setup marked and highlightjs library to use markdown for exercise details
-  hljs.initHighlightingOnLoad();
-  marked.setOptions({
-    highlight: function(code, language) {
-      result = hljs.getLanguage(language) ? hljs.highlight(language, code) : hljs.highlightAuto(code);
-      return result.value;
-    }
-  });
+  initMarked();
 
   // setup exercise description preview tabs
   $('#description-preview-tab a').click(function (e) {
@@ -19,7 +12,7 @@ $(document).ready(function() {
     let tabContent = $('#' + id).parent();
 
     if(id === 'preview') {
-      markdownMirror.save();
+      markdownEditor.save();
       markdownPreview.html(marked(markdownArea.value));
     }
 
@@ -29,12 +22,8 @@ $(document).ready(function() {
   // setup code editor for markdown description
   let markdownPreview = $('#preview .content');
   let markdownArea = $('#markdown-area')[0];
-  let markdownMirror = CodeMirror.fromTextArea(markdownArea, {
-    'scrollbarStyle': 'overlay',
-    'theme': 'material',
-    'mode': 'markdown'
-  });
-  markdownMirror.setSize('100%', 330);
+  let markdownEditor = CodeMirrorFactory.create(markdownArea, 
+    { mode: 'markdown', lineNumbers: false } );
 
   // setup exercise description preview tabs
   $('#challenge-solution-tab a').click(function (e) {
@@ -43,31 +32,17 @@ $(document).ready(function() {
   });
 
   $('#challenge-solution-tab a').on('shown.bs.tab', function() {
-    completeSolutionMirror.refresh();
-    initialSolutionMirror.refresh();
+    completeSolutionEditor.refresh();
+    initialSolutionEditor.refresh();
   });  
 
   // setup code editor for challenge solutions
   let completeSolutionArea = $('#complete-solution-area')[0];
-  let completeSolutionMirror = CodeMirror.fromTextArea(completeSolutionArea, {
-    lineNumbers: true,
-    'scrollbarStyle': 'overlay',
-    'theme': 'material',
-    'mode': 'javascript',
-    matchBrackets: true
-  });
+  let completeSolutionEditor = CodeMirrorFactory.create(completeSolutionArea);
 
   // setup code editor for challenge solutions
   let initialSolutionArea = $('#initial-solution-area')[0];
-  let initialSolutionMirror = CodeMirror.fromTextArea(initialSolutionArea, {
-    lineNumbers: true,
-    'scrollbarStyle': 'overlay',
-    'theme': 'material',
-    'mode': 'javascript',
-    matchBrackets: true
-  });
-
-
+  let initialSolutionEditor = CodeMirrorFactory.create(initialSolutionArea);
 
   // setup test cases tabs
   $('#test-cases-tab a').click(function (e) {
@@ -76,28 +51,16 @@ $(document).ready(function() {
   });
 
   $('#test-cases-tab a').on('shown.bs.tab', function() {
-    finalTestMirror.refresh();
-    exampleTestMirror.refresh();
+    finalTestEditor.refresh();
+    exampleTestEditor.refresh();
   });  
 
   // setup code editor for challenge solutions
   let finalTestArea = $('#final-test-area')[0];
-  let finalTestMirror = CodeMirror.fromTextArea(finalTestArea, {
-    lineNumbers: true,
-    'scrollbarStyle': 'overlay',
-    'theme': 'material',
-    'mode': 'javascript',
-    matchBrackets: true
-  });
+  let finalTestEditor = CodeMirrorFactory.create(finalTestArea)
 
   // setup code editor for challenge solutions
   let exampleTestArea = $('#example-test-area')[0];
-  let exampleTestMirror = CodeMirror.fromTextArea(exampleTestArea, {
-    lineNumbers: true,
-    'scrollbarStyle': 'overlay',
-    'theme': 'material',
-    'mode': 'javascript',
-    matchBrackets: true
-  });
+  let exampleTestEditor = CodeMirrorFactory.create(exampleTestArea)
 });
 
