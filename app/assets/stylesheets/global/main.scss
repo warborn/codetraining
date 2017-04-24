@@ -78,27 +78,21 @@ a:hover {
 }
 
 /** practice exercise section */
-.practice-exercise .tab-content .tab-pane {
+.practice-exercise .tab-content .tab-pane,
+.create-exercise .tab-content .tab-pane {  /* TODO: refactor */
 	font-size: 0.9em;
+	position: relative;
+	height: 100%;
 }
 
-.practice-exercise .card-block {
-	padding: 0;
+.create-exercise .tab-content { /* TODO: refactor */
+	height: 330px;
+	background-color: #2C2F37;
+	overflow: auto; 
 }
 
 .practice-exercise .tab-content {
 	height: 530px;
-}
-
-.practice-exercise .exercise-solution {
-	height: 220px;
-}
-
-.practice-exercise .exercise-tests {
-	height: 170px;
-}
-
-.practice-exercise .tab-content {
 	background-color: #2C2F37;
 	overflow: auto;
 }
@@ -111,9 +105,16 @@ a:hover {
 	margin-bottom: 20px;
 }
 
-.practice-exercise .tab-pane {
-	position: relative;
-	height: 100%;
+.practice-exercise .card-block {
+	padding: 0;
+}
+
+.practice-exercise .exercise-solution {
+	height: 220px;
+}
+
+.practice-exercise .exercise-tests {
+	height: 170px;
 }
 
 /** test output section */
@@ -183,6 +184,12 @@ a:hover {
 /** code-mirror */
 .CodeMirror {
 	font-size: 14px;
+}
+
+/** code-mirror markdown description */
+#markdown-description .CodeMirror { 
+	color: #CCCCCC;
+	background-color: #282A2A;
 }
 
 /* @group media-queries */

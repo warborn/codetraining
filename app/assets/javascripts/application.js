@@ -21,5 +21,6 @@
 //= require marked/lib/marked
 //= require CodeMirror/lib/codemirror
 //= require CodeMirror/mode/javascript/javascript
+//= require CodeMirror/mode/markdown/markdown
 //= require CodeMirror/addon/scroll/simplescrollbars
 //= require_tree .
