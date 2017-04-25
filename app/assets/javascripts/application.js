@@ -19,10 +19,10 @@
 //= require perfect-scrollbar/js/perfect-scrollbar.jquery.min
 //= require perfect-scrollbar/js/perfect-scrollbar.min
 //= require marked/lib/marked
-//= require CodeMirror/lib/codemirror
-//= require CodeMirror/mode/javascript/javascript
-//= require CodeMirror/mode/markdown/markdown
-//= require CodeMirror/addon/scroll/simplescrollbars
+//= require codemirror/lib/codemirror
+//= require codemirror/mode/javascript/javascript
+//= require codemirror/mode/markdown/markdown
+//= require codemirror/addon/scroll/simplescrollbars
 //= require axios/dist/axios.min
 //= require gijgo/dist/modular/tree/js/tree.min
 //= require_tree .
