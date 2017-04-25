@@ -23,4 +23,6 @@
 //= require CodeMirror/mode/javascript/javascript
 //= require CodeMirror/mode/markdown/markdown
 //= require CodeMirror/addon/scroll/simplescrollbars
+//= require axios/dist/axios.min
+//= require gijgo/dist/modular/tree/js/tree.min
 //= require_tree .

@@ -40,6 +40,10 @@ gem 'jbuilder', '~> 2.5'
 
 # Use bootstrap 4 for styling
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem "font-awesome-rails"
+
+# CodeRunner module to execute code using the codewars-runenr CLI
+gem 'code_runner', git: 'https://github.com/warborn/code_runner'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

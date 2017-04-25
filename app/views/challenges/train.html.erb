@@ -1,0 +1,82 @@
+<section class="row practice-exercise"><!-- practice exercise-->
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="progress mb-3">
+	  	<div class="progress-bar" role="progressbar" style="width: 0%; height: 4px;"></div>
+		</div>
+		<h5>Ordenar un arreglo</h5>
+	</div>
+	<div class="details col-sm-12 col-md-12 col-lg-5">
+		<ul class="nav nav-tabs" id="details-tab">
+			<li class="nav-item"><a href="#description" class="nav-link active">Descripción</a></li>
+			<li class="nav-item"><a href="#output" class="nav-link">Salida</a></li>
+		</ul>
+
+		<div class="tab-content">
+		  <div class="tab-pane active" id="description" role="tabpanel">
+		  	<div class="body">
+		  		<div class="content markdown">
+			  	</div>
+			  	<hr />
+			  	<div class="exercise-tags col-sm-12 col-md-12 col-lg-12">
+					  <span><i class="fa fa-tags" aria-hidden="true"></i></span>
+				    <button class="btn btn-outline-secondary btn-sm">Algoritmos</button>
+						<button class="btn btn-outline-secondary btn-sm">Arreglos</button>
+						<button class="btn btn-outline-secondary btn-sm">Funciones</button>
+						<button class="btn btn-outline-secondary btn-sm">Ordenamiento</button>
+			    </div>
+		  	</div>
+		  </div>
+		  <div class="tab-pane" id="output" role="tabpanel">
+		  	<div class="body">
+		  		<div class="header">Pasados: 0 Fallidos: 0</div>
+			  	<hr />
+			  	<div class="content" id="tree">
+			  	</div>
+		  	</div>
+		  </div>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-12 col-lg-7">
+		<div class="card">
+			<div class="card-header">
+				Solución
+			</div>
+			<card class="card-block">
+				<textarea class="form-control exercise-solution" id="code-area"></textarea>
+			</card>
+		</div>
+
+		<div class="card mt-3">
+			<div class="card-header">
+				Pruebas
+			</div>
+			<card class="card-block">
+				<textarea class="form-control exercise-tests" id="test-area"></textarea>
+			</card>
+		</div>
+		
+		<div class="exercise-options mt-3">
+			<button class="btn btn-outline-secondary col-sm-12 col-md-12 col-lg-5 col-xl-4">Desbloquear Soluciones</button>
+			<button class="test btn btn-outline-primary col-sm-12 col-md-12 col-lg-4 col-xl-3 offset-xl-2">Ejecutar pruebas</button>
+			<button class="btn btn-outline-success col-sm-12 col-md-12 col-lg-2 col-xl-2">Ejecutar</button>
+		</div>
+	</div>
+</section><!-- end practice exercise -->
+
+<script id="markdown-test" type="text/markdown">
+La funcion numeroDeOcurrencias debe regresar el número de ocurrencias de un elemento en un arreglo.
+
+```javascript
+var arr = [0,1,2,2,3];
+arr.numeroDeOcurrencias(0) === 1;
+arr.numeroDeOcurrencias(4) === 0;
+arr.numeroDeOcurrencias(2) === 2;
+arr.numeroDeOcurrencias("a") === 0;
+```
+    </script>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+     <%= render file: js_path(:challenges, :train) %>
+  </script>
+<% end %>

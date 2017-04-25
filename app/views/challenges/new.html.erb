@@ -118,3 +118,9 @@
 		</div>
 	</div><!-- end test cases -->
 </section>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+     <%= render file: js_path(:challenges, :new) %>
+  </script>
+<% end %>
