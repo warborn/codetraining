@@ -25,7 +25,7 @@ class ChallengesController < ApplicationController
     javascript = {
       setup: "var lenguageFavorito = '';",
       answer: "// javascript es el lenguaje favorito\n// asignalo a la variable lenguageFavorito\nvar lenguajeFavorito = 'javascript';",
-      fixture: "Test.expect(lenguageFavorito.length > 0, 'La cadena esta vacia')\nTest.expect(lenguageFavorito === 'javascript', 'El lenguaje favorito no es javascript')\n"
+      fixture: "Test.expect(lenguajeFavorito.length > 0, 'La cadena esta vacia')\nTest.expect(lenguajeFavorito === 'javascript', 'El lenguaje favorito no es javascript')\n"
     }
 
     examples = { javascript: javascript }
