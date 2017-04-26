@@ -45,6 +45,9 @@ gem "font-awesome-rails"
 # CodeRunner module to execute code using the codewars-runenr CLI
 gem 'code_runner', git: 'https://github.com/warborn/code_runner'
 
+gem 'execjs' 
+gem 'therubyracer'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -58,6 +61,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # for fast sass reloading
+  gem "guard", ">= 2.2.2", :require => false
+  gem "guard-livereload",  :require => false
+  gem "rack-livereload"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

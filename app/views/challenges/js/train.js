@@ -3,18 +3,10 @@ $(document).on('turbolinks:load', function() {
 	setupScrollbars(['#output', '#description']);
 
   // setup marked and highlightjs library to use markdown for exercise details
-  hljs.initHighlightingOnLoad();
-	marked.setOptions({
-		highlight: function(code, language) {
-			result = hljs.getLanguage(language) ? hljs.highlight(language, code) : hljs.higlightAuto(code);
-			return result.value
-		}
-	});
+  initMarked();
 
   let markdown = $('#markdown-test')[0].textContent;
 	$('#description .content')[0].innerHTML = marked(markdown);
-
-  
 
   // practice exercise 
 
@@ -22,23 +14,13 @@ $(document).on('turbolinks:load', function() {
   let codeArea = $('#code-area')[0];
   let testArea = $('#test-area')[0];
 
-  let baseConfig = {
-    lineNumbers: true,
-    mode: 'javascript',
-    theme: 'material',
-    scrollbarStyle: 'overlay'
-  };
-
-  let codeMirror = CodeMirror.fromTextArea(codeArea, baseConfig);
-  let testMirror = CodeMirror.fromTextArea(testArea, baseConfig);
-
   let codeStr = 'Array.prototype.numeroDeOcurrencias = function(val){\n  return this.filter(e => e === val).length; \n}';
   let testStr = "var arr = [4, 0, 4, 'a'];\n\ndescribe('Numeros', function() {\n  it('Deberia aceptar numeros', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias(4), 2);\n    Test.assertEquals(arr.numeroDeOcurrencias(0), 1);\n  });\n});\n\ndescribe('Letras', function() {\n  it('Deberia aceptar letras', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias('a'), 1);\n  });\n});";
 
-  codeMirror.setSize("100%", 250);
-  codeMirror.doc.setValue(codeStr);
-  testMirror.setSize("100%", 150);
-  testMirror.doc.setValue(testStr);
+  let codeEditor = CodeMirrorFactory.create(codeArea, { size: { width: '100%', height: 250 } });
+  let testEditor = CodeMirrorFactory.create(testArea, { size: { width: '100%', height: 150 } });
+  codeEditor.doc.setValue(codeStr);
+  testEditor.doc.setValue(testStr);
 
   // setup exercise details tabs
   $('#details-tab a').click(function (e) {
@@ -62,7 +44,6 @@ $(document).on('turbolinks:load', function() {
 
 	function setProgress(progressBar, value) {
 		progressBar.style.width = value + '%';
-		// progressBar.innerHTML = value + '%';
 	}
 
 	function getProgress(progressBar) {
@@ -74,8 +55,8 @@ $(document).on('turbolinks:load', function() {
 	submitButton.addEventListener('click', function(e) {
 		e.preventDefault();
 		$('#details-tab a[href="#output"]').tab('show')
-		codeMirror.save();
-		testMirror.save();
+		codeEditor.save();
+		testEditor.save();
 		submitButton.classList.add('is-loading');
 		setProgress(progressBar, 0);
 
@@ -95,7 +76,6 @@ $(document).on('turbolinks:load', function() {
 			fixture: testArea.value,
 		}, { responseType: 'json' })
 		.then(function(response) {
-			console.log(response.data);
 			setProgress(progressBar, 100);
 			clearInterval(interval);
 			if(Response.hasErrors(response.data)) {

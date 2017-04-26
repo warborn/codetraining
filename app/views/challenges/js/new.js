@@ -11,6 +11,9 @@
     if(id === 'preview') {
       markdownEditor.save();
       markdownPreview.html(marked(markdownArea.value));
+      tabContent.removeClass('output');
+    } else {
+      tabContent.addClass('output');
     }
 
     $(this).tab('show');
@@ -59,4 +62,22 @@
   // setup code editor for challenge solutions
   let exampleTestArea = $('#example-test-area')[0];
   let exampleTestEditor = CodeMirrorFactory.create(exampleTestArea);
+
+  // insert example functionality
+  $('#insert-btn').click(retrieveExample);
+
+  function retrieveExample() {
+    let language = 'javascript';
+
+    axios.get('/challenge/example/' + language, {
+
+    }, { responseType: 'json' })
+    .then(function(response) {
+      console.log(response);
+      example = response.data;
+      initialSolutionEditor.doc.setValue(example.setup);
+      completeSolutionEditor.doc.setValue(example.answer);
+      finalTestEditor.doc.setValue(example.fixture);
+    });
+  }
  });

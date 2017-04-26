@@ -97,8 +97,17 @@ a:hover {
 	overflow: auto;
 }
 
-.practice-exercise .tab-content .body {
+.practice-exercise .tab-content .body { /* TODO: refactor */
 	padding: 25px 15px;
+}
+
+.create-exercise .markdown-preview .body { /* TODO: refactor */
+	padding: 15px 15px;
+}
+
+.create-exercise #preview .body {
+	padding-left: 19px;
+	padding-top: 17px;
 }
 
 .practice-exercise .details {
@@ -186,10 +195,18 @@ a:hover {
 	font-size: 14px;
 }
 
+.CodeMirror-overlayscroll-horizontal {
+  height: 10px;
+}
+
+.CodeMirror-overlayscroll-vertical {
+  width: 10px;
+}
+
 /** code-mirror markdown description */
 #markdown-description .CodeMirror { 
 	color: #CCCCCC;
-	background-color: #282A2A;
+	background-color: #1E1E20;
 }
 
 /* @group media-queries */

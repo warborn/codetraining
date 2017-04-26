@@ -20,4 +20,15 @@ class ChallengesController < ApplicationController
 
   	render json: response
   end
+
+  def example
+    javascript = {
+      setup: "var lenguageFavorito = '';",
+      answer: "// javascript es el lenguaje favorito\n// asignalo a la variable lenguageFavorito\nvar lenguajeFavorito = 'javascript';",
+      fixture: "Test.expect(lenguageFavorito.length > 0, 'La cadena esta vacia')\nTest.expect(lenguageFavorito === 'javascript', 'El lenguaje favorito no es javascript')\n"
+    }
+
+    examples = { javascript: javascript }
+    render json: examples[params[:language].to_sym]
+  end
 end
