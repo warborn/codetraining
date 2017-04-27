@@ -81,59 +81,37 @@
     });
   }
 
-  let tree = null;
+  let outputSelector = '#output';
 
-  // validate solution
+  RunnerUI.init({
+    root: outputSelector,
+    tree: '#output-body'
+  });
+
   validateButton = $('#validate-btn');
   validateButton.click(function(e) {
     completeSolutionEditor.save();
     finalTestEditor.save();
 
-    if(tree) {
-      tree.destroy();
+    let runnerData = {
+      url: '/run',
+      code: completeSolutionArea.value,
+      fixture: finalTestArea.value
     }
 
-    axios.post('/run', {
-      code: completeSolutionArea.value,
-      fixture: finalTestArea.value,
-    }, { responseType: 'json' })
-    .then(function(response) {
-      $('#output').show();
-      if(Response.hasErrors(response.data)) {
-        // display error block
-        $responseDiv = $('#tree');
-        $responseDiv.empty();
-        $errorBlock = $('<div class="error-block"></div>');
-        $pre = $('<pre></pre>');
-        $pre.text(Response.getErrors(response.data));
-        $errorBlock.append($pre)
-        $responseDiv.append($errorBlock);
+    let runner = new Runner(runnerData);
 
-        // duplicated refactor soon
-        $('#output .header').text('Pasados: ' + Response.response.result.passed + ' Fallidos: '  + Response.response.result.failed);
-      } else {
-        // setup bootstrap4 treeview for test output
-        let dataSource = Response.format(response.data);
-        tree = $('#tree').tree({
-            uiLibrary: 'bootstrap4',
-            iconsLibrary: 'fontawesome',
-            dataSource: dataSource,
-            primaryKey: 'id'
-        });
+    RunnerUI.refreshTree();
 
-        $('.block-failed').each(function() {
-          $(this).parent().siblings('[data-role="expander"]').addClass('failed');
-        });
-
-        $('.block-passed').each(function() {
-          $(this).parent().siblings('[data-role="expander"]').addClass('passed');
-        });
-
-        $('#output .header').text('Pasados: ' + Response.response.result.passed + ' Fallidos: '  + Response.response.result.failed);
-      }
-    })
-    .catch(function(error) {
+    runner.send()
+    .then(function(res) {
+      let response = new Response(res);
+      $(outputSelector).show();
+      RunnerUI.displayResponse(response);
+    }).
+    catch(function(error) {
       console.log(error);
-    });
+    })
   });
+
  });

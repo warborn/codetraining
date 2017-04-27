@@ -1,21 +1,18 @@
-// function Runner() {
+function Runner(config) {
+	this.config = config;
 
-// }
-
-// data = {
-// 	url: '/run',
-// 	code: completeSolutionArea.value,
-// 	fixture: finalTestArea.value
-// }
-
-// let runner = new Runner();
-
-// runner.send()
-// .then(function() {
-// 	$('#output').show();
-
-// 	TreeView.display({
-// 		el: '#tree',
-// 		// 
-// 	})
-// })
+	this.send = function() {
+		return new Promise(function(resolve, reject) {
+			axios.post(config.url, {
+				code: config.code,
+				fixture: config.fixture
+			}, { responseType: 'json' })
+			.then(function(response) {
+				resolve(response.data);
+			})
+			.catch(function(error) {
+				reject(error.data);
+			});
+		});
+	}
+}

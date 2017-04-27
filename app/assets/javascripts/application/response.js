@@ -1,20 +1,25 @@
-let Response = {
-  format: function(response) {
-    this.response = response;
-    this.output = response.result.output;
+function Response(response) {
+  this.response = response;
+  this.output = response.result.output;
+
+  this.formatData = function() {
     this.convertProperties(this.output);
     return this.output;
-  },
+  }
 
-  hasErrors: function(response) {
-    return response.result.errors > 0;
-  },
+  this.hasErrors = function() {
+    return this.response.result.errors > 0;
+  }
 
-  getErrors: function(response) {
-    return response.result.error;
-  },
+  this.getErrors = function() {
+    return this.response.result.error;
+  }
 
-  generateText: function(block) {
+  this.getResult = function() {
+    return this.response.result;
+  }
+
+  this.generateText = function(block) {
     let str = '<span';
     if(this.isCompletedin(block)) {
       str += '><small>Completado en ' + block.v + 'ms</small></span>'
@@ -28,39 +33,39 @@ let Response = {
       str += ' class="' + block.t + '"><i class="fa fa-' + (block.t === 'passed' ? 'check' : 'close') + '"></i>'+ block.v + '</span>';
     }
     return str;
-  },
+  }
 
-  passed: function(block) {
+  this.passed = function(block) {
     return block.filter(object => object.t === 'passed');
-  },
+  }
 
-  failed: function(block) {
+  this.failed = function(block) {
     return block.filter(object => object.t === 'failed');
-  },
+  }
 
-  generateStatsHTML: function(block) {
+  this.generateStatsHTML = function(block) {
     return '(<span class="passed">' + this.passed(block).length + ' Pasados</span>, <span class="failed">' + this.failed(block).length + ' Fallidos</failed>)';
-  },
+  }
 
-  isDescribe: function(block) {
+  this.isDescribe = function(block) {
     return block.t === 'describe';
-  },
+  }
 
-  isIt: function(block) {
+  this.isIt = function(block) {
     return block.t === 'it';
-  },
+  }
 
-  isCompletedin: function(block) {
+  this.isCompletedin = function(block) {
     return block.t === 'completedin';
-  },
+  }
 
-  getStatusClass: function(block) {
+  this.getStatusClass = function(block) {
     return block.p ? 'passed' : 'failed';
-  },
+  }
 
-  convertProperties: function(response) {
+  this.convertProperties = function(output) {
     let that = this;
-    response.forEach(function(block) {
+    output.forEach(function(block) {
       block.text = that.generateText(block);
       if(block.items) {
         block.children = block.items;
