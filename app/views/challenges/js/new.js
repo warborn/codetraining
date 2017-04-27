@@ -100,9 +100,6 @@
     }
 
     let runner = new Runner(runnerData);
-
-    RunnerUI.refreshTree();
-
     runner.send()
     .then(function(res) {
       let response = new Response(res);

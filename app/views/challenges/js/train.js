@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function() {
       tabContent.removeClass('description');
     } else {
       tabContent.addClass('description');
-      tabContent.removeClass('output passed failed');
+      tabContent.removeClass('output');
     }
 
     $(this).tab('show');
@@ -50,14 +50,15 @@ $(document).on('turbolinks:load', function() {
 		return parseInt(progressBar.style.width.replace('/%/', ''));
 	}
 
-	let tree = null;
+	RunnerUI.init({
+		root: '#output',
+		tree: '#output-body'
+	});
 
 	submitButton.addEventListener('click', function(e) {
-		e.preventDefault();
 		$('#details-tab a[href="#output"]').tab('show')
 		codeEditor.save();
 		testEditor.save();
-		submitButton.classList.add('is-loading');
 		setProgress(progressBar, 0);
 
 		var interval = setInterval(function() {
@@ -67,67 +68,20 @@ $(document).on('turbolinks:load', function() {
 			}
 		}, 800);
 
-		if(tree) {
-			tree.destroy();
+		let runnerData = {
+			url: '/run',
+			code: codeArea.value,
+			fixture: testArea.value
 		}
 
-		axios.post('/run', {
-			code: codeArea.value,
-			fixture: testArea.value,
-		}, { responseType: 'json' })
-		.then(function(response) {
+		let runner = new Runner(runnerData);
+		runner.send()
+		.then(function(res) {
 			setProgress(progressBar, 100);
 			clearInterval(interval);
-			if(Response.hasErrors(response.data)) {
-				// display error block
-				$responseDiv = $('#tree');
-				$responseDiv.empty();
-				$errorBlock = $('<div class="error-block"></div>');
-				$pre = $('<pre></pre>');
-				$pre.text(Response.getErrors(response.data));
-				$errorBlock.append($pre)
-				$responseDiv.append($errorBlock);
 
-				// duplicated refactor soon
-				$('#output .header').text('Pasados: ' + Response.response.result.passed + ' Fallidos: '  + Response.response.result.failed);
-
-	    	let tabContent = $('#output').parent();
-	    	if(Response.response.result.completed) {    	
-	      	tabContent.addClass('passed');
-	      	tabContent.removeClass('failed');	
-	    	} else {   	
-	      	tabContent.addClass('failed');	
-	      	tabContent.removeClass('passed');	
-    		}
-			} else {
-				// setup bootstrap4 treeview for test output
-			  let dataSource = Response.format(response.data);
-				tree = $('#tree').tree({
-			      uiLibrary: 'bootstrap4',
-			      iconsLibrary: 'fontawesome',
-			      dataSource: dataSource,
-			      primaryKey: 'id'
-			  });
-
-			  $('.block-failed').each(function() {
-			    $(this).parent().siblings('[data-role="expander"]').addClass('failed');
-			  });
-
-			  $('.block-passed').each(function() {
-			    $(this).parent().siblings('[data-role="expander"]').addClass('passed');
-			  });
-
-			  $('#output .header').text('Pasados: ' + Response.response.result.passed + ' Fallidos: '  + Response.response.result.failed);
-
-	    	let tabContent = $('#output').parent();
-	    	if(Response.response.result.completed) {    	
-	      	tabContent.addClass('passed');
-	      	tabContent.removeClass('failed');	
-	    	} else {   	
-	      	tabContent.addClass('failed');	
-	      	tabContent.removeClass('passed');	
-    		}
-			}
+			let response = new Response(res);
+			RunnerUI.displayResponse(response);
 		})
 		.catch(function(error) {
 			console.log(error)

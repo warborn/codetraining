@@ -1,15 +1,14 @@
 function TreeView(config) {
 	this.config = config;
-	this.show = false;
-	this.displaying = null;
+	this.tree = null;
 
 	this.isAlive = function() {
-		return this.displaying !== null;
+		return this.tree !== null;
 	}
 
 	this.destroy = function() {
 		this.tree.destroy();
-		this.displaying = false;
+		this.tree = null;
 	}
 
 	this.display = function(data) {

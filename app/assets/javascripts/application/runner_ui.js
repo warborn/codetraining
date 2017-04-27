@@ -2,10 +2,7 @@ let RunnerUI = {
 	init: function(config) {
 		this.rootSelector = config.root;
 		this.treeSelector = config.tree;
-		this.tree = new TreeView({
-			root: this.rootSelector,
-			tree: this.treeSelector
-		});
+		this.treeView = null;
 	},
 
 	setResponse: function(response) {
@@ -14,12 +11,18 @@ let RunnerUI = {
 	},
 
 	refreshTree: function() {
-    if(this.tree.isAlive()) { 
-    	this.tree.destroy();
+    if(this.treeView && this.treeView.isAlive()) { 
+    	this.treeView.destroy();
     }
+
+    this.treeView =	new TreeView({
+			root: this.rootSelector,
+			tree: this.treeSelector
+		});
 	},
 
 	displayResponse: function(response) {
+		this.refreshTree();
 		this.setResponse(response);
 		this.displayHeader();
 		
@@ -28,6 +31,7 @@ let RunnerUI = {
     } else {
       this.displayTree();
     }
+    this.displayBorder(this.result.completed);
 	},
 
 	displayHeader: function() {
@@ -45,6 +49,11 @@ let RunnerUI = {
 	},
 
 	displayTree: function() {
-		this.tree.display(this.response.formatData());
+		this.treeView.display(this.response.formatData());
+	},
+
+	displayBorder: function(completed) {
+		$border = $(this.rootSelector + ' .border').removeClass('passed failed');
+		$border.addClass(completed ? 'passed' : 'failed');
 	}
 }
