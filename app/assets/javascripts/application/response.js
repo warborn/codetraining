@@ -8,11 +8,11 @@ function Response(response) {
   }
 
   this.hasErrors = function() {
-    return this.response.result.errors > 0;
+    return this.response.result.errors > 0 | this.response.exit_code === 1;
   }
 
   this.getErrors = function() {
-    return this.response.result.error;
+    return this.response.result.error || this.response.stderr;
   }
 
   this.getResult = function() {
