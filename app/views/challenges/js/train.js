@@ -40,15 +40,6 @@ $(document).on('turbolinks:load', function() {
   });
 
   var submitButton = document.querySelector('button.test');
-	var progressBar = document.querySelector('.progress-bar');
-
-	function setProgress(progressBar, value) {
-		progressBar.style.width = value + '%';
-	}
-
-	function getProgress(progressBar) {
-		return parseInt(progressBar.style.width.replace('/%/', ''));
-	}
 
 	RunnerUI.init({
 		root: '#output',
@@ -59,14 +50,12 @@ $(document).on('turbolinks:load', function() {
 		$('#details-tab a[href="#output"]').tab('show')
 		codeEditor.save();
 		testEditor.save();
-		setProgress(progressBar, 0);
 
-		var interval = setInterval(function() {
-			setProgress(progressBar, getProgress(progressBar) + 10);
-			if(getProgress(progressBar) >= 100) {
-				clearInterval(interval);
-			}
-		}, 800);
+		let progressbar = new Progressbar({
+			root: '.progress-bar', delay: 800, step: 10
+		});
+
+		progressbar.startInterval();
 
 		let runnerData = {
 			url: '/run',
@@ -77,16 +66,14 @@ $(document).on('turbolinks:load', function() {
 		let runner = new Runner(runnerData);
 		runner.send()
 		.then(function(res) {
-			setProgress(progressBar, 100);
-			clearInterval(interval);
+			progressbar.finished();
 
 			let response = new Response(res);
 			RunnerUI.displayResponse(response);
 		})
 		.catch(function(error) {
-			console.log(error)
-			setProgress(progressBar, 100);
-			clearInterval(interval);
+			console.log(error);
+			progressbar.finished();
 		});
 	});
 });
