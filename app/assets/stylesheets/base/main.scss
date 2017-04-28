@@ -24,6 +24,10 @@
 	height: 530px;
 }
 
+.border {
+	border: 1px solid $dark-blue-color;
+}
+
 .btn-group, .btn-group .btn {
 	width: 100%;
 }
@@ -58,24 +62,33 @@
 }
 
 /** practice exercise section */
-.practice-exercise .tab-content .tab-pane .body {
-	min-height: 530px;
+
+.practice-exercise {
+	.tab-content .tab-pane .body {
+		min-height: 530px;
+	}
+
+	.details {
+		margin-bottom: 20px;
+	}
+
+	.card-block {
+		padding: 0;
+	}
+
+	.exercise-solution {
+		height: 220px;
+	}
+
+	.exercise-tests {
+		height: 170px;
+	}
 }
 
-.practice-exercise .details {
-	margin-bottom: 20px;
-}
-
-.practice-exercise .card-block {
-	padding: 0;
-}
-
-.practice-exercise .exercise-solution {
-	height: 220px;
-}
-
-.practice-exercise .exercise-tests {
-	height: 170px;
+.create-exercise {
+	.nav.nav-tabs {
+		border-color: $dark-blue-color;
+	}
 }
 
 /* @group media-queries */
