@@ -7,8 +7,7 @@
     root: '#description-preview-tab',
     tabs: {
       preview: function(tabContent) {
-        markdownEditor.save();
-        markdownPreview.html(marked(markdownArea.value));
+        markdownPreview.html(marked(markdownEditor.getValue()));
         tabContent.removeClass('output');
       },
       'markdown-preview': function(tabContent) {
@@ -19,9 +18,8 @@
 
   // setup code editor for markdown description
   let markdownPreview = $('#preview .content');
-  let markdownArea = $('#markdown-area')[0];
-  let markdownEditor = CodeMirrorFactory.create(markdownArea, 
-    { mode: 'markdown', lineNumbers: false } );
+  let markdownEditor = new CodeEditor('#markdown-area', 
+    { mode: 'markdown', lineNumbers: false });
 
   // setup test cases tabs
   new TabComponent({ root: '#challenge-solution-tab' })
@@ -31,12 +29,10 @@
       });
 
   // setup code editor for challenge solutions
-  let completeSolutionArea = $('#complete-solution-area')[0];
-  let completeSolutionEditor = CodeMirrorFactory.create(completeSolutionArea);
+  let completeSolutionEditor = new CodeEditor('#complete-solution-area');
 
   // setup code editor for challenge solutions
-  let initialSolutionArea = $('#initial-solution-area')[0];
-  let initialSolutionEditor = CodeMirrorFactory.create(initialSolutionArea);
+  let initialSolutionEditor = new CodeEditor('#initial-solution-area');
 
   // setup test cases tabs
   new TabComponent({ root: '#test-cases-tab' })
@@ -46,12 +42,10 @@
       });
 
   // setup code editor for challenge solutions
-  let finalTestArea = $('#final-test-area')[0];
-  let finalTestEditor = CodeMirrorFactory.create(finalTestArea);
+  let finalTestEditor = new CodeEditor('#final-test-area');
 
   // setup code editor for challenge solutions
-  let exampleTestArea = $('#example-test-area')[0];
-  let exampleTestEditor = CodeMirrorFactory.create(exampleTestArea);
+  let exampleTestEditor = new CodeEditor('#example-test-area');
 
   // insert example functionality
   $('#insert-btn').click(retrieveExample);
@@ -65,9 +59,9 @@
     .then(function(response) {
       console.log(response);
       example = response.data;
-      initialSolutionEditor.doc.setValue(example.setup);
-      completeSolutionEditor.doc.setValue(example.answer);
-      finalTestEditor.doc.setValue(example.fixture);
+      initialSolutionEditor.setValue(example.setup);
+      completeSolutionEditor.setValue(example.answer);
+      finalTestEditor.setValue(example.fixture);
     });
   }
 
@@ -78,13 +72,10 @@
 
   validateButton = $('#validate-btn');
   validateButton.click(function(e) {
-    completeSolutionEditor.save();
-    finalTestEditor.save();
-
     let runnerData = {
       url: '/run',
-      code: completeSolutionArea.value,
-      fixture: finalTestArea.value
+      code: completeSolutionEditor.getValue(),
+      fixture: finalTestEditor.getValue()
     }
 
     let runner = new Runner(runnerData);

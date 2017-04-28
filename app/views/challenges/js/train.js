@@ -11,27 +11,24 @@ $(document).on('turbolinks:load', function() {
   // practice exercise 
 
   // setup codemirror code and test areas
-  let codeArea = $('#code-area')[0];
-  let testArea = $('#test-area')[0];
-
   let codeStr = 'Array.prototype.numeroDeOcurrencias = function(val){\n  return this.filter(e => e === val).length; \n}';
   let testStr = "var arr = [4, 0, 4, 'a'];\n\ndescribe('Numeros', function() {\n  it('Deberia aceptar numeros', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias(4), 2);\n    Test.assertEquals(arr.numeroDeOcurrencias(0), 1);\n  });\n});\n\ndescribe('Letras', function() {\n  it('Deberia aceptar letras', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias('a'), 1);\n  });\n});";
 
-  let codeEditor = CodeMirrorFactory.create(codeArea, { size: { width: '100%', height: 250 } });
-  let testEditor = CodeMirrorFactory.create(testArea, { size: { width: '100%', height: 150 } });
-  codeEditor.doc.setValue(codeStr);
-  testEditor.doc.setValue(testStr);
+  let codeEditor = new CodeEditor('#code-area', 
+  	{ size: { width: '100%', height: 250 } }, codeStr);
+  let testEditor = new CodeEditor('#test-area', 
+  	{ size: { width: '100%', height: 150 } }, testStr);
 
   // setup exercise details tabs
   let tabComponent = new TabComponent({
   	root: '#details-tab',
-  	tabs: {
-  		output: function(tabContent) {
-  			tabContent.addClass('output').removeClass('description');
-  		},
-  		description: function(tabContent) {
-  			tabContent.addClass('description').removeClass('output');
-  		}
+	  tabs: {
+			output: function(tabContent) {
+				tabContent.addClass('output').removeClass('description');
+			},
+			description: function(tabContent) {
+				tabContent.addClass('description').removeClass('output');
+			}
   	}
   });
 
@@ -43,9 +40,7 @@ $(document).on('turbolinks:load', function() {
 	});
 
 	submitButton.addEventListener('click', function(e) {
-		$('#details-tab a[href="#output"]').tab('show')
-		codeEditor.save();
-		testEditor.save();
+		$('#details-tab a[href="#output"]').tab('show');
 
 		let progressbar = new Progressbar({
 			root: '.progress-bar', delay: 800, step: 10
@@ -55,8 +50,8 @@ $(document).on('turbolinks:load', function() {
 
 		let runnerData = {
 			url: '/run',
-			code: codeArea.value,
-			fixture: testArea.value
+			code: codeEditor.getValue(),
+			fixture: codeEditor.getValue()
 		}
 
 		let runner = new Runner(runnerData);
