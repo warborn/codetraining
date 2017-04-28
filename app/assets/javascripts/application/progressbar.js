@@ -15,7 +15,6 @@ function Progressbar(config) {
 	this.startInterval = function() {
 		let that = this;
 		this.interval = setInterval(function() {
-			console.log('intervaling');
 			that.setProgress(that.getProgress() + that.step);
 			if(that.getProgress() >= 100) {
 				that.stopInterval();

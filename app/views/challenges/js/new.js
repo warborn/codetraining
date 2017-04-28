@@ -3,20 +3,18 @@
   setupScrollbars(['.scroll']);
 
   // setup exercise description preview tabs
-  $('#description-preview-tab a').click(function (e) {
-    e.preventDefault();
-    let id = this.href.replace(/.+#/g, '');
-    let tabContent = $('#' + id).parent();
-
-    if(id === 'preview') {
-      markdownEditor.save();
-      markdownPreview.html(marked(markdownArea.value));
-      tabContent.removeClass('output');
-    } else {
-      tabContent.addClass('output');
+  let tabComponent = new TabComponent({
+    root: '#description-preview-tab',
+    tabs: {
+      preview: function(tabContent) {
+        markdownEditor.save();
+        markdownPreview.html(marked(markdownArea.value));
+        tabContent.removeClass('output');
+      },
+      'markdown-preview': function(tabContent) {
+        tabContent.addClass('output');
+      }
     }
-
-    $(this).tab('show');
   });
 
   // setup code editor for markdown description
@@ -25,16 +23,12 @@
   let markdownEditor = CodeMirrorFactory.create(markdownArea, 
     { mode: 'markdown', lineNumbers: false } );
 
-  // setup exercise description preview tabs
-  $('#challenge-solution-tab a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  });
-
-  $('#challenge-solution-tab a').on('shown.bs.tab', function() {
-    completeSolutionEditor.refresh();
-    initialSolutionEditor.refresh();
-  });  
+  // setup test cases tabs
+  new TabComponent({ root: '#challenge-solution-tab' })
+      .shown(function() {
+        completeSolutionEditor.refresh();
+        initialSolutionEditor.refresh();
+      });
 
   // setup code editor for challenge solutions
   let completeSolutionArea = $('#complete-solution-area')[0];
@@ -45,15 +39,11 @@
   let initialSolutionEditor = CodeMirrorFactory.create(initialSolutionArea);
 
   // setup test cases tabs
-  $('#test-cases-tab a').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  });
-
-  $('#test-cases-tab a').on('shown.bs.tab', function() {
-    finalTestEditor.refresh();
-    exampleTestEditor.refresh();
-  });  
+  new TabComponent({ root: '#test-cases-tab' })
+      .shown(function() {
+        finalTestEditor.refresh();
+        exampleTestEditor.refresh();
+      });
 
   // setup code editor for challenge solutions
   let finalTestArea = $('#final-test-area')[0];

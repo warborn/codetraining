@@ -23,20 +23,16 @@ $(document).on('turbolinks:load', function() {
   testEditor.doc.setValue(testStr);
 
   // setup exercise details tabs
-  $('#details-tab a').click(function (e) {
-    e.preventDefault();
-    let id = this.href.replace(/.+#/g, '');
-    let tabContent = $('#' + id).parent();
-
-    if(id === 'output') {
-      tabContent.addClass('output');
-      tabContent.removeClass('description');
-    } else {
-      tabContent.addClass('description');
-      tabContent.removeClass('output');
-    }
-
-    $(this).tab('show');
+  let tabComponent = new TabComponent({
+  	root: '#details-tab',
+  	tabs: {
+  		output: function(tabContent) {
+  			tabContent.addClass('output').removeClass('description');
+  		},
+  		description: function(tabContent) {
+  			tabContent.addClass('description').removeClass('output');
+  		}
+  	}
   });
 
   var submitButton = document.querySelector('button.test');
