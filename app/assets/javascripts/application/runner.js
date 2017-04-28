@@ -1,7 +1,8 @@
 function Runner(config) {
 	this.config = config;
 
-	this.send = function() {
+	this.send = function(cb) {
+		cb();
 		return new Promise(function(resolve, reject) {
 			axios.post(config.url, {
 				code: config.code,

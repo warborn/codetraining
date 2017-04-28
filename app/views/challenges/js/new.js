@@ -79,10 +79,12 @@
     }
 
     let runner = new Runner(runnerData);
-    runner.send()
+    runner.send(function() {
+      $('.collapse').show();
+      RunnerUI.displayPendingHeader();
+    })
     .then(function(res) {
       let response = new Response(res);
-      $('.collapse').show();
       RunnerUI.displayResponse(response);
     }).
     catch(function(error) {

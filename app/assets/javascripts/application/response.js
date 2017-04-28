@@ -19,6 +19,10 @@ function Response(response) {
     return this.response.result;
   }
 
+  this.getExecutionTime = function() {
+    return this.response.execution_time;
+  }
+
   this.generateText = function(block) {
     let str = '<span';
     if(this.isCompletedin(block)) {

@@ -23,12 +23,12 @@ $(document).on('turbolinks:load', function() {
   let tabComponent = new TabComponent({
   	root: '#details-tab',
 	  tabs: {
-			output: function(tabContent) {
-				tabContent.addClass('output').removeClass('description');
-			},
-			description: function(tabContent) {
-				tabContent.addClass('description').removeClass('output');
-			}
+		output: function(tabContent) {
+			tabContent.addClass('output').removeClass('description');
+		},
+		description: function(tabContent) {
+			tabContent.addClass('description').removeClass('output');
+		}
   	}
   });
 
@@ -55,7 +55,9 @@ $(document).on('turbolinks:load', function() {
 		}
 
 		let runner = new Runner(runnerData);
-		runner.send()
+		runner.send(function() {
+			RunnerUI.displayPendingHeader();
+		})
 		.then(function(res) {
 			progressbar.finished();
 

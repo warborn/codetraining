@@ -24,7 +24,7 @@ let RunnerUI = {
 	displayResponse: function(response) {
 		this.refreshTree();
 		this.setResponse(response);
-		this.displayHeader();
+		this.displayResponseHeader();
 		
     if(this.response.hasErrors()) {
       this.displayErrors();
@@ -34,8 +34,16 @@ let RunnerUI = {
     this.displayBorder(this.result.completed);
 	},
 
-	displayHeader: function() {
-		$(this.rootSelector + ' .header').text('Pasados: ' + this.result.passed + ' Fallidos: '  + this.result.failed);
+	displayHeader: function(message) {
+		$(this.rootSelector + ' .header').text(message);
+	},
+
+	displayResponseHeader: function() {
+		this.displayHeader('Tiempo: ' + this.response.getExecutionTime() + 'ms Pasados: ' + this.result.passed + ' Fallidos: '  + this.result.failed);
+	},
+
+	displayPendingHeader: function() {
+		this.displayHeader('Estado: Pendiente');
 	},
 
 	displayErrors: function() {
