@@ -1,0 +1,12 @@
+.markdown-description {
+	> .body {
+		padding: 10px 0 0 15px;
+		background-color: $output-bg;
+	}
+
+	.CodeMirror { 
+		color: $markdown-editor-color;
+		background-color: $output-bg;
+		font-size: 1.1rem;
+	}
+}

@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   // setup perfectScrollbar for practice exercise section
-	setupScrollbars(['#output', '#description']);
+	setupScrollbars(['.scroll']);
 
   // setup marked and highlightjs library to use markdown for exercise details
   initMarked();
@@ -52,7 +52,7 @@ $(document).on('turbolinks:load', function() {
 
 	RunnerUI.init({
 		root: '#output',
-		tree: '#output-body'
+		content: '#output-body'
 	});
 
 	submitButton.addEventListener('click', function(e) {

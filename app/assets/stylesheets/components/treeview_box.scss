@@ -1,0 +1,22 @@
+.treeview-box {
+	small {
+		color: $completedin-color;
+		font-weight: bold;
+	}
+
+	.list-group .list-group-item {
+		font-size: 1.03em;
+	}
+
+	.list-group .list-group-item .list-group-item [data-role="spacer"] {
+	  width: 12px !important;
+	}
+
+	.list-group-item, 
+	.list-group-item:hover, 
+	.list-group-item.active {
+	  background-color: transparent;
+	  border-color: transparent;
+		color: #cfd2da;
+	}
+}

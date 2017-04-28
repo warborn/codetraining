@@ -1,0 +1,17 @@
+.code-output {
+	> .body {
+		background-color: $output-bg;
+		@include output;
+	}
+
+	>.body.-passed {
+		border: 2px solid $passed-color;
+	}
+
+	>.body.-failed {
+		border: 2px solid $failed-color;
+	}
+
+	> .body > .header {  }
+	> .body > .content {  }
+}

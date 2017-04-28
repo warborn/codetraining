@@ -1,6 +1,6 @@
  $(document).on('turbolinks:load', function() {	
   // setup perfectScrollbar for markdown description section
-  setupScrollbars(['#markdown-description', '#preview']);
+  setupScrollbars(['.scroll']);
 
   // setup exercise description preview tabs
   $('#description-preview-tab a').click(function (e) {
@@ -81,11 +81,9 @@
     });
   }
 
-  let outputSelector = '#output';
-
   RunnerUI.init({
-    root: outputSelector,
-    tree: '#output-body'
+    root: '#output',
+    content: '#output-body'
   });
 
   validateButton = $('#validate-btn');
@@ -103,7 +101,7 @@
     runner.send()
     .then(function(res) {
       let response = new Response(res);
-      $(outputSelector).show();
+      $('.collapse').show();
       RunnerUI.displayResponse(response);
     }).
     catch(function(error) {

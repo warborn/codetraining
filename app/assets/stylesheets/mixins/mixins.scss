@@ -1,0 +1,5 @@
+// common style for displaying markdown and code output
+@mixin output {
+	font-size: 0.9em;
+	padding: 25px 15px;
+}

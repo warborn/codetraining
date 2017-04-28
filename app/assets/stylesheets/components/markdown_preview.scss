@@ -1,0 +1,14 @@
+.markdown-preview {
+	> .body {
+  	background-color: $preview-bg;
+		@include output;
+	}
+
+	> .body > .content pre:not([class]) {
+		background-color: $output-bg;
+		color: $markdown-preview-color;
+		width: 100%;
+		display: block;
+		padding: 15px 15px;
+	}
+}

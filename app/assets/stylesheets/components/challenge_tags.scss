@@ -1,0 +1,14 @@
+.challenge-tags {
+	> .icon { 
+		position: relative;
+		top: -4px;
+	}
+
+	> .tag {
+		display: inline-block;
+	  padding: .20rem .4rem;
+	  font-size: .850rem;
+	  border-radius: .2rem;
+	  margin: 0 10px 10px 0;
+	}
+}

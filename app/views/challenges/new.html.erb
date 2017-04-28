@@ -52,15 +52,17 @@
 			<li class="nav-item"><a href="#preview" class="nav-link">Preview</a></li>
 		</ul>
 
-		<div class="tab-content markdown-preview output">
-		  <div class="tab-pane active" id="markdown-description" role="tabpanel">
+		<div class="tab-content">
+		  <div class="tab-pane active markdown-description" id="markdown-description" role="tabpanel">
 		  	<div class="body">
-		  		<textarea class="form-control" id="markdown-area"></textarea>
+		  		<div class="content">
+		  			<textarea class="form-control" id="markdown-area"></textarea>
+		  		</div>
 		  	</div>
 		  </div>
-		  <div class="tab-pane" id="preview" role="tabpanel">
+		  <div class="tab-pane scroll markdown-preview" id="preview" role="tabpanel">
 		  	<div class="body">
-		  		<div class="content markdown">
+		  		<div class="content">
 			  	</div>
 		  	</div>
 		  </div>
@@ -79,14 +81,12 @@
 	</div>
 
 	<div class="mt-5 col-sm-12 col-md-12 col-lg-12">
-		<div class="collapsed-output collapse" id="output">
-			<div class="border">
-				<div class="card">
-					<div class="card-block">
-						<div class="header">Pasados: 0 Fallidos: 0</div>
-					  <hr />
-				  	<div class="content" id="output-body"></div>
-					</div>
+		<div class="collapse">
+			<div class="card code-output" id="output">
+				<div class="card-block body">
+					<div class="header">Pasados: 0 Fallidos: 0</div>
+				  <hr />
+			  	<div class="content" id="output-body"></div>
 				</div>
 			</div>
 		</div>

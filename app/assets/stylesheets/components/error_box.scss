@@ -1,0 +1,12 @@
+.error-box {
+	> .box {
+		border: 1px solid $failed-color;
+		border-radius: 3px;
+		background-color: $error-block-bg;
+		padding: 10px 15px;
+	}
+
+	> .box pre {
+		color: $error-block-color;
+	}
+}

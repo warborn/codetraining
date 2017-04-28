@@ -1,7 +1,7 @@
 let RunnerUI = {
 	init: function(config) {
 		this.rootSelector = config.root;
-		this.treeSelector = config.tree;
+		this.contentSelector = config.content;
 		this.treeView = null;
 	},
 
@@ -17,7 +17,7 @@ let RunnerUI = {
 
     this.treeView =	new TreeView({
 			root: this.rootSelector,
-			tree: this.treeSelector
+			tree: this.contentSelector
 		});
 	},
 
@@ -39,9 +39,10 @@ let RunnerUI = {
 	},
 
 	displayErrors: function() {
-		$root = $(this.treeSelector);
+		this.setOutputType('error-box');
+		$root = $(this.contentSelector);
 		$root.empty();
-		$errorBlock = $('<div class="error-block"></div>');
+		$errorBlock = $('<div class="box"></div>');
     $pre = $('<pre></pre>');
     $pre.text(this.response.getErrors());
     $errorBlock.append($pre)
@@ -49,11 +50,18 @@ let RunnerUI = {
 	},
 
 	displayTree: function() {
+		this.setOutputType('treeview-box');
 		this.treeView.display(this.response.formatData());
 	},
 
 	displayBorder: function(completed) {
-		$border = $(this.rootSelector + ' .border').removeClass('passed failed');
-		$border.addClass(completed ? 'passed' : 'failed');
+		$border = $(this.rootSelector + ' .body').removeClass('-passed -failed');
+		$border.addClass(completed ? '-passed' : '-failed');
+	},
+
+	setOutputType: function(className) {
+		$(this.contentSelector)
+			.removeClass('treeview-box error-box')
+			.addClass('content ' + className);
 	}
 }
