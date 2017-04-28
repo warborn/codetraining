@@ -1,5 +1,6 @@
 function CodeEditor(selector, options, value) {
 	this.constructor = function() {
+		$(selector).siblings().remove();
 		this.editor = CodeMirrorFactory.create($(selector)[0], options);
 		if(value) {
 			this.editor.doc.setValue(value);
