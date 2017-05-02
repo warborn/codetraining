@@ -3,6 +3,7 @@ class ChallengesController < ApplicationController
   end
 
   def train
+    @translation = Translation.includes(:challenge).first
   end
 
   def run

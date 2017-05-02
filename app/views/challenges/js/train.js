@@ -5,30 +5,25 @@ $(document).on('turbolinks:load', function() {
   // setup marked and highlightjs library to use markdown for exercise details
   initMarked();
 
-  let markdown = $('#markdown-test')[0].textContent;
+  let markdown = $('#description .content input[type=hidden]').val();
 	$('#description .content')[0].innerHTML = marked(markdown);
 
-  // practice exercise 
-
   // setup codemirror code and test areas
-  let codeStr = 'Array.prototype.numeroDeOcurrencias = function(val){\n  return this.filter(e => e === val).length; \n}';
-  let testStr = "var arr = [4, 0, 4, 'a'];\n\ndescribe('Numeros', function() {\n  it('Deberia aceptar numeros', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias(4), 2);\n    Test.assertEquals(arr.numeroDeOcurrencias(0), 1);\n  });\n});\n\ndescribe('Letras', function() {\n  it('Deberia aceptar letras', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias('a'), 1);\n  });\n});";
-
   let codeEditor = new CodeEditor('#code-area', 
-  	{ size: { width: '100%', height: 250 } }, codeStr);
+  	{ size: { width: '100%', height: 250 } }, $('#code-area').val());
   let testEditor = new CodeEditor('#test-area', 
-  	{ size: { width: '100%', height: 150 } }, testStr);
+  	{ size: { width: '100%', height: 150 } }, $('#test-area').val());
 
   // setup exercise details tabs
   let tabComponent = new TabComponent({
   	root: '#details-tab',
 	  tabs: {
-		output: function(tabContent) {
-			tabContent.addClass('output').removeClass('description');
-		},
-		description: function(tabContent) {
-			tabContent.addClass('description').removeClass('output');
-		}
+			output: function(tabContent) {
+				tabContent.addClass('output').removeClass('description');
+			},
+			description: function(tabContent) {
+				tabContent.addClass('description').removeClass('output');
+			}
   	}
   });
 
@@ -51,7 +46,7 @@ $(document).on('turbolinks:load', function() {
 		let runnerData = {
 			url: '/run',
 			code: codeEditor.getValue(),
-			fixture: codeEditor.getValue()
+			fixture: testEditor.getValue()
 		}
 
 		let runner = new Runner(runnerData);

@@ -3,7 +3,7 @@
 		<div class="progress mb-3">
 	  	<div class="progress-bar" role="progressbar" style="width: 0%; height: 4px;"></div>
 		</div>
-		<h5>Ordenar un arreglo</h5>
+		<h5><%= @translation.challenge.name %></h5>
 	</div>
 	<div class="details col-sm-12 col-md-12 col-lg-5">
 		<ul class="nav nav-tabs" id="details-tab">
@@ -15,14 +15,14 @@
 		  <div class="tab-pane scroll active markdown-preview" id="description" role="tabpanel">
 		  	<div class="body">
 		  		<div class="content">
+		  			<input type="hidden" value="<%= @translation.challenge.description %>">
 			  	</div>
 			  	<hr />
 			  	<div class="challenge-tags col-sm-12 col-md-12 col-lg-12">
 					  <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-				    <button class="tag btn btn-outline-secondary btn-sm">Algoritmos</button>
-						<button class="tag btn btn-outline-secondary btn-sm">Arreglos</button>
-						<button class="tag btn btn-outline-secondary btn-sm">Funciones</button>
-						<button class="tag btn btn-outline-secondary btn-sm">Ordenamiento</button>
+					<% @translation.challenge.tags.split(',').each do |tag| %>
+				    <button class="tag btn btn-outline-secondary btn-sm"><%= tag.capitalize %></button>
+					<% end %>
 			    </div>
 		  	</div>
 		  </div>
@@ -42,7 +42,7 @@
 				Solución
 			</div>
 			<card class="card-block">
-				<textarea class="form-control exercise-solution" id="code-area"></textarea>
+				<textarea class="form-control exercise-solution" id="code-area"><%= @translation.initial_solution %></textarea>
 			</card>
 		</div>
 
@@ -51,7 +51,7 @@
 				Pruebas
 			</div>
 			<card class="card-block">
-				<textarea class="form-control exercise-tests" id="test-area"></textarea>
+				<textarea class="form-control exercise-tests" id="test-area"><%= @translation.example_fixture %></textarea>
 			</card>
 		</div>
 		
@@ -62,18 +62,6 @@
 		</div>
 	</div>
 </section><!-- end practice exercise -->
-
-<script id="markdown-test" type="text/markdown">
-La funcion numeroDeOcurrencias debe regresar el número de ocurrencias de un elemento en un arreglo.
-
-```javascript
-var arr = [0,1,2,2,3];
-arr.numeroDeOcurrencias(0) === 1;
-arr.numeroDeOcurrencias(4) === 0;
-arr.numeroDeOcurrencias(2) === 2;
-arr.numeroDeOcurrencias("a") === 0;
-```
-</script>
 
 <% content_for :javascript do %>
   <script type="text/javascript">

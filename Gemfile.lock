@@ -239,6 +239,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   pg (~> 0.18)
+  pry
   puma (~> 3.0)
   rack-livereload
   rails (~> 5.0.2)
