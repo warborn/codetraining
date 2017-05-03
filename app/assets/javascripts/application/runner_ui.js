@@ -11,14 +11,24 @@ let RunnerUI = {
 	},
 
 	refreshTree: function() {
-    if(this.treeView && this.treeView.isAlive()) { 
-    	this.treeView.destroy();
-    }
+    this.destroyTreeBox();
 
     this.treeView =	new TreeView({
 			root: this.rootSelector,
 			tree: this.contentSelector
 		});
+	},
+
+	destroyTreeBox: function() {
+		if(this.treeView && this.treeView.isAlive()) {
+      this.treeView.destroy();
+    }
+	},
+
+	setup: function() {
+		this.displayPendingHeader();
+    this.destroyTreeBox();
+    $(this.contentSelector).empty();
 	},
 
 	displayResponse: function(response) {

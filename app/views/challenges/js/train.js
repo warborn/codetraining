@@ -51,7 +51,7 @@ $(document).on('turbolinks:load', function() {
 
 		let runner = new Runner(runnerData);
 		runner.send(function() {
-			RunnerUI.displayPendingHeader();
+			RunnerUI.setup();
 		})
 		.then(function(res) {
 			progressbar.finished();

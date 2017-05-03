@@ -81,7 +81,7 @@
     let runner = new Runner(runnerData);
     runner.send(function() {
       $('.collapse').show();
-      RunnerUI.displayPendingHeader();
+      RunnerUI.setup();
     })
     .then(function(res) {
       let response = new Response(res);
