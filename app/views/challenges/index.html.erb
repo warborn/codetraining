@@ -1,0 +1,51 @@
+<section class="row"><!-- exercise list-->
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<h3 class="mb-4">Ejercicios</h3>
+		
+		<form action="#" class="inline-form">
+			<div class="form-group row">
+				<div class="col-lg-3">
+					<label class="sr-only">Nivel</label>
+					<select class="form-control mb-xs-5 mb-sm-3">
+						<option disabled selected="selected">Nivel</option>
+						<option value="0">1</option>
+						<option value="1">2</option>
+						<option value="2">3</option>
+						<option value="3">4</option>
+					</select>
+				</div>
+				<div class="col-lg-3">
+					<label class="sr-only">Categoria</label>
+					<select class="form-control mb-xs-5 mb-sm-3">
+						<option disabled selected="selected">Categoria</option>
+						<option value="0">Algoritmos</option>
+						<option value="1">Arreglos</option>
+						<option value="2">Funciones</option>
+						<option value="3">Ordenamiento</option>
+					</select>
+				</div>
+				<div class="col-lg-2">
+					<button type="submit" class="btn btn-outline-success btn-block">Filtrar</button>
+				</div>
+			</div>
+		</form>
+		
+		<% @challenges.each do |challenge| %>
+		<div class="list-group">
+			<%= link_to challenge_path(challenge), class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
+		  <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start"> -->
+		    <div class="d-flex w-100 justify-content-between">
+		      <h5 class="mb-1"><%= challenge.name %></h5>
+		      <span><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= challenge.level %></span>
+		    </div>
+		    <p class="mb-1">Disciplina: <%= challenge.discipline.capitalize %></p>
+		    <div class="mt-2 challenge-tags">
+				  <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
+				  <%= render partial: 'shared/tags', collection: challenge.splitted_tags, as: :tag %>
+		    </div>
+		  <!-- </a> -->
+		  <% end %>
+		</div>
+		<% end %>
+	</div>
+</section><!-- end exercise list section -->

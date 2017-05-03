@@ -17,7 +17,7 @@ challenge = Challenge.create({
 	name: 'Encuentra el numero de ocurrencias',
 	level: 1,
 	description: description,
-	discipline: 'fundamentals',
+	discipline: 'fundamentos',
 	tags: 'algoritmos,funciones,arreglos'	
 })
 puts 'Challenge created!'

@@ -11,4 +11,11 @@
 		display: block;
 		padding: 15px 15px;
 	}
+
+	&.regular {
+		> .body {
+			font-size: 1em;
+			padding: 0
+		}
+	}
 }
