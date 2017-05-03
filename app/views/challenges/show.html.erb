@@ -1,14 +1,14 @@
 <section><!-- exercise details -->
-	<div class="col-sm-12">
-		<div class="exercise-details row">
-			<div class="col-sm-12 col-md-6 col-lg-8">	
-				<h5><%= @challenge.name %></h5>
-				<span><a href="#"><i class="fa fa-user" aria-hidden="true"></i>warborn</a></span>
-				<span><i class="fa fa-code" aria-hidden="true"></i>JavaScript</span>
-				<span><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= @challenge.level %></span>
-				<span><i class="fa fa-user-plus" aria-hidden="true"></i></i>102 veces contestado</span>
+	<div class="mb-4 col-sm-12">
+		<div class="challenge-details row">
+			<div class="info col-sm-12 col-md-6 col-lg-8">
+				<h5 class="name"><%= @challenge.name %></h5>
+				<span class="icon"><a href="#"><i class="fa fa-user" aria-hidden="true"></i>warborn</a></span>
+				<span class="icon"><i class="fa fa-code" aria-hidden="true"></i>JavaScript</span>
+				<span class="icon"><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= @challenge.level %></span>
+				<span class="icon"><i class="fa fa-user-plus" aria-hidden="true"></i></i>102 veces contestado</span>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-4">	
+			<div class="actions col-sm-12 col-md-6 col-lg-4">
 				<div class="btn-group">
 					<%= link_to 'Practicar', train_challenge_path(@challenge, 'javascript'), class: 'btn btn-outline-success' %>
 					<%= link_to 'Ver Soluciones', solutions_challenge_path(@challenge, 'javascript'), class: 'btn btn-outline-info' %>

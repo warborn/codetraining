@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('ready', function() {
   // setup marked and highlightjs library to use markdown for exercise details
   initMarked();
 

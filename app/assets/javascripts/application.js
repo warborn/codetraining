@@ -14,7 +14,6 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
 //= require highlightjs/highlight.pack.min
 //= require perfect-scrollbar/js/perfect-scrollbar.jquery.min
 //= require perfect-scrollbar/js/perfect-scrollbar.min

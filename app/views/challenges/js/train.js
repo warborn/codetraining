@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('ready', function() {
   // setup perfectScrollbar for practice exercise section
 	setupScrollbars(['.scroll']);
 
