@@ -15,9 +15,9 @@ HEREDOC
 
 challenge = Challenge.create({
 	name: 'Encuentra el numero de ocurrencias',
-	level: 1,
+	rank: 1,
 	description: description,
-	discipline: 'fundamentos',
+	category: 'fundamentos',
 	tags: 'algoritmos,funciones,arreglos'	
 })
 puts 'Challenge created!'
@@ -29,7 +29,7 @@ final_fixture    = example_fixture
 
 translation = Translation.create({
 	initial_solution: initial_solution,
-	final_solution: final_solution,
+	complete_solution: final_solution,
 	example_fixture: example_fixture,
 	final_fixture: final_fixture,
 	status: 'beta',

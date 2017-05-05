@@ -2,13 +2,14 @@ class CreateChallenges < ActiveRecord::Migration[5.0]
   def change
     create_table :challenges do |t|
       t.string :name
-      t.integer :level
+      t.integer :rank
       t.text :description
-      t.string :discipline
+      t.string :category
       t.string :tags
       t.string :status, default: 'beta'
 
       t.timestamps
     end
+    add_index :challenges, :name, unique: true
   end
 end

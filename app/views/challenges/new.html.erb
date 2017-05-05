@@ -1,7 +1,7 @@
 <section class="row create-exercise"><!-- create exercise section -->
 	<div class="col-sm-12">
 		<ul class="nav flex-column flex-md-row">
-			<li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-database"></i>Guardar</a></li>
+			<li class="nav-item" id="save-btn"><a href="#" class="nav-link"><i class="fa fa-database"></i>Guardar</a></li>
 			<li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-refresh"></i>Reiniciar</a></li>
 			<li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-feed"></i>Publicar</a></li>
 			<li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-trash"></i>Eliminar</a></li>
@@ -14,32 +14,32 @@
 				<form action="#">
 					<div class="form-group">
 						<label for="name">Nombre</label>
-						<input type="text" class="form-control">
+						<input type="text" name="name" class="form-control">
 					</div>
 
 					<div>
 						<label>Categoria</label>
-						<select class="form-control mb-xs-5 mb-sm-3">
-							<option value="0">Algoritmos</option>
-							<option value="1">Arreglos</option>
-							<option value="2">Funciones</option>
-							<option value="3">Ordenamiento</option>
+						<select name="category" class="form-control mb-xs-5 mb-sm-3">
+							<option value="algorithms">Algoritmos</option>
+							<option value="arrays">Arreglos</option>
+							<option value="functions">Funciones</option>
+							<option value="sorting">Ordenamiento</option>
 						</select>
 					</div>
 
 					<div>
 						<label>Nivel</label>
-						<select class="form-control mb-xs-5 mb-sm-3">
-							<option value="0">1</option>
-							<option value="1">2</option>
-							<option value="2">3</option>
-							<option value="3">4</option>
+						<select name="rank" class="form-control mb-xs-5 mb-sm-3">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label for="name">Etiquetas</label>
-						<input type="text" class="form-control">
+						<input type="text" name="tags" class="form-control">
 					</div>
 				</form>
 			</div>

@@ -17,12 +17,14 @@ ActiveRecord::Schema.define(version: 20170502141842) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
-    t.integer  "level"
+    t.integer  "rank"
     t.text     "description"
-    t.string   "discipline"
+    t.string   "category"
     t.string   "tags"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "status",      default: "beta"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["name"], name: "index_challenges_on_name", unique: true, using: :btree
   end
 
   create_table "languages", force: :cascade do |t|
@@ -33,14 +35,14 @@ ActiveRecord::Schema.define(version: 20170502141842) do
 
   create_table "translations", force: :cascade do |t|
     t.text     "initial_solution"
-    t.text     "final_solution"
+    t.text     "complete_solution"
     t.text     "example_fixture"
     t.text     "final_fixture"
-    t.string   "status",           default: "beta"
+    t.string   "status",            default: "pending"
     t.integer  "challenge_id"
     t.integer  "language_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.index ["challenge_id"], name: "index_translations_on_challenge_id", using: :btree
     t.index ["language_id"], name: "index_translations_on_language_id", using: :btree
   end
