@@ -3,6 +3,35 @@ let RunnerUI = {
 		this.rootSelector = config.root;
 		this.contentSelector = config.content;
 		this.treeView = null;
+		this.runner = new Runner();
+		this.progressbar = new Progressbar({ delay: 800, step: 10 });
+	},
+
+	sendRequest: function(config, callback) {
+		let that = this;
+		this.setup();
+		this.runner.setConfig(config);
+		if(typeof callback === 'function') callback();
+		return new Promise(function(resolve, reject) {
+			that.runner.send()
+			.then(function(response) {
+				that.successfulRequest.call(that, response);
+				resolve(response);
+			})
+			.catch(function(error) {
+				that.failedRequest.call(that, error);
+				reject(error);
+			});
+		});
+	},
+
+	successfulRequest: function(res) {
+		this.displayResponse(new Response(res));
+		this.progressbar.finished();
+	},
+
+	failedRequest: function(error) {
+		this.progressbar.finished();
 	},
 
 	setResponse: function(response) {
@@ -29,6 +58,7 @@ let RunnerUI = {
 		this.displayPendingHeader();
     this.destroyTreeBox();
     $(this.contentSelector).empty();
+		this.progressbar.startInterval();
 	},
 
 	displayResponse: function(response) {

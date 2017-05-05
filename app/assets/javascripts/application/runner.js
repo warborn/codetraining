@@ -1,12 +1,10 @@
-function Runner(config) {
-	this.config = config;
-
-	this.send = function(cb) {
-		cb();
+function Runner() {
+	this.send = function() {
+		let that = this;
 		return new Promise(function(resolve, reject) {
-			axios.post(config.url, {
-				code: config.code,
-				fixture: config.fixture
+			axios.post(that.config.url, {
+				code: that.config.code,
+				fixture: that.config.fixture
 			}, { responseType: 'json' })
 			.then(function(response) {
 				resolve(response.data);
@@ -15,5 +13,9 @@ function Runner(config) {
 				reject(error.data);
 			});
 		});
+	}
+
+	this.setConfig = function(config) {
+		this.config = config;
 	}
 }

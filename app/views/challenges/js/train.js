@@ -33,15 +33,9 @@ $(document).on('ready', function() {
 		root: '#output',
 		content: '#output-body'
 	});
-
+	
 	submitButton.addEventListener('click', function(e) {
 		$('#details-tab a[href="#output"]').tab('show');
-
-		let progressbar = new Progressbar({
-			root: '.progress-bar', delay: 800, step: 10
-		});
-
-		progressbar.startInterval();
 
 		let runnerData = {
 			url: '/run',
@@ -49,19 +43,12 @@ $(document).on('ready', function() {
 			fixture: testEditor.getValue()
 		}
 
-		let runner = new Runner(runnerData);
-		runner.send(function() {
-			RunnerUI.setup();
-		})
+		RunnerUI.sendRequest(runnerData)
 		.then(function(res) {
-			progressbar.finished();
-
-			let response = new Response(res);
-			RunnerUI.displayResponse(response);
+			//
 		})
 		.catch(function(error) {
 			console.log(error);
-			progressbar.finished();
 		});
 	});
 });

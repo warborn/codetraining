@@ -78,18 +78,15 @@
       fixture: finalTestEditor.getValue()
     }
 
-    let runner = new Runner(runnerData);
-    runner.send(function() {
+    RunnerUI.sendRequest(runnerData, function() {
       $('.collapse').show();
-      RunnerUI.setup();
     })
     .then(function(res) {
-      let response = new Response(res);
-      RunnerUI.displayResponse(response);
+      //
     }).
     catch(function(error) {
       console.log(error);
-    })
+    });
   });
 
   let action = $('input[name=_method]').length > 0 ? 'patch' : 'post';
