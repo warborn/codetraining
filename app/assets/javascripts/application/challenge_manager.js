@@ -11,7 +11,6 @@ function ChallengeManager(options) {
 
 	this.onSave = function() {
 		let that = this;
-			console.log('clicked');
 		this.saveBtn.click(function() {
 	    let data = that.inputsToObject(that.getInputs());
 	    let saveURL = that.generateURL();

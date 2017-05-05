@@ -19,7 +19,7 @@
   // setup code editor for markdown description
   let markdownPreview = $('#preview .content');
   let markdownEditor = new CodeEditor('#markdown-area', 
-    { mode: 'markdown', lineNumbers: false });
+    { mode: 'markdown', lineNumbers: false, theme: 'material' });
 
   // setup test cases tabs
   new TabComponent({ root: '#challenge-solution-tab' })

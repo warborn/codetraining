@@ -3,7 +3,7 @@ let CodeMirrorFactory = {
 	defaults: {
     lineNumbers: true,
 		scrollbarStyle: 'overlay',
-		theme: 'material',
+		theme: 'one-dark',
 		mode: 'javascript',
     matchBrackets: true,
 	},
