@@ -16,6 +16,10 @@ function CodeEditor(selector, options, value) {
 		return this.editor.doc.getValue();
 	}
 
+	this.save = function() {
+		this.editor.save();
+	}
+
 	this.refresh = function() {
 		this.editor.refresh();
 	}

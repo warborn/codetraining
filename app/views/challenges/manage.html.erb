@@ -1,0 +1,148 @@
+<section class="row create-exercise"><!-- create exercise section -->
+	<%= form_for @translation.challenge, html: { class: 'col-sm-12', data: {:'challenge-id' => @translation.challenge.id, :'language' => @translation.language.name } } do %>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav flex-column flex-md-row">
+					<li class="nav-item" id="save-btn"><a href="#" class="nav-link"><i class="fa fa-database"></i>Guardar</a></li>
+					<li class="nav-item"><a class="nav-link"><i class="fa fa-refresh"></i>Reiniciar</a></li>
+					<li class="nav-item"><a class="nav-link"><i class="fa fa-feed"></i>Publicar</a></li>
+					<li class="nav-item"><a class="nav-link"><i class="fa fa-trash"></i>Eliminar</a></li>
+				</ul>
+			</div>
+
+			<div class="mt-3 col-sm-12 col-md-12 col-lg-6">
+				<div class="card">
+					<div class="card-block">
+							<div class="form-group">
+								<label for="name">Nombre</label>
+								<!-- <input type="text" name="name" class="form-control"> -->
+								<%= text_field_tag 'name', @translation.challenge.name, class: 'form-control' %>
+							</div>
+
+							<div>
+								<label>Categoria</label>
+								<%= select_tag 'category', options_for_select(@categories, @translation.challenge.category), class: 'form-control' %>
+							</div>
+
+							<div>
+								<label>Nivel</label>
+								<select name="rank" class="form-control mb-xs-5 mb-sm-3">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="name">Etiquetas</label>
+								<!-- <input type="text" name="tags" class="form-control"> -->
+								<%= text_field_tag 'tags', @translation.challenge.tags, class: 'form-control' %>
+							</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-3 col-sm-12 col-md-12 col-lg-6"><!-- markdow description -->
+				<ul class="nav nav-tabs" id="description-preview-tab">
+					<li class="nav-item"><a href="#markdown-description" class="nav-link active">Descripción</a></li>
+					<li class="nav-item"><a href="#preview" class="nav-link">Preview</a></li>
+				</ul>
+
+				<div class="tab-content">
+				  <div class="tab-pane active markdown-description" id="markdown-description" role="tabpanel">
+				  	<div class="body">
+				  		<div class="content">
+				  			<!-- <textarea class="form-control" id="markdown-area"></textarea> -->
+								<%= text_area_tag 'description', @translation.challenge.description, class: 'form-control', id: 'markdown-area' %>
+				  		</div>
+				  	</div>
+				  </div>
+				  <div class="tab-pane scroll markdown-preview" id="preview" role="tabpanel">
+				  	<div class="body">
+				  		<div class="content">
+					  	</div>
+				  	</div>
+				  </div>
+				</div>
+			</div><!-- end markdow description -->
+
+			<div class="mt-5 col-sm-12 col-md-12 col-lg-12">
+				<div class="row">
+					<div class="col-lg-3">
+						<button type="button" id="validate-btn" class="btn btn-outline-primary btn-block">Validar Solución</button>
+					</div>
+					<div class="col-lg-3">
+						<button type="button" id="insert-btn" class="btn btn-outline-secondary btn-block">Insertar Ejemplo</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="mt-5 collapse">
+					<div class="code-output" id="output">
+						<div class="body">
+							<div class="header"></div>
+						  <hr />
+					  	<div class="content" id="output-body"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-3 col-sm-12 col-md-12 col-lg-6"><!-- challenge solution -->
+				<div class="border">
+					<ul class="nav nav-tabs" id="challenge-solution-tab">
+						<li class="nav-item"><a href="#complete-solution" class="nav-link active">Solución Final</a></li>
+						<li class="nav-item"><a href="#initial-solution" class="nav-link">Solución Inicial</a></li>
+					</ul>
+
+					<div class="tab-content">
+					  <div class="tab-pane active" id="complete-solution" role="tabpanel">
+					  	<div class="body">
+					  		<!-- <textarea class="form-control" id="complete-solution-area"></textarea> -->
+								<%= text_area_tag 'complete_solution', @translation.complete_solution, class: 'form-control', id: 'complete-solution-area' %>
+					  	</div>
+					  </div>
+					  <div class="tab-pane" id="initial-solution" role="tabpanel">
+					  	<div class="body">
+					  		<!-- <textarea class="form-control" id="initial-solution-area"></textarea> -->
+								<%= text_area_tag 'initial_solution', @translation.initial_solution, class: 'form-control', id: 'initial-solution-area' %>
+					  	</div>
+					  </div>
+					</div>
+				</div>
+			</div><!-- end challenge solution -->
+
+			<div class="mt-3 col-sm-12 col-md-12 col-lg-6"><!-- test cases -->
+				<div class="border">
+					<ul class="nav nav-tabs" id="test-cases-tab">
+						<li class="nav-item"><a href="#final-test" class="nav-link active">Pruebas Finales</a></li>
+						<li class="nav-item"><a href="#example-test" class="nav-link">Pruebas de Ejemplo</a></li>
+					</ul>
+
+					<div class="tab-content">
+					  <div class="tab-pane active" id="final-test" role="tabpanel">
+					  	<div class="body">
+					  		<!-- <textarea class="form-control" id="final-test-area"></textarea> -->
+								<%= text_area_tag 'final_fixture', @translation.final_fixture, class: 'form-control', id: 'final-test-area' %>
+					  	</div>
+					  </div>
+					  <div class="tab-pane" id="example-test" role="tabpanel">
+					  	<div class="body">
+					  		<!-- <textarea class="form-control" id="example-test-area"></textarea> -->
+								<%= text_area_tag 'example_fixture', @translation.example_fixture, class: 'form-control', id: 'example-test-area' %>
+					  	</div>
+					  </div>
+					</div>
+				</div>
+			</div><!-- end test cases -->
+		</div>
+	<% end %>
+</section>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+     <%= render file: js_path(:challenges, :manage) %>
+  </script>
+<% end %>

@@ -48,6 +48,8 @@ gem 'code_runner', git: 'https://github.com/warborn/code_runner'
 gem 'execjs' 
 gem 'therubyracer'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -63,9 +65,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # for fast sass reloading
-  gem "guard", ">= 2.2.2", :require => false
-  gem "guard-livereload",  :require => false
-  gem "rack-livereload"
+  # gem "guard", ">= 2.2.2", :require => false
+  # gem "guard-livereload",  :require => false
+  # gem "rack-livereload"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

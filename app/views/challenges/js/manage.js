@@ -92,29 +92,20 @@
     })
   });
 
+  let action = $('input[name=_method]').length > 0 ? 'patch' : 'post';
   // menu event handler
-  $('#save-btn').click(function() {
-    let inputs = $('form input, form select').toArray();
-    let data = inputs.reduce(function(prev, current) {
-      prev[current.name] = current.value;
-      return prev;
-    }, {});
-
-    data.description = markdownEditor.getValue();
-    data.initial_solution = initialSolutionEditor.getValue();
-    data.complete_solution = completeSolutionEditor.getValue();
-    data.example_fixture = exampleTestEditor.getValue();
-    data.final_fixture = finalTestEditor.getValue();
-
-    axios.post('/challenges', {
-      challenge: data
-    }, { responseType: 'json' })
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+  let challengeManager = new ChallengeManager({ 
+    save: { 
+      selector: '#save-btn',
+      action: action
+    },
+    editors: {
+      markdownEditor: markdownEditor,
+      initialSolutionEditor: initialSolutionEditor,
+      completeSolutionEditor: completeSolutionEditor,
+      exampleTestEditor: exampleTestEditor,
+      finalTestEditor: finalTestEditor
+    }
   });
 
  });

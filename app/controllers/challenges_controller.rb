@@ -1,4 +1,6 @@
 class ChallengesController < ApplicationController
+  before_action :set_translation, only: [:edit, :update, :train]
+
   def index
     @challenges = Challenge.all
   end
@@ -8,6 +10,11 @@ class ChallengesController < ApplicationController
   end
 
   def new
+    @translation = Translation.new
+    @translation.challenge = Challenge.new
+    @translation.language = Language.first
+    @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
+    render :manage
   end
   
   def create
@@ -16,16 +23,27 @@ class ChallengesController < ApplicationController
       @translation = @challenge.translations.build(translation_params)
       @translation.language_id = Language.first.id
       @translation.save
-      render json: @challenge, status: :created
+      render json: @translation, status: :created
+    else
+      render json: { errors: @challenge.errors.full_messages }, status: 422
+    end
+  end
+
+  def edit
+    @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
+    render :manage
+  end
+
+  def update
+    @translation.update_attributes(translation_params)
+    if @translation.challenge.update_attributes(challenge_params)
+      render json: @translation, status: :created
     else
       render json: { errors: @challenge.errors.full_messages }, status: 422
     end
   end
 
   def train
-    language = Language.find_by_name(params[:language])
-    challenge = Challenge.find(params[:id])
-    @translation = challenge.translations.where(language_id: language.id).first
   end
 
   def run
@@ -63,5 +81,11 @@ class ChallengesController < ApplicationController
 
   def translation_params
     params.require(:challenge).permit(:initial_solution, :complete_solution, :example_fixture, :final_fixture)
+  end
+
+  def set_translation
+    language = Language.find_by_name('javascript')
+    challenge = Challenge.find(params[:id])
+    @translation = Translation.where(language_id: language.id, challenge_id: params[:id]).first
   end
 end
