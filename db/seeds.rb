@@ -1,6 +1,16 @@
 javascript = Language.create(name: 'javascript')
 puts 'Language created!'
 
+example = javascript.build_example({
+	setup: "var lenguageFavorito = '';",
+	answer: "// javascript es el lenguaje favorito\n// asignalo a la variable lenguageFavorito\nvar lenguajeFavorito = 'javascript';",
+	fixture: "Test.expect(lenguajeFavorito.length > 0, 'La cadena esta vacia')\nTest.expect(lenguajeFavorito === 'javascript', 'El lenguaje favorito no es javascript')\n"
+})
+example.save
+puts 'Example created!'
+
+
+
 ['fundamentos', 'algoritmos', 'refactorizacion', 'bugs'].each do |category|
 	Category.create(name: category)
 end
