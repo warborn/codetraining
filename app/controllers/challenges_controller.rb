@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_translation, only: [:edit, :update, :train]
+  before_action :set_language, only: [:new, :create]
 
   def index
     @challenges = Challenge.all
@@ -12,20 +13,19 @@ class ChallengesController < ApplicationController
   def new
     @translation = Translation.new
     @translation.challenge = Challenge.new
-    @translation.language = Language.first
+    @translation.language = @language
     @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
     render :manage
   end
   
   def create
-    @challenge = Challenge.new(challenge_params)
-    if @challenge.save
-      @translation = @challenge.translations.build(translation_params)
-      @translation.language_id = Language.first.id
-      @translation.save
+    challenge_creator = CreateChallenge.new(challenge_params, translation_params, @language)
+    if challenge_creator.create
+      @challenge = challenge_creator.challenge
+      @translation = challenge_creator.translation
       render json: @translation, status: :created
     else
-      render json: { errors: @challenge.errors.full_messages }, status: 422
+      render json: { errors: challenge_creator.errors }, status: 422
     end
   end
 
@@ -60,5 +60,9 @@ class ChallengesController < ApplicationController
     language = Language.find_by_name('javascript')
     challenge = Challenge.find(params[:id])
     @translation = Translation.where(language_id: language.id, challenge_id: params[:id]).first
+  end
+
+  def set_language
+    @language = Language.find_by_name('javascript')
   end
 end
