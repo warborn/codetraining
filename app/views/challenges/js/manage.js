@@ -47,24 +47,6 @@
   // setup code editor for challenge solutions
   let exampleTestEditor = new CodeEditor('#example-test-area');
 
-  // insert example functionality
-  $('#insert-btn').click(retrieveExample);
-
-  function retrieveExample() {
-    let language = 'javascript';
-
-    axios.get('/challenges/example/' + language, {
-
-    }, { responseType: 'json' })
-    .then(function(response) {
-      console.log(response);
-      example = response.data;
-      initialSolutionEditor.setValue(example.setup);
-      completeSolutionEditor.setValue(example.answer);
-      finalTestEditor.setValue(example.fixture);
-    });
-  }
-
   RunnerUI.init({
     root: '#output',
     content: '#output-body'
@@ -89,12 +71,11 @@
     });
   });
 
-  let action = $('input[name=_method]').length > 0 ? 'patch' : 'post';
   // menu event handler
   let challengeManager = new ChallengeManager({ 
-    save: { 
-      selector: '#save-btn',
-      action: action
+    selectors: { 
+      save: '#save-btn',
+      insert: '#insert-btn'
     },
     editors: {
       markdownEditor: markdownEditor,

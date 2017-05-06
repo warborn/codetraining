@@ -44,26 +44,28 @@
 			</div>
 
 			<div class="mt-3 col-sm-12 col-md-12 col-lg-6"><!-- markdow description -->
-				<ul class="nav nav-tabs" id="description-preview-tab">
-					<li class="nav-item"><a href="#markdown-description" class="nav-link active">Descripción</a></li>
-					<li class="nav-item"><a href="#preview" class="nav-link">Preview</a></li>
-				</ul>
+				<div class="border">
+					<ul class="nav nav-tabs" id="description-preview-tab">
+						<li class="nav-item"><a href="#markdown-description" class="nav-link active">Descripción</a></li>
+						<li class="nav-item"><a href="#preview" class="nav-link">Preview</a></li>
+					</ul>
 
-				<div class="tab-content">
-				  <div class="tab-pane active markdown-description" id="markdown-description" role="tabpanel">
-				  	<div class="body">
-				  		<div class="content">
-				  			<!-- <textarea class="form-control" id="markdown-area"></textarea> -->
-								<%= text_area_tag 'description', @translation.challenge.description, class: 'form-control', id: 'markdown-area' %>
-				  		</div>
-				  	</div>
-				  </div>
-				  <div class="tab-pane scroll markdown-preview" id="preview" role="tabpanel">
-				  	<div class="body">
-				  		<div class="content">
+					<div class="tab-content">
+					  <div class="tab-pane active markdown-description" id="markdown-description" role="tabpanel">
+					  	<div class="body">
+					  		<div class="content">
+					  			<!-- <textarea class="form-control" id="markdown-area"></textarea> -->
+									<%= text_area_tag 'description', @translation.challenge.description, class: 'form-control', id: 'markdown-area' %>
+					  		</div>
 					  	</div>
-				  	</div>
-				  </div>
+					  </div>
+					  <div class="tab-pane scroll markdown-preview" id="preview" role="tabpanel">
+					  	<div class="body">
+					  		<div class="content">
+						  	</div>
+					  	</div>
+					  </div>
+					</div>
 				</div>
 			</div><!-- end markdow description -->
 

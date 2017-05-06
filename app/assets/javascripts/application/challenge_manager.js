@@ -1,13 +1,8 @@
 function ChallengeManager(options) {
-	this.action = options.save.action;
-	this.saveBtn = $(options.save.selector);
-
-	// editors references
-	this.markdownEditor = options.editors.markdownEditor;
-	this.initialSolutionEditor = options.editors.initialSolutionEditor;
-	this.completeSolutionEditor = options.editors.completeSolutionEditor;
-	this.exampleTestEditor = options.editors.exampleTestEditor;
-	this.finalTestEditor = options.editors.finalTestEditor;
+	this.action = 'post'; // default action
+	this.saveBtn = $(options.selectors.save);
+	this.insertBtn = $(options.selectors.insert);
+	this.editors = options.editors;
 
 	this.onSave = function() {
 		let that = this;
@@ -31,6 +26,20 @@ function ChallengeManager(options) {
 		});
 	}
 
+	this.onInsertExample = function() {
+		let language = 'javascript';
+		let that = this;
+		this.insertBtn.click(function() {
+			axios.get('/challenges/example/' + language, {}, { responseType: 'json' })
+	    .then(function(response) {
+	      example = response.data;
+	      that.initialSolutionEditor.setValue(example.setup);
+	      that.completeSolutionEditor.setValue(example.answer);
+	      that.finalTestEditor.setValue(example.fixture);
+	    });
+	  });
+	}
+
 	this.getInputs = function() {
 	  this.refreshEditorValues();
 		return $('form input, form select, form textarea').toArray();
@@ -46,12 +55,9 @@ function ChallengeManager(options) {
 	}
 
 	this.refreshEditorValues = function() {
-		let that = this;
-		['markdown', 'initialSolution', 'completeSolution', 'exampleTest', 'finalTest']
-			.forEach(function(editorName) {
-				editorName += 'Editor';
-				that[editorName].save();
-			});
+		this.forEachEditor(function(editor) {
+			editor.save();
+		});
 	}
 
 	this.generateURL = function(challengeID, language) {
@@ -64,8 +70,30 @@ function ChallengeManager(options) {
 		}
 	}
 
+	this.getAction = function() {
+		return $('input[name=_method]').length > 0 ? 'patch' : 'post';
+	}
+
+	this.attachEditors = function() {
+		// attach each editor object to the ChallengeManager instance
+		this.forEachEditor(function() {
+			this[editorName] = options.editors[editorName];
+		})
+	}
+
+	this.forEachEditor = function(callback) {
+		for(editorName in this.editors) {
+			if(this.editors.hasOwnProperty(editorName)) {			
+				callback(options.editors[editorName]);
+			}
+		}
+	}
+
 	this.init = function() {
 		this.onSave();
+		this.onInsertExample();
+		this.action = this.getAction();
+		this.attachEditors();
 	}
 
 	this.init();
