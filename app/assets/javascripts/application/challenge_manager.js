@@ -76,15 +76,15 @@ function ChallengeManager(options) {
 
 	this.attachEditors = function() {
 		// attach each editor object to the ChallengeManager instance
-		this.forEachEditor(function() {
-			this[editorName] = options.editors[editorName];
+		this.forEachEditor(function(editor) {
+			this[editorName] = editor;
 		})
 	}
 
 	this.forEachEditor = function(callback) {
 		for(editorName in this.editors) {
 			if(this.editors.hasOwnProperty(editorName)) {			
-				callback(options.editors[editorName]);
+				callback.call(this, options.editors[editorName]);
 			}
 		}
 	}
