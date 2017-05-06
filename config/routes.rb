@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  # root 'challenges#index'
-  # get 'challenges/train', to: 'challenges#train'
-  # get 'challenges/new', to: 'challenges#new'
-  post 'run', to: 'challenges#run'
+  post 'run', to: 'runner#run'
 
   resources :challenges
   get 'challenges/:id/train/:language', to: 'challenges#train', as: 'train_challenge'
