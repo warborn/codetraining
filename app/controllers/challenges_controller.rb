@@ -57,9 +57,7 @@ class ChallengesController < ApplicationController
   end
 
   def set_translation
-    language = Language.find_by_name('javascript')
-    challenge = Challenge.find(params[:id])
-    @translation = Translation.where(language_id: language.id, challenge_id: params[:id]).first
+    @translation = Translation.by_language_and_challenge('javascript', params[:id])
   end
 
   def set_language

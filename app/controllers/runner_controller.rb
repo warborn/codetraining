@@ -1,16 +1,7 @@
 class RunnerController < ApplicationController
 	def run
-  	runner = CodeRunner::Runner.new({
-  		code: params[:code],
-  		fixture: params[:fixture],
-  		language: 'javascript'
-  	})
-
-  	response = nil
-  	t = Thread.new(runner) do |t|
-  		response = runner.execute!
-  	end
-  	t.join
+    runner_service = CodeRunnerService.new(params)
+    response = runner_service.call!
 
   	render json: response
   end

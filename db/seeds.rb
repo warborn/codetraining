@@ -39,15 +39,14 @@ puts 'Challenge created!'
 
 initial_solution = "Array.prototype.numeroDeOcurrencias = function(val){\n  \n}"
 final_solution   = "Array.prototype.numeroDeOcurrencias = function(val){\n  return this.filter(e => e === val).length; \n}"
-example_fixture  = "var arr = [4, 0, 4, 'a'];\n\ndescribe('Numeros', function() {\n  it('Deberia aceptar numeros', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias(4), 2);\n    Test.assertEquals(arr.numeroDeOcurrencias(0), 1);\n  });\n});\n\ndescribe('Letras', function() {\n  it('Deberia aceptar letras', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias('a'), 1);\n  });\n});"
-final_fixture    = example_fixture
+example_fixture  = "var arr = [4, 0, 4, 'a'];\n\nTest.assertEquals(arr.numeroDeOcurrencias(4), 2);\nTest.assertEquals(arr.numeroDeOcurrencias(0), 1);"
+final_fixture    = "var arr = [4, 0, 4, 'a'];\n\ndescribe('Numeros', function() {\n  it('Deberia aceptar numeros', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias(4), 2);\n    Test.assertEquals(arr.numeroDeOcurrencias(0), 1);\n  });\n});\n\ndescribe('Letras', function() {\n  it('Deberia aceptar letras', function() {\n    Test.assertEquals(arr.numeroDeOcurrencias('a'), 1);\n  });\n});"
 
 translation = Translation.create({
 	initial_solution: initial_solution,
 	complete_solution: final_solution,
 	example_fixture: example_fixture,
 	final_fixture: final_fixture,
-	status: 'beta',
 	challenge_id: challenge.id,
 	language_id: javascript.id
 })

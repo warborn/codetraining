@@ -56,8 +56,10 @@
   validateButton.click(function(e) {
     let runnerData = {
       url: '/run',
-      code: completeSolutionEditor.getValue(),
-      fixture: finalTestEditor.getValue()
+      data: {
+        code: completeSolutionEditor.getValue(),
+        fixture: finalTestEditor.getValue()
+      }
     }
 
     RunnerUI.sendRequest(runnerData, function() {

@@ -2,10 +2,8 @@ function Runner() {
 	this.send = function() {
 		let that = this;
 		return new Promise(function(resolve, reject) {
-			axios.post(that.config.url, {
-				code: that.config.code,
-				fixture: that.config.fixture
-			}, { responseType: 'json' })
+			axios.post(that.config.url, that.config.data, 
+				{ responseType: 'json' })
 			.then(function(response) {
 				resolve(response.data);
 			})

@@ -27,20 +27,23 @@ $(document).on('ready', function() {
   	}
   });
 
-  var submitButton = document.querySelector('button.test');
+  var sampleTestButton = $('#example-btn');
+  var finalTestButton = $('#attempt-btn');
 
 	RunnerUI.init({
 		root: '#output',
 		content: '#output-body'
 	});
 	
-	submitButton.addEventListener('click', function(e) {
+	sampleTestButton.click(function(e) {
 		$('#details-tab a[href="#output"]').tab('show');
 
 		let runnerData = {
 			url: '/run',
-			code: codeEditor.getValue(),
-			fixture: testEditor.getValue()
+			data: {
+				code: codeEditor.getValue(),
+				fixture: testEditor.getValue()
+			}
 		}
 
 		RunnerUI.sendRequest(runnerData)
@@ -51,4 +54,31 @@ $(document).on('ready', function() {
 			console.log(error);
 		});
 	});
+
+	finalTestButton.click(function(e) {
+		$('#details-tab a[href="#output"]').tab('show');
+		let matches = window.location.pathname.match(/challenges\/(\d+)\/train\/([a-zA-Z-_\+#]+)/);
+		let matchGroup = { ChallengeID: 1, Language: 2 };
+
+		let runnerData = {
+			url: '/run',
+			data: {
+				code: codeEditor.getValue(),
+				language:  matches[matchGroup.Language],
+				challenge_id: matches[matchGroup.ChallengeID],
+				attempt: true
+			}
+		}
+
+		console.log(runnerData);
+
+		RunnerUI.sendRequest(runnerData)
+		.then(function(res) {
+			//
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
+	});
+
 });
