@@ -10,6 +10,8 @@ function ChallengeManager(options) {
 	    let data = that.inputsToObject(that.getInputs());
 	    let saveURL = that.generateURL();
 
+			let progressbar = new Progressbar({ delay: 400, step: 10 });
+			progressbar.startInterval();
 	    axios[that.action](saveURL, {
 	      challenge: data
 	    }, { responseType: 'json' })
@@ -19,9 +21,12 @@ function ChallengeManager(options) {
 	    		that.action = 'patch';
 	    		window.location.replace(that.generateURL(translation.challenge.id, translation.language));
 	    	}
+	    	progressbar.finished();
 		  })
 	    .catch(function(error) {
-		    console.log(error);
+		    console.log(error.response);
+		    Notifier.fromError(error.response.data.errors);
+	    	progressbar.finished();
 		  });
 		});
 	}

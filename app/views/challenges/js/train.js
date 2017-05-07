@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).ready(function() {
   // setup perfectScrollbar for practice exercise section
 	setupScrollbars(['.scroll']);
 

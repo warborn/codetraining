@@ -1,4 +1,4 @@
- $(document).on('ready', function() {	
+ $(document).ready(function() {	
   // setup perfectScrollbar for markdown description section
   setupScrollbars(['.scroll']);
 

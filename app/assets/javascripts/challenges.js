@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).ready(function() {
   // setup marked and highlightjs library to use markdown for exercise details
   initMarked();
 

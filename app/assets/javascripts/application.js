@@ -25,4 +25,9 @@
 //= require axios/dist/axios.min
 //= require gijgo/dist/modular/tree/js/tree.min
 //= require Progress.js/minified/progress.min
+//= require remarkable-bootstrap-notify/dist/bootstrap-notify.min
 //= require_tree .
+
+$(document).ready(function() {
+	$('body').css('display', 'block');
+});
