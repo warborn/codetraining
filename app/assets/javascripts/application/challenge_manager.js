@@ -2,16 +2,19 @@ function ChallengeManager(options) {
 	this.action = 'post'; // default action
 	this.saveBtn = $(options.selectors.save);
 	this.insertBtn = $(options.selectors.insert);
+	this.resetBtn = $(options.selectors.reset);
+	this.deleteBtn = $(options.selectors.delete);
 	this.editors = options.editors;
 
 	this.onSave = function() {
 		let that = this;
-		this.saveBtn.click(function() {
+		this.saveBtn.click(function(e) {
+			e.preventDefault();
 	    let data = that.inputsToObject(that.getInputs());
 	    let saveURL = that.generateURL();
 
 			let progressbar = new Progressbar({ delay: 400, step: 10 });
-			progressbar.startInterval();
+			progressbar.start();
 	    axios[that.action](saveURL, {
 	      challenge: data
 	    }, { responseType: 'json' })
@@ -33,6 +36,43 @@ function ChallengeManager(options) {
 		    Notifier.fromErrors('No se pudo guardar', error.response.data.errors);
 	    	progressbar.finished();
 		  });
+		});
+	}
+
+	this.onReset = function() {
+		let that = this;
+		this.resetBtn.click(function(e) {
+			e.preventDefault();
+			$('form')[0].reset();
+			that.forEachEditor(function(editor) {
+				editor.clear();
+			});
+		})
+	}
+
+	this.onDelete = function() {
+		let that = this;
+		this.deleteBtn.click(function(e) {
+			e.preventDefault();
+			let deleteURL = that.generateURL();
+			let progressbar = new Progressbar({ delay: 400, step: 10 });
+			progressbar.start();
+			axios.delete(deleteURL, {}, 
+				{ responseType: 'json' })
+			.then(function(response) {
+				progressbar.finished();
+	    	if(that.action === 'patch') {
+    			Notifier.success('Se eliminó correctamente', 'Puedes crear un nuevo ejercico ahora!');
+	    		setTimeout(function() {
+		    	that.action = 'post';
+	    		that.redirectTo('/challenges/new');
+		    	}, 2000);
+	    	}
+			})
+			.catch(function(error) {
+				progressbar.finished();
+		    console.log(error.response);
+			});
 		});
 	}
 
@@ -74,10 +114,18 @@ function ChallengeManager(options) {
 		if(this.action === 'post') {
 			return '/challenges';
 		} else {
-			challengeID = challengeID || $('form').data('challenge-id');
-			language = language || $('form').data('language');
+			challengeID = challengeID || this.getChallenge();
+			language = language || this.getLanguage();
 			return '/challenges/' + challengeID + '/edit/' + language;
 		}
+	}
+
+	this.getChallenge = function() {
+		return $('form').data('challenge-id');
+	}
+
+	this.getLanguage = function() {
+		return $('form').data('language');
 	}
 
 	this.getAction = function() {
@@ -101,6 +149,8 @@ function ChallengeManager(options) {
 
 	this.init = function() {
 		this.onSave();
+		this.onReset();
+		this.onDelete();
 		this.onInsertExample();
 		this.action = this.getAction();
 		this.attachEditors();

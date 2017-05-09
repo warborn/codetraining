@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'challenges/:id/solutions/:language', to: 'challenges#solutions', as: 'solutions_challenge'
   get 'challenges/:id/edit/:language', to: 'challenges#edit'
   patch 'challenges/:id/edit/:language', to: 'challenges#update'
+  delete 'challenges/:id/edit/:language', to: 'challenges#destroy'
 
   get 'challenges/example/:language', to: 'examples#show'
 

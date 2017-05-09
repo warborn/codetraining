@@ -3,7 +3,7 @@ function Progressbar(config) {
 	this.delay = config.delay;
 	this.step = config.step;
 
-	this.startInterval = function() {
+	this.start = function() {
 		this.bar.start().autoIncrease(this.step, this.delay);
 	}
 

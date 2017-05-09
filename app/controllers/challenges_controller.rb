@@ -43,6 +43,15 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def destroy
+    @challenge = Challenge.find(params[:id])
+    @translation = Translation.by_language_and_challenge('javascript', params[:id])
+    if @translation.destroy
+      @challenge.destroy if @challenge.translations.size == 0
+      head :no_content
+    end
+  end
+
   def train
   end
 

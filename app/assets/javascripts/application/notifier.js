@@ -3,7 +3,7 @@ let Notifier = {
 		// settings
 		newest_on_top: true,
 		allow_dismiss: true,
-		delay: 4000,
+		delay: 3000,
 		animate: {
 			enter: 'animated bounceInDown',
 			exit: 'animated bounceOutUp'

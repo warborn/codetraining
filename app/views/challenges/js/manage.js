@@ -77,6 +77,8 @@
   let challengeManager = new ChallengeManager({ 
     selectors: { 
       save: '#save-btn',
+      reset: '#reset-btn',
+      delete: '#delete-btn',
       insert: '#insert-btn'
     },
     editors: {

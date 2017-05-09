@@ -5,9 +5,11 @@
 			<div class="col-sm-12">
 				<ul class="nav flex-column flex-md-row">
 					<li class="nav-item" id="save-btn"><a href="#" class="nav-link"><i class="fa fa-database"></i>Guardar</a></li>
-					<li class="nav-item"><a class="nav-link"><i class="fa fa-refresh"></i>Reiniciar</a></li>
-					<li class="nav-item"><a class="nav-link"><i class="fa fa-feed"></i>Publicar</a></li>
-					<li class="nav-item"><a class="nav-link"><i class="fa fa-trash"></i>Eliminar</a></li>
+					<li class="nav-item" id="reset-btn"><a href="#" class="nav-link"><i class="fa fa-refresh"></i>Reiniciar</a></li>
+					<!-- <li class="nav-item"><a class="nav-link"><i class="fa fa-feed"></i>Publicar</a></li> -->
+					<% if action_name == 'edit' %>
+					<li class="nav-item" id="delete-btn"><a href="#" class="nav-link"><i class="fa fa-trash"></i>Eliminar</a></li>
+					<% end %>
 				</ul>
 			</div>
 

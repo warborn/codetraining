@@ -58,7 +58,7 @@ let RunnerUI = {
 		this.displayPendingHeader();
     this.destroyTreeBox();
     $(this.contentSelector).empty();
-		this.progressbar.startInterval();
+		this.progressbar.start();
 	},
 
 	displayResponse: function(response) {
