@@ -4,13 +4,13 @@ function ChallengeManager(options) {
 	this.insertBtn = $(options.selectors.insert);
 	this.resetBtn = $(options.selectors.reset);
 	this.deleteBtn = $(options.selectors.delete);
-	this.editors = options.editors;
+	this.form = new ChallengeForm(options.selectors.root, options.editors);
 
 	this.onSave = function() {
 		let that = this;
 		this.saveBtn.click(function(e) {
 			e.preventDefault();
-	    let data = that.inputsToObject(that.getInputs());
+	    let data = that.form.getData();
 	    let saveURL = that.generateURL();
 
 			let progressbar = new Progressbar({ delay: 400, step: 10 });
@@ -22,8 +22,8 @@ function ChallengeManager(options) {
 	    	let translation = response.data;
 	    	progressbar.finished();
 	    	if(that.action === 'post') {
-	    			Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
-		    		setTimeout(function() {
+    			Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
+	    		setTimeout(function() {
 			    	that.action = 'patch';
 		    		that.redirectTo(that.generateURL(translation.challenge.id, translation.language));
 		    	}, 2000);
@@ -43,10 +43,7 @@ function ChallengeManager(options) {
 		let that = this;
 		this.resetBtn.click(function(e) {
 			e.preventDefault();
-			$('form')[0].reset();
-			that.forEachEditor(function(editor) {
-				editor.clear();
-			});
+			that.form.reset();
 		})
 	}
 
@@ -64,8 +61,8 @@ function ChallengeManager(options) {
 	    	if(that.action === 'patch') {
     			Notifier.success('Se eliminó correctamente', 'Puedes crear un nuevo ejercico ahora!');
 	    		setTimeout(function() {
-		    	that.action = 'post';
-	    		that.redirectTo('/challenges/new');
+			    	that.action = 'post';
+		    		that.redirectTo('/challenges/new');
 		    	}, 2000);
 	    	}
 			})
@@ -83,31 +80,11 @@ function ChallengeManager(options) {
 			axios.get('/challenges/example/' + language, {}, { responseType: 'json' })
 	    .then(function(response) {
 	      example = response.data;
-	      that.initialSolutionEditor.setValue(example.setup);
-	      that.completeSolutionEditor.setValue(example.answer);
-	      that.finalTestEditor.setValue(example.fixture);
+	      that.form.initialSolutionEditor.setValue(example.setup);
+	      that.form.completeSolutionEditor.setValue(example.answer);
+	      that.form.finalTestEditor.setValue(example.fixture);
 	    });
 	  });
-	}
-
-	this.getInputs = function() {
-	  this.refreshEditorValues();
-		return $('form input, form select, form textarea').toArray();
-	}
-
-	this.inputsToObject = function(inputs) {
-		return inputs.reduce(function(prev, current) {
-			if(current.name) {
-      	prev[current.name] = current.value;
-      }
-      return prev;
-    }, {});
-	}
-
-	this.refreshEditorValues = function() {
-		this.forEachEditor(function(editor) {
-			editor.save();
-		});
 	}
 
 	this.generateURL = function(challengeID, language) {
@@ -128,32 +105,12 @@ function ChallengeManager(options) {
 		return $('form').data('language');
 	}
 
-	this.getAction = function() {
-		return $('input[name=_method]').length > 0 ? 'patch' : 'post';
-	}
-
-	this.attachEditors = function() {
-		// attach each editor object to the ChallengeManager instance
-		this.forEachEditor(function(editor) {
-			this[editorName] = editor;
-		})
-	}
-
-	this.forEachEditor = function(callback) {
-		for(editorName in this.editors) {
-			if(this.editors.hasOwnProperty(editorName)) {			
-				callback.call(this, options.editors[editorName]);
-			}
-		}
-	}
-
 	this.init = function() {
 		this.onSave();
 		this.onReset();
 		this.onDelete();
 		this.onInsertExample();
-		this.action = this.getAction();
-		this.attachEditors();
+		this.action = this.form.getAction();
 	}
 
 	this.redirectTo = function(url) {

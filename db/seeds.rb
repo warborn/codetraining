@@ -112,8 +112,8 @@ challenge = Challenge.create({
 })
 puts 'Challenge created!'
 
-initial_solution = "function suma(a, b) {\n  return a + b;\n}"
-final_solution   = "function suma(a, b) {\n  \n}"
+initial_solution = "function suma(a, b) {\n  \n}"
+final_solution   = "function suma(a, b) {\n  return a + b;\n}"
 example_fixture  = "Test.assertEquals(suma(1, 2), 3);\nTest.assertEquals(suma(-1, 5), 4);\nTest.assertEquals(suma(0, 0), 0);"
 final_fixture    = "function getRandomInt(min, max) {\n  return Math.floor(Math.random() * (max - min)) + min;\n}\n\nfor(var i = 0; i < 100; i++) {\n	let a = getRandomInt(0, 1000);\n  	let b = getRandomInt(0, 1000);\n  	Test.assertEquals(suma(a, b), a + b);\n}"
 

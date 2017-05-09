@@ -76,6 +76,7 @@
   // menu event handler
   let challengeManager = new ChallengeManager({ 
     selectors: { 
+      root: '#challenge-form',
       save: '#save-btn',
       reset: '#reset-btn',
       delete: '#delete-btn',
