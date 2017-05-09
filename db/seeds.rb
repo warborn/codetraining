@@ -91,3 +91,39 @@ translation = Translation.create({
 })
 puts 'JavaScript translation created!'
 
+# ------------------------------------------------------
+
+description = <<~HEREDOC
+Define una funcion que regrese la suma de dos numeros dados.
+
+```js
+suma(1, 2) // => 3
+suma(-1, 5) // => 4
+suma(0, 0) // => 0
+```
+HEREDOC
+
+challenge = Challenge.create({
+	name: 'Suma de dos números',
+	rank: 1,
+	description: description,
+	category: 'fundamentos',
+	tags: 'operadores,números,funciones'	
+})
+puts 'Challenge created!'
+
+initial_solution = "function suma(a, b) {\n  return a + b;\n}"
+final_solution   = "function suma(a, b) {\n  \n}"
+example_fixture  = "Test.assertEquals(suma(1, 2), 3);\nTest.assertEquals(suma(-1, 5), 4);\nTest.assertEquals(suma(0, 0), 0);"
+final_fixture    = "function getRandomInt(min, max) {\n  return Math.floor(Math.random() * (max - min)) + min;\n}\n\nfor(var i = 0; i < 100; i++) {\n	let a = getRandomInt(0, 1000);\n  	let b = getRandomInt(0, 1000);\n  	Test.assertEquals(suma(a, b), a + b);\n}"
+
+translation = Translation.create({
+	initial_solution: initial_solution,
+	complete_solution: final_solution,
+	example_fixture: example_fixture,
+	final_fixture: final_fixture,
+	status: 'beta',
+	challenge_id: challenge.id,
+	language_id: javascript.id
+})
+puts 'JavaScript translation created!'

@@ -1,0 +1,41 @@
+.alert-code {
+	padding: 0;
+	border: none;
+	border-radius: 3px;
+	color: #ECECEC;
+	background-color: #2C2F37;
+	box-shadow: 0 25px 10px -15px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	> [data-notify="title"] {
+		color: #DEDEDE;
+		display: block;
+		margin-bottom: 12px;
+		background-color: #1E1E20;
+		padding: 4px 0;
+		text-align: center;
+		font-size: 0.98em;
+		box-shadow: 0 2px 4px -2px #383838;
+	}
+
+	> [data-notify="message"] {	
+		font-size: 0.90em;
+	}
+
+	> [data-notify="message"] > ul.messages {		
+		list-style: bullet;
+		padding-left: 30px;
+	}
+
+	> [data-notify="message"] > p.messages {		
+		text-align: center;
+		font-size: 1.2em;
+	}
+
+	&.danger {
+		background-color: #B05D5D;
+	}
+
+	&.success {
+		background-color: #5DB072;
+	}
+}

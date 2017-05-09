@@ -17,15 +17,20 @@ function ChallengeManager(options) {
 	    }, { responseType: 'json' })
 	    .then(function(response) {
 	    	let translation = response.data;
-	    	if(that.action === 'post') {
-	    		that.action = 'patch';
-	    		window.location.replace(that.generateURL(translation.challenge.id, translation.language));
-	    	}
 	    	progressbar.finished();
+	    	if(that.action === 'post') {
+	    			Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
+		    		setTimeout(function() {
+			    	that.action = 'patch';
+		    		that.redirectTo(that.generateURL(translation.challenge.id, translation.language));
+		    	}, 2000);
+	    	} else {
+	    		Notifier.success('Se editó correctamente', 'Se han guardado tus cambios!');
+	    	}
 		  })
 	    .catch(function(error) {
 		    console.log(error.response);
-		    Notifier.fromError(error.response.data.errors);
+		    Notifier.fromErrors('No se pudo guardar', error.response.data.errors);
 	    	progressbar.finished();
 		  });
 		});
@@ -100,6 +105,10 @@ function ChallengeManager(options) {
 		this.action = this.getAction();
 		this.attachEditors();
 	}
+
+	this.redirectTo = function(url) {
+		window.location.replace(url);
+	},
 
 	this.init();
 }
