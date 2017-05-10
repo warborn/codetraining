@@ -27,15 +27,32 @@ $(document).ready(function() {
   	}
   });
 
-  var sampleTestButton = $('#example-btn');
+  var resetChallengeButton = $('#reset-btn');
+  var exampleTestButton = $('#example-btn');
   var finalTestButton = $('#attempt-btn');
 
 	RunnerUI.init({
 		root: '#output',
 		content: '#output-body'
 	});
+
+	resetChallengeButton.click(function(e) {
+		let progressbar = new Progressbar({ delay: 400, step: 10 });
+		progressbar.start();
+		axios.get('/challenges/3/show/javascript.json', {}, { responseType: 'json' })
+		.then(function(response) {
+			console.log(response);
+			codeEditor.setValue(response.data.initial_solution);
+			testEditor.setValue(response.data.example_fixture);
+			progressbar.finished();
+		})
+		.catch(function(error) {
+			console.log(error.response);
+			progressbar.finished();
+		});
+	});
 	
-	sampleTestButton.click(function(e) {
+	exampleTestButton.click(function(e) {
 		$('#details-tab a[href="#output"]').tab('show');
 
 		let runnerData = {

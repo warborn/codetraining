@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :set_translation, only: [:edit, :update, :train]
+  before_action :set_translation, only: [:edit, :update]
   before_action :set_language, only: [:new, :create]
 
   def index

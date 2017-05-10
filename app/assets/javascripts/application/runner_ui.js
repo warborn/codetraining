@@ -4,7 +4,7 @@ let RunnerUI = {
 		this.contentSelector = config.content;
 		this.treeView = null;
 		this.runner = new Runner();
-		this.progressbar = new Progressbar({ delay: 800, step: 10 });
+		this.progressbar = new Progressbar({ delay: 200, step: 5 });
 	},
 
 	sendRequest: function(config, callback) {
@@ -75,7 +75,7 @@ let RunnerUI = {
 	},
 
 	displayHeader: function(message) {
-		$(this.rootSelector + ' .header').text(message);
+		$(this.rootSelector + ' .header').html(message);
 	},
 
 	displayResponseHeader: function() {
@@ -83,7 +83,7 @@ let RunnerUI = {
 	},
 
 	displayPendingHeader: function() {
-		this.displayHeader('Estado: Pendiente');
+		this.displayHeader('<p class="loading-dots">Estado: Ejecutando tu código<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></p>');
 	},
 
 	displayErrors: function() {

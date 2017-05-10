@@ -5,11 +5,11 @@
 	}
 
 	>.body.-passed {
-		border: 2px solid $passed-color;
+		border-top: 6px solid $passed-color;
 	}
 
 	>.body.-failed {
-		border: 2px solid $failed-color;
+		border-top: 6px solid $failed-color;
 	}
 
 	> .body > .header {  }
