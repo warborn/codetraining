@@ -58,6 +58,9 @@ Rails.application.configure do
   # cache assets
   config.action_controller.perform_caching = false
   config.reload_classes_only_on_change = false
+
+  # devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
 
 class Application < Rails::Application
