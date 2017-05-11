@@ -7,8 +7,11 @@ es:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
     models:
+      user: Usuario
     attributes:
       user:
+        username: 'Nombre de usuario'
+        name: Nombre
         current_password: Contraseña actual
         email: Correo electrónico
         password: Contraseña
@@ -119,17 +122,6 @@ es:
       send_instructions: En unos minutos recibirás instrucciones para desbloquear tu cuenta.
       send_paranoid_instructions: Si tu cuenta existe, en unos minutos recibirás instrucciones para desbloquear tu cuenta.
       unlocked: Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión.
-  errors:
-    messages:
-      already_confirmed: ya fue confirmada, por favor intenta iniciar sesión
-      confirmation_period_expired: necesita confirmarse dentro de %{period}, por favor solicita una nueva
-      expired: ha expirado; por favor solicita una nueva
-      not_found: no se encontró
-      not_locked: no se encuentra bloqueada
-      not_saved:
-        one: 'Un error ocurrió al tratar de guardar %{resource}:'
-        other: "%{count} errores ocurrieron al tratar de guardar %{resource}:"
-
   date:
     abbr_day_names:
     - dom
@@ -262,6 +254,14 @@ es:
         one: "no tiene la longitud correcta (1 carácter exactos)"
         other: "no tiene la longitud correcta (%{count} caracteres exactos)"
       other_than: debe ser distinto de %{count}
+      already_confirmed: ya fue confirmada, por favor intenta iniciar sesión
+      confirmation_period_expired: necesita confirmarse dentro de %{period}, por favor solicita una nueva
+      expired: ha expirado; por favor solicita una nueva
+      not_found: no se encontró
+      not_locked: no se encuentra bloqueada
+      not_saved:
+        one: 'Un error ocurrió al tratar de guardar %{resource}:'
+        other: "%{count} errores ocurrieron al tratar de guardar %{resource}:"
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:
