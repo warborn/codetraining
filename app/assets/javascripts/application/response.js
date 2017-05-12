@@ -11,6 +11,10 @@ function Response(response) {
     return this.response.result.errors > 0 | this.response.exit_code === 1;
   }
 
+  this.hasEmptyCode = function() {
+    return this.response.status === 'empty_code';
+  }
+
   this.getErrors = function() {
     return this.response.result.error || this.response.stderr;
   }

@@ -66,7 +66,9 @@ let RunnerUI = {
 		this.setResponse(response);
 		this.displayResponseHeader();
 		
-    if(this.response.hasErrors()) {
+		if(this.response.hasEmptyCode()) {
+			this.displayEmptyCodeError();
+		} else if(this.response.hasErrors()) {
       this.displayErrors();
     } else {
       this.displayTree();
@@ -87,12 +89,20 @@ let RunnerUI = {
 	},
 
 	displayErrors: function() {
+    this.displayErrorBox(this.response.getErrors());
+	},
+
+	displayEmptyCodeError: function() {
+    this.displayErrorBox('No se envió código, no hay nada que ejecutar.');
+	},
+
+	displayErrorBox: function(message) {
 		this.setOutputType('error-box');
 		$root = $(this.contentSelector);
 		$root.empty();
 		$errorBlock = $('<div class="box"></div>');
     $pre = $('<pre></pre>');
-    $pre.text(this.response.getErrors());
+    $pre.text(message);
     $errorBlock.append($pre)
     $root.append($errorBlock);
 	},
