@@ -76,13 +76,16 @@ $(document).ready(function() {
 		$('#details-tab a[href="#output"]').tab('show');
 		let matches = window.location.pathname.match(/challenges\/(\d+)\/train\/([a-zA-Z-_\+#]+)/);
 		let matchGroup = { ChallengeID: 1, Language: 2 };
+		let language = matches[matchGroup.Language];
+		let challengeID = matches[matchGroup.ChallengeID];
 
 		let runnerData = {
 			url: '/run',
 			data: {
 				code: codeEditor.getValue(),
-				language:  matches[matchGroup.Language],
-				challenge_id: matches[matchGroup.ChallengeID],
+				fixture: testEditor.getValue(),
+				language:  language,
+				challenge_id: challengeID,
 				attempt: true
 			}
 		}
@@ -90,8 +93,13 @@ $(document).ready(function() {
 		console.log(runnerData);
 
 		RunnerUI.sendRequest(runnerData)
-		.then(function(res) {
-			//
+		.then(function(response) {
+			if(response.result.completed) {
+				Notifier.success('Ejercicio Resuelto', 'Se ha registrado tu solución!');
+				setTimeout(function() {
+					window.location.replace('/challenges/' + challengeID + '/solutions/' + language);
+				}, 3000);
+			}
 		})
 		.catch(function(error) {
 			console.log(error);

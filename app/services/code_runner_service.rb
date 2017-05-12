@@ -4,7 +4,7 @@ class CodeRunnerService
 		@code = params[:code]
 		@language_name = 'javascript' # replace with params[:language]) when adding more languages
 		@challenge_id = params[:challenge_id]
-		@fixture = get_fixture(params)
+		@fixture = attempted_fixture(params)
 	end
 
 	def call!
@@ -32,7 +32,7 @@ class CodeRunnerService
 	  	response
 		end
 
-		def get_fixture(params)
+		def attempted_fixture(params)
 			if params[:attempt]
 				Translation.by_language_and_challenge(@language_name, @challenge_id).final_fixture
 			else
