@@ -4,14 +4,6 @@
 		@include output;
 	}
 
-	> .body > .content pre:not([class]) {
-		background-color: $output-bg;
-		color: $markdown-preview-color;
-		width: 100%;
-		display: block;
-		padding: 15px 15px;
-	}
-
 	&.regular {
 		> .body {
 			font-size: 1em;

@@ -1,0 +1,9 @@
+.solution-box {
+	padding: 10px 20px;
+	background-color: $preview-bg;
+	border-bottom: 1px solid #272727;
+
+	> .user span a{
+		color: #fff
+	}
+}
