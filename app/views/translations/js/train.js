@@ -39,7 +39,10 @@ $(document).ready(function() {
 	resetChallengeButton.click(function(e) {
 		let progressbar = new Progressbar({ delay: 400, step: 10 });
 		progressbar.start();
-		axios.get('/challenges/3/show/javascript.json', {}, { responseType: 'json' })
+		let language = getLanguageFromURL();
+		let challengeID = getChallengeIDFromURL();
+
+		axios.get('/challenges/' + challengeID + '/show/' + language + '.json', {}, { responseType: 'json' })
 		.then(function(response) {
 			console.log(response);
 			codeEditor.setValue(response.data.initial_solution);
@@ -74,10 +77,8 @@ $(document).ready(function() {
 
 	finalTestButton.click(function(e) {
 		$('#details-tab a[href="#output"]').tab('show');
-		let matches = window.location.pathname.match(/challenges\/(\d+)\/train\/([a-zA-Z-_\+#]+)/);
-		let matchGroup = { ChallengeID: 1, Language: 2 };
-		let language = matches[matchGroup.Language];
-		let challengeID = matches[matchGroup.ChallengeID];
+		let language = getLanguageFromURL();
+		let challengeID = getChallengeIDFromURL();
 
 		let runnerData = {
 			url: '/run',

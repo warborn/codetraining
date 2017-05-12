@@ -15,3 +15,19 @@ function initMarked() {
     }
   });
 }
+
+function challengeURLMatches() {
+  return window.location.pathname.match(/challenges\/(\d+)\/train\/([a-zA-Z-_\+#]+)/);
+}
+
+function getChallengeIDFromURL() {
+  let matches = challengeURLMatches();
+  return matches[1];
+}
+
+function getLanguageFromURL() {
+  let matches = challengeURLMatches();
+  return matches[2];
+}
+
+
