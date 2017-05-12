@@ -3,7 +3,9 @@ function ChallengeForm(rootSelector, editors) {
 	this.editors = editors;
 
 	this.reset = function() {
-		$(this.rootSelector)[0].reset();
+		$('#challenge-form input').not(':hidden').each(function(index, input) {
+			input.value = '';
+		});
 		this.forEachEditor(function(editor) {
 			editor.clear();
 		});
