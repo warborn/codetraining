@@ -23,7 +23,7 @@
           <%= link_to 'Crear Ejercicio', new_challenge_path, class: 'dropdown-item' %>
           <a class="dropdown-item" href="#">Mis Ejercicios</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Configuración</a>
+          <%= link_to 'Configuración', edit_user_registration_path, class: 'dropdown-item' %>
           <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
         </div>
       </li>
