@@ -39,10 +39,8 @@ $(document).ready(function() {
 	resetChallengeButton.click(function(e) {
 		let progressbar = new Progressbar({ delay: 400, step: 10 });
 		progressbar.start();
-		let language = getLanguageFromURL();
-		let challengeID = getChallengeIDFromURL();
 
-		axios.get('/challenges/' + challengeID + '/show/' + language + '.json', {}, { responseType: 'json' })
+		axios.get(Router.challenge_path(), {}, { responseType: 'json' })
 		.then(function(response) {
 			console.log(response);
 			codeEditor.setValue(response.data.initial_solution);
@@ -77,21 +75,17 @@ $(document).ready(function() {
 
 	finalTestButton.click(function(e) {
 		$('#details-tab a[href="#output"]').tab('show');
-		let language = getLanguageFromURL();
-		let challengeID = getChallengeIDFromURL();
 
 		let runnerData = {
 			url: '/run',
 			data: {
 				code: codeEditor.getValue(),
 				fixture: testEditor.getValue(),
-				language:  language,
-				challenge_id: challengeID,
+				language:  Router.getLanguage(),
+				challenge_id: Router.getChallengeID(),
 				attempt: true
 			}
 		}
-
-		console.log(runnerData);
 
 		RunnerUI.sendRequest(runnerData)
 		.then(function(response) {

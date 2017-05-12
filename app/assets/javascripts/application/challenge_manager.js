@@ -11,7 +11,7 @@ function ChallengeManager(options) {
 		this.saveBtn.click(function(e) {
 			e.preventDefault();
 	    let data = that.form.getData();
-	    let saveURL = that.generateURL();
+	    let saveURL = Router.save_challenge_path(that.action);
 
 			let progressbar = new Progressbar({ delay: 400, step: 10 });
 			progressbar.start();
@@ -25,7 +25,7 @@ function ChallengeManager(options) {
     			Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
 	    		setTimeout(function() {
 			    	that.action = 'patch';
-		    		that.redirectTo(that.generateURL(translation.challenge.id, translation.language));
+		    		Router.redirectTo(Router.edit_challenge_path(translation.challenge.id, translation.language));
 		    	}, 2000);
 	    	} else {
 	    		Notifier.success('Se editó correctamente', 'Se han guardado tus cambios!');
@@ -51,7 +51,7 @@ function ChallengeManager(options) {
 		let that = this;
 		this.deleteBtn.click(function(e) {
 			e.preventDefault();
-			let deleteURL = that.generateURL();
+			let deleteURL = Router.delete_challenge_path();
 			let progressbar = new Progressbar({ delay: 400, step: 10 });
 			progressbar.start();
 			axios.delete(deleteURL, {}, 
@@ -62,7 +62,7 @@ function ChallengeManager(options) {
     			Notifier.success('Se eliminó correctamente', 'Puedes crear un nuevo ejercico ahora!');
 	    		setTimeout(function() {
 			    	that.action = 'post';
-		    		that.redirectTo('/challenges/new');
+		    		Router.redirectTo(Router.new_challenge_path());
 		    	}, 2000);
 	    	}
 			})
@@ -74,10 +74,9 @@ function ChallengeManager(options) {
 	}
 
 	this.onInsertExample = function() {
-		let language = 'javascript';
 		let that = this;
 		this.insertBtn.click(function() {
-			axios.get('/challenges/example/' + language, {}, { responseType: 'json' })
+			axios.get(Router.example_path(), {}, { responseType: 'json' })
 	    .then(function(response) {
 	      example = response.data;
 	      that.form.initialSolutionEditor.setValue(example.setup);
@@ -87,24 +86,6 @@ function ChallengeManager(options) {
 	  });
 	}
 
-	this.generateURL = function(challengeID, language) {
-		if(this.action === 'post') {
-			return '/challenges';
-		} else {
-			challengeID = challengeID || this.getChallenge();
-			language = language || this.getLanguage();
-			return '/challenges/' + challengeID + '/edit/' + language;
-		}
-	}
-
-	this.getChallenge = function() {
-		return $('form').data('challenge-id');
-	}
-
-	this.getLanguage = function() {
-		return $('form').data('language');
-	}
-
 	this.init = function() {
 		this.onSave();
 		this.onReset();
@@ -112,10 +93,6 @@ function ChallengeManager(options) {
 		this.onInsertExample();
 		this.action = this.form.getAction();
 	}
-
-	this.redirectTo = function(url) {
-		window.location.replace(url);
-	},
 
 	this.init();
 }
