@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/warborn/code_runner
-  revision: 7614a667c05b41f9c7a66ba58491db964d6903ea
+  revision: 0cd401679098ffdc1550634886496228e7021147
   specs:
     code_runner (0.1.0)
 

@@ -34,6 +34,10 @@ let Router = {
 		return this.edit_challenge_path();
 	},
 
+	challenge_solutions_path: function() {
+		return '/challenges/' + this.getChallengeID() + '/solutions/' + this.getLanguage();
+	},
+
 	// Examples show action
 	example_path: function() {
 		let language = 'javascript';
@@ -42,7 +46,7 @@ let Router = {
 
 	// Get the matches that correspond to the challenge id and language name from URL
 	challengeURLMatches: function() {
-	  return window.location.pathname.match(/challenges\/(\d+)\/(train|edit)\/([a-zA-Z-_\+#]+)/);
+	  return window.location.pathname.match(/challenges\/(\d+)\/(?:train|edit)\/([a-zA-Z-_\+#]+)/);
 	},
 
 	// Extract challenge id from URL

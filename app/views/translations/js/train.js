@@ -92,7 +92,7 @@ $(document).ready(function() {
 			if(response.result.completed) {
 				Notifier.success('Ejercicio Resuelto', 'Se ha registrado tu solución!');
 				setTimeout(function() {
-					window.location.replace('/challenges/' + challengeID + '/solutions/' + language);
+					Router.redirectTo(Router.challenge_solutions_path());
 				}, 3000);
 			}
 		})
