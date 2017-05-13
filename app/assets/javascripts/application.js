@@ -28,6 +28,11 @@
 //= require remarkable-bootstrap-notify/dist/bootstrap-notify.min
 //= require_tree .
 
+$(function(){
+  var token = $('meta[name="csrf-token"]').attr('content');
+  if (token) axios.defaults.headers.common['X-CSRF-Token'] = token;
+});
+
 $(document).ready(function() {
 	$('body').css('display', 'block');
 });

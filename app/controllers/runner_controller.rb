@@ -1,4 +1,6 @@
 class RunnerController < ApplicationController
+  before_action :authenticate_user!
+
 	def run
     runner_service = CodeRunnerService.new(params)
     response = runner_service.call!
@@ -6,7 +8,6 @@ class RunnerController < ApplicationController
     if params[:attempt] && response[:result][:completed]
     	# solution_saver_service = SolutionSaverService.new(current_user, params)
     	# solution_saver_service.call!
-    	current_user ||= User.first
     	solution = current_user.solutions.build({
     		answer: params[:code],
     		fixture: params[:fixture]

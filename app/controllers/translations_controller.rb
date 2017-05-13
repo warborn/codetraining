@@ -1,4 +1,5 @@
 class TranslationsController < ApplicationController
+  before_action :authenticate_user!
 	before_action :set_translation, only: [:show, :train, :solutions]
 
 	def show
@@ -9,7 +10,7 @@ class TranslationsController < ApplicationController
 	end
 
 	def solutions
-		@solutions = Solution.where(translation_id: @translation.id)
+		@solutions = @translation.solutions.first_of_each_user
 	end
 
 	def train
