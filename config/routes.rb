@@ -16,5 +16,7 @@ Rails.application.routes.draw do
 
   get 'challenges/example/:language', to: 'examples#show'
 
+  get 'users/:id/solutions', to: 'users#solutions', as: 'user_solutions'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

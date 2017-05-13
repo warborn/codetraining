@@ -18,7 +18,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Ejercicios Resueltos</a>
-          <a class="dropdown-item" href="#">Mis Soluciones</a>
+          <%= link_to 'Mis Soluciones', user_solutions_path(current_user.username), class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>
           <%= link_to 'Crear Ejercicio', new_challenge_path, class: 'dropdown-item' %>
           <a class="dropdown-item" href="#">Mis Ejercicios</a>
