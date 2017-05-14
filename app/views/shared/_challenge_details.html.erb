@@ -1,0 +1,18 @@
+<div class="list-group">
+	<div class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <%= link_to challenge_path(challenge) do %>
+      <h5 class="mb-1"><%= challenge.name %></h5>
+      <% end %>
+      <span><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= challenge.rank %></span>
+    </div>
+    <p class="mb-1">Disciplina: <%= challenge.category %></p>
+    <div class="mt-2 challenge-tags">
+		  <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
+		  <%= render partial: 'shared/tags', collection: challenge.splitted_tags, as: :tag %>
+    </div>
+    <% if current_user == challenge.user %>
+    	<%= link_to 'Editar Ejercicio', edit_challenge_translation_path(challenge, 'javascript') %>
+    <% end %>
+  </div>
+</div>

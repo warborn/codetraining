@@ -29,21 +29,6 @@
 				</div>
 			</div>
 		</form>
-		
-		<% @challenges.each do |challenge| %>
-		<div class="list-group">
-			<%= link_to challenge_path(challenge), class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
-		    <div class="d-flex w-100 justify-content-between">
-		      <h5 class="mb-1"><%= challenge.name %></h5>
-		      <span><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= challenge.rank %></span>
-		    </div>
-		    <p class="mb-1">Disciplina: <%= challenge.category %></p>
-		    <div class="mt-2 challenge-tags">
-				  <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-				  <%= render partial: 'shared/tags', collection: challenge.splitted_tags, as: :tag %>
-		    </div>
-		  <% end %>
-		</div>
-		<% end %>
+		<%= render partial: 'shared/challenge_details', collection: @challenges, as: :challenge %>
 	</div>
 </section><!-- end exercise list section -->
