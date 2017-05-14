@@ -4,7 +4,7 @@ class ChallengesController < ApplicationController
   before_action :set_language, only: [:new, :create]
 
   def index
-    @challenges = Challenge.all
+    @challenges = Challenge.includes(:user).all
   end
 
   def show
@@ -21,8 +21,9 @@ class ChallengesController < ApplicationController
   end
   
   def create
-    challenge_creator = CreateChallenge.new(challenge_params, translation_params, @language)
+    challenge_creator = CreateChallenge.new(challenge_params, current_user, @language)
     if challenge_creator.create
+      challenge_creator.assign_translation(translation_params)
       @challenge = challenge_creator.challenge
       @translation = challenge_creator.translation
       render json: @translation, status: :created
