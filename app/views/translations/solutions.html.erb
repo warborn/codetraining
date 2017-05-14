@@ -1,7 +1,9 @@
 <section class="exercise-solutions row"><!-- solutions  -->
 	<div class="col-sm-12">
 		<h4><%= @translation.challenge.name %></h4>
-		<%= render partial: 'shared/solution', collection: @solutions, as: :solution %>
+		<div class="border">
+			<%= render partial: 'shared/solution', collection: @solutions, as: :solution %>
+		</div>
 	</div>
 	
 </section><!-- end solutions -->

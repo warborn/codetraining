@@ -1,6 +1,25 @@
-<section class="exercise-solutions row"><!-- solutions  -->
-	<div class="col-sm-12">
-		<%= render partial: 'shared/solution', collection: @solutions, as: :solution %>
+<section class="user-solutions row"><!-- solutions  -->
+	<div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
+		<div class="border">
+			<% @solutions.each do |solution| %>
+			<div class="solution-box">
+				<div class="user mb-2">
+					<span>
+					<%= link_to solution.translation.challenge.name, challenge_path(solution.translation.challenge) %>
+					</span>
+					<span><small><%= solution.translation.language.name %>:</small></span>
+				</div>
+				<div class="answer" id="answer_<%= solution.id %>">
+					<div class="body">
+						<div class="content marked-code">
+							<input type="hidden" value="<%= solution.answer %>">
+						</div>
+					</div>
+					<span><small>Hace <%= time_ago_in_words(solution.created_at) %></small></span>
+				</div>
+			</div>
+			<% end%>
+		</div>
 	</div>
 	
 </section><!-- end solutions -->
