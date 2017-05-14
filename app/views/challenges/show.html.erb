@@ -3,10 +3,14 @@
 		<div class="challenge-details row">
 			<div class="info col-sm-12 col-md-6 col-lg-8">
 				<h5 class="name"><%= @challenge.name %></h5>
-				<span class="icon"><a href="#"><i class="fa fa-user" aria-hidden="true"></i>warborn</a></span>
-				<span class="icon"><i class="fa fa-code" aria-hidden="true"></i>JavaScript</span>
+				<span class="icon">
+					<%= link_to "/users/#{@challenge.user.username}" do %>
+					<i class="fa fa-user" aria-hidden="true"></i><%= @challenge.user.username %></a>
+					<% end %>
+				</span>
+				<span class="icon"><i class="fa fa-code" aria-hidden="true"></i><%= @challenge.translations.first.language.name %></span>
 				<span class="icon"><i class="fa fa-signal" aria-hidden="true"></i>Nivel <%= @challenge.rank %></span>
-				<span class="icon"><i class="fa fa-user-plus" aria-hidden="true"></i></i>102 veces contestado</span>
+				<span class="icon"><i class="fa fa-user-plus" aria-hidden="true"></i></i><%= @solutions_count %> veces contestado</span>
 			</div>
 			<div class="actions col-sm-12 col-md-6 col-lg-4">
 				<div class="btn-group">

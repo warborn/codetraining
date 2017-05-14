@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 20170512054000) do
     t.string   "category"
     t.string   "tags"
     t.string   "status",      default: "beta"
+    t.integer  "user_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["name"], name: "index_challenges_on_name", unique: true, using: :btree
+    t.index ["user_id"], name: "index_challenges_on_user_id", using: :btree
   end
 
   create_table "examples", force: :cascade do |t|
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170512054000) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_languages_on_name", unique: true, using: :btree
   end
 
   create_table "solutions", force: :cascade do |t|
@@ -99,8 +102,10 @@ ActiveRecord::Schema.define(version: 20170512054000) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  add_foreign_key "challenges", "users"
   add_foreign_key "examples", "languages"
   add_foreign_key "solutions", "translations"
   add_foreign_key "solutions", "users"

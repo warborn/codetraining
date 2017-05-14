@@ -1,3 +1,12 @@
+user = User.new(
+		:username              => 'ejemplo',
+    :email                 => "email@email.com",
+    :password              => "password",
+    :password_confirmation => "password"
+)
+user.skip_confirmation!
+user.save!
+
 javascript = Language.create(name: 'javascript')
 puts 'Language created!'
 
@@ -33,7 +42,8 @@ challenge = Challenge.create({
 	rank: 1,
 	description: description,
 	category: 'fundamentos',
-	tags: 'algoritmos,funciones,arreglos'	
+	tags: 'algoritmos,funciones,arreglos',
+	user_id: user.id
 })
 puts 'Challenge created!'
 
@@ -71,7 +81,8 @@ challenge = Challenge.create({
 	rank: 1,
 	description: description,
 	category: 'fundamentos',
-	tags: 'condiciones,control de flujo,operadores'	
+	tags: 'condiciones,control de flujo,operadores',
+	user_id: user.id
 })
 puts 'Challenge created!'
 
@@ -108,7 +119,8 @@ challenge = Challenge.create({
 	rank: 1,
 	description: description,
 	category: 'fundamentos',
-	tags: 'operadores,números,funciones'	
+	tags: 'operadores,números,funciones',
+	user_id: user.id
 })
 puts 'Challenge created!'
 

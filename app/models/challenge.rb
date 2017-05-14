@@ -4,6 +4,7 @@ class Challenge < ApplicationRecord
 	validates :category, presence: true
 	validates :rank, presence: true
 
+	belongs_to :user
 	has_many :translations
 
 	before_save :transform_tags

@@ -7,6 +7,7 @@ class CreateChallenges < ActiveRecord::Migration[5.0]
       t.string :category
       t.string :tags
       t.string :status, default: 'beta'
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

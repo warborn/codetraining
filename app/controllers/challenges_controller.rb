@@ -1,4 +1,5 @@
 class ChallengesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_translation, only: [:edit, :update]
   before_action :set_language, only: [:new, :create]
 
@@ -7,7 +8,8 @@ class ChallengesController < ApplicationController
   end
 
   def show
-    @challenge = Challenge.find(params[:id])
+    @solutions_count = Solution.joins(translation: [:challenge]).where('challenges.id = ?', params[:id]).count
+    @challenge = Challenge.includes(:user).includes(translations: [:language]).find(params[:id])
   end
 
   def new
