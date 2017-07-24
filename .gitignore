@@ -20,3 +20,8 @@
 /node_modules
 # Ignore bower dependencies
 /vendor/assets/bower_components
+
+/public/packs
+/public/packs-test
+npm-debug.log
+yarn-error.log

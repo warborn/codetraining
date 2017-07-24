@@ -51,6 +51,9 @@ gem 'therubyracer'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'devise', '~> 4.2', '>= 4.2.1'
 
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+gem 'foreman'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
