@@ -39,8 +39,4 @@
 	</div>
 </section><!-- end exercise details -->
 
-<% content_for :javascript do %>
-  <script type="text/javascript">
-     <%= render file: js_path(:challenges, :show) %>
-  </script>
-<% end %>
+<%= javascript_pack_tag 'challenges/show' %>

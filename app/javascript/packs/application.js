@@ -7,4 +7,16 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('livereload')
+console.log('livereloads')
+
+import $ from 'jquery'
+import axios from 'axios'
+
+$(function(){
+  var token = $('meta[name="csrf-token"]').attr('content');
+  if (token) axios.defaults.headers.common['X-CSRF-Token'] = token;
+});
+
+$(document).ready(function() {
+  $('body').css('display', 'block');
+});

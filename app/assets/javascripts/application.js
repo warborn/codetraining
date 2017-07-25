@@ -14,25 +14,4 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require highlightjs/highlight.pack.min
-//= require perfect-scrollbar/js/perfect-scrollbar.jquery.min
-//= require perfect-scrollbar/js/perfect-scrollbar.min
-//= require marked/lib/marked
-//= require codemirror/lib/codemirror
-//= require codemirror/mode/javascript/javascript
-//= require codemirror/mode/markdown/markdown
-//= require codemirror/addon/scroll/simplescrollbars
-//= require axios/dist/axios.min
-//= require gijgo/dist/modular/tree/js/tree.min
-//= require Progress.js/minified/progress.min
-//= require remarkable-bootstrap-notify/dist/bootstrap-notify.min
-//= require_tree .
-
-$(function(){
-  var token = $('meta[name="csrf-token"]').attr('content');
-  if (token) axios.defaults.headers.common['X-CSRF-Token'] = token;
-});
-
-$(document).ready(function() {
-	$('body').css('display', 'block');
-});
+//= require bootstrap-notify/bootstrap-notify

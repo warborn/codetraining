@@ -8,8 +8,4 @@
 	
 </section><!-- end solutions -->
 
-<% content_for :javascript do %>
-  <script type="text/javascript">
-     <%= render file: js_path(:shared, :solutions) %>
-  </script>
-<% end %>
+<%= javascript_pack_tag 'shared/solutions' %>

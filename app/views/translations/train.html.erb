@@ -58,8 +58,4 @@
 	</div>
 </section><!-- end practice exercise -->
 
-<% content_for :javascript do %>
-  <script type="text/javascript">
-     <%= render file: js_path(:translations, :train) %>
-  </script>
-<% end %>
+<%= javascript_pack_tag 'translations/train' %>

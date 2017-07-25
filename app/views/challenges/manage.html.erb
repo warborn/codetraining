@@ -142,8 +142,4 @@
 	<% end %>
 </section>
 
-<% content_for :javascript do %>
-  <script type="text/javascript">
-     <%= render file: js_path(:challenges, :manage) %>
-  </script>
-<% end %>
+<%= javascript_pack_tag 'challenges/manage' %>

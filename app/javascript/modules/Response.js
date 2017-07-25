@@ -1,5 +1,6 @@
 function Response(response) {
   this.response = response;
+  console.log(this.response)
   this.output = response.result.output;
 
   this.formatData = function() {
@@ -83,3 +84,5 @@ function Response(response) {
     });
   }
 }
+
+export default Response

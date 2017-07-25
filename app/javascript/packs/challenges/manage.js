@@ -1,6 +1,14 @@
- $(document).ready(function() {	
-  // setup perfectScrollbar for markdown description section
+import TabComponent from 'modules/TabComponent'
+import CodeEditor from 'modules/CodeEditor'
+import RunnerUI from 'modules/RunnerUI'
+import ChallengeManager from 'modules/ChallengeManager'
+import { setupScrollbars, initMarked } from 'helpers/utils'
+
+$(document).ready(function() { 
+  // setup perfectScrollbar for markdown section
   setupScrollbars(['.scroll']);
+  // setup marked for markdown
+  const marked = initMarked()
 
   // setup exercise description preview tabs
   let tabComponent = new TabComponent({
@@ -52,7 +60,7 @@
     content: '#output-body'
   });
 
-  validateButton = $('#validate-btn');
+  const validateButton = $('#validate-btn');
   validateButton.click(function(e) {
     let runnerData = {
       url: '/run',
@@ -91,4 +99,4 @@
     }
   });
 
- });
+});
