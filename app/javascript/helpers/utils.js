@@ -1,14 +1,14 @@
-import $ from 'jquery'
-import Ps from 'perfect-scrollbar/jquery'
-import hljs from 'highlight.js'
-import marked from 'marked'
+import Ps from 'perfect-scrollbar/jquery';
+import hljs from 'highlight.js';
+import marked from 'marked';
+import { WHEEL_SPEED, MAX_SCROLLBAR_LENGTH } from 'config/constants';
 
 export function setupScrollbars(selectors) {
   // Use the jQuery adaptor
   Ps($)
   
   selectors.forEach(function(selector) {
-    $(selector).perfectScrollbar({wheelSpeed: 0.3, maxScrollbarLength: 80});
+    $(selector).perfectScrollbar({wheelSpeed: WHEEL_SPEED, maxScrollbarLength: MAX_SCROLLBAR_LENGTH});
   });
 }
 
@@ -22,5 +22,5 @@ export function initMarked() {
     }
   });
 
-  return marked
+  return marked;
 }

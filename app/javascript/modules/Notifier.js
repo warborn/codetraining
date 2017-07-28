@@ -1,5 +1,3 @@
-// require('bootstrap-notify/bootstrap-notify')
-
 let Notifier = {
   settings: {
     // settings
@@ -14,32 +12,31 @@ let Notifier = {
       from: "top",
       align: "left"
     },
-    template: '<div data-notify="container" class="col-xs-11 col-sm-11 col-md-5 col-lg-3 alert alert-{0}" role="alert">' +
-        '<span data-notify="title">{1}</span>' +
-        '<span data-notify="message">{2}</span>' +
-    '</div>'
+    template: `
+      <div data-notify="container" class="col-xs-11 col-sm-11 col-md-5 col-lg-3 alert alert-{0}" role="alert">
+        <span data-notify="title">{1}</span>
+        <span data-notify="message">{2}</span>
+      </div>`
   },
 
-  fromErrors: function(title, errors) {
+  fromErrors(title, errors) {
     this.error(title, this.generateHTMLList(errors), false);
   },
 
-  error: function(title, message) {
+  error(title, message) {
     this.showNotification('danger', title, message);
   },
 
-  success: function(title, message) {
+  success(title, message) {
     this.showNotification('success', title, message);
   },
 
-  showNotification: function(type, title, message, wrap) {
-    if(wrap === undefined) wrap = true;
-    
-    if(wrap) {
-      message = '<p class="messages">' + message + '</p>';
+  showNotification(type, title, message, wrap = true) {
+    if (wrap) {
+      message = `<p class="messages">${message}</p>`;
     }
 
-    this.settings.type = 'code ' + type;
+    this.settings.type = `code ${type}`;
 
     $.notify({
       // options
@@ -49,11 +46,10 @@ let Notifier = {
   },
 
   generateHTMLList: function(array) {
-    items = array.map(function(e) { 
-      return '<li>' + e + '</li>';
-    });
-    return '<ul class="messages">' + items.join('') + '</ul>';
+    const items = array.map((e) => `<li>${e}</li>`);
+
+    return `<ul class="messages">${items.join('')}</ul>`;
   }
 }
 
-export default Notifier
+export default Notifier;

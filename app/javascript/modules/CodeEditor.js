@@ -1,41 +1,43 @@
-import CodeMirrorFactory from './CodeMirrorFactory'
+import CodeMirrorFactory from './CodeMirrorFactory';
 
-function CodeEditor(selector, options, value) {
-  this.constructor = function() {
+class CodeEditor {
+  constructor(selector, options, value) {
     $(selector).siblings().remove();
-    this.editor = CodeMirrorFactory.create($(selector)[0], options);
-    if(value) {
-      this.setValue(value);
+    
+    this.editor = CodeMirrorFactory.create(
+      $(selector)[0],
+      options
+    );
+
+    if (value) {
+     this.setValue(value);
     }
-    this.refresh()
-    let that = this
-    setTimeout(function() {
-        that.refresh();
-    }, 100);
+
+    setTimeout(() => {
+      this.refresh();
+    }, 100)
   }
 
-  this.setValue = function(value) {
+  setValue(value) {
     this.editor.doc.setValue(value);
   }
 
-  this.getValue = function() {
-    this.editor.save();
+  getValue() {
+    this.save();
     return this.editor.doc.getValue();
   }
 
-  this.clear = function() {
+  clear() {
     this.setValue('');
   }
 
-  this.save = function() {
+  save() {
     this.editor.save();
   }
 
-  this.refresh = function() {
+  refresh() {
     this.editor.refresh();
   }
-
-  this.constructor();
 }
 
-export default CodeEditor
+export default CodeEditor;

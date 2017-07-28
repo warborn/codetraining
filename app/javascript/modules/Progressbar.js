@@ -1,17 +1,19 @@
-import { progressJs } from 'Progress.js'
+import { progressJs } from 'Progress.js';
 
-function Progressbar(config) {
-  this.bar = progressJs();
-  this.delay = config.delay;
-  this.step = config.step;
+class Progressbar {
+	constructor(config) {
+	  this.bar = progressJs();
+	  this.delay = config.delay;
+	  this.step = config.step;
+	}
 
-  this.start = function() {
+  start() {
     this.bar.start().autoIncrease(this.step, this.delay);
   }
 
-  this.finished = function() {
+  finished() {
     this.bar.end();
   }
 }
 
-export default Progressbar
+export default Progressbar;

@@ -1,50 +1,56 @@
-import Runner from './Runner'
-import Progressbar from './Progressbar'
-import TreeView from './TreeView'
-import Response from './Response'
+import Runner from './Runner';
+import Progressbar from './Progressbar';
+import TreeView from './TreeView';
+import Response from './Response';
+import { 
+  RUNNER_PROGRESSBAR_DELAY, RUNNER_PROGRESSBAR_STEP 
+} from 'config/constants';
 
 let RunnerUI = {
-  init: function(config) {
+  init(config) {
     this.rootSelector = config.root;
     this.contentSelector = config.content;
     this.treeView = null;
     this.runner = new Runner();
-    this.progressbar = new Progressbar({ delay: 200, step: 5 });
+    this.progressbar = new Progressbar({ delay: RUNNER_PROGRESSBAR_DELAY, step: RUNNER_PROGRESSBAR_STEP });
   },
 
-  sendRequest: function(config, callback) {
-    let that = this;
+  sendRequest(config, callback) {
     this.setup();
     this.runner.setConfig(config);
-    if(typeof callback === 'function') callback();
-    return new Promise(function(resolve, reject) {
-      that.runner.send()
-      .then(function(response) {
-        that.successfulRequest.call(that, response);
+
+    if (typeof callback === 'function') { 
+      callback();
+    }
+
+    return new Promise((resolve, reject) => {
+      this.runner.send()
+      .then((response) => {
+        this.successfulRequest.call(this, response);
         resolve(response);
       })
-      .catch(function(error) {
-        that.failedRequest.call(that, error);
+      .catch((error) => {
+        this.failedRequest.call(this, error);
         reject(error);
       });
     });
   },
 
-  successfulRequest: function(res) {
+  successfulRequest(res) {
     this.displayResponse(new Response(res));
     this.progressbar.finished();
   },
 
-  failedRequest: function(error) {
+  failedRequest(error) {
     this.progressbar.finished();
   },
 
-  setResponse: function(response) {
+  setResponse(response) {
     this.response = response;
     this.result = this.response.getResult();
   },
 
-  refreshTree: function() {
+  refreshTree() {
     this.destroyTreeBox();
 
     this.treeView = new TreeView({
@@ -53,27 +59,27 @@ let RunnerUI = {
     });
   },
 
-  destroyTreeBox: function() {
-    if(this.treeView && this.treeView.isAlive()) {
+  destroyTreeBox() {
+    if (this.treeView && this.treeView.isAlive()) {
       this.treeView.destroy();
     }
   },
 
-  setup: function() {
+  setup() {
     this.displayPendingHeader();
     this.destroyTreeBox();
     $(this.contentSelector).empty();
     this.progressbar.start();
   },
 
-  displayResponse: function(response) {
+  displayResponse(response) {
     this.refreshTree();
     this.setResponse(response);
     this.displayResponseHeader();
     
-    if(this.response.hasEmptyCode()) {
+    if (this.response.hasEmptyCode()) {
       this.displayEmptyCodeError();
-    } else if(this.response.hasErrors()) {
+    } else if (this.response.hasErrors()) {
       this.displayErrors();
     } else {
       this.displayTree();
@@ -81,52 +87,58 @@ let RunnerUI = {
     this.displayBorder(this.result.completed);
   },
 
-  displayHeader: function(message) {
-    $(this.rootSelector + ' .header').html(message);
+  displayHeader(message) {
+    $(`${this.rootSelector} .header`).html(message);
   },
 
-  displayResponseHeader: function() {
-    this.displayHeader('Tiempo: ' + this.response.getExecutionTime() + 'ms Pasados: ' + this.result.passed + ' Fallidos: '  + this.result.failed);
+  displayResponseHeader() {
+    this.displayHeader(`
+      Tiempo: ${this.response.getExecutionTime()}ms Pasados: ${this.result.passed} Fallidos: ${this.result.failed}
+    `);
   },
 
-  displayPendingHeader: function() {
-    this.displayHeader('<p class="loading-dots">Estado: Ejecutando tu código<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></p>');
+  displayPendingHeader() {
+    this.displayHeader(`
+      <p class="loading-dots">
+        Estado: Ejecutando tu código<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+      </p>
+    `);
   },
 
-  displayErrors: function() {
+  displayErrors() {
     this.displayErrorBox(this.response.getErrors());
   },
 
-  displayEmptyCodeError: function() {
+  displayEmptyCodeError() {
     this.displayErrorBox('No se envió código, no hay nada que ejecutar.');
   },
 
-  displayErrorBox: function(message) {
+  displayErrorBox(message) {
     this.setOutputType('error-box');
     const $root = $(this.contentSelector);
     $root.empty();
     const $errorBlock = $('<div class="box"></div>');
     const $pre = $('<pre></pre>');
     $pre.text(message);
-    $errorBlock.append($pre)
+    $errorBlock.append($pre);
     $root.append($errorBlock);
   },
 
-  displayTree: function() {
+  displayTree() {
     this.setOutputType('treeview-box');
     this.treeView.display(this.response.formatData());
   },
 
-  displayBorder: function(completed) {
-    let $border = $(this.rootSelector + ' .body').removeClass('-passed -failed');
+  displayBorder(completed) {
+    let $border = $(`${this.rootSelector} .body`).removeClass('-passed -failed');
     $border.addClass(completed ? '-passed' : '-failed');
   },
 
-  setOutputType: function(className) {
+  setOutputType(className) {
     $(this.contentSelector)
       .removeClass('treeview-box error-box')
-      .addClass('content ' + className);
+      .addClass(`content ${className}`);
   }
 }
 
-export default RunnerUI
+export default RunnerUI;

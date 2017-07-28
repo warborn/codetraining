@@ -1,88 +1,91 @@
-function Response(response) {
-  this.response = response;
-  console.log(this.response)
-  this.output = response.result.output;
+class Response {
+  constructor(response) {
+    this.response = response;
+    this.output = response.result.output;
+  }
 
-  this.formatData = function() {
+  formatData() {
     this.convertProperties(this.output);
     return this.output;
   }
 
-  this.hasErrors = function() {
-    return this.response.result.errors > 0 | this.response.exit_code === 1;
+  hasErrors() {
+    return this.response.result.errors > 0 || this.response.exit_code === 1;
   }
 
-  this.hasEmptyCode = function() {
+  hasEmptyCode() {
     return this.response.status === 'empty_code';
   }
 
-  this.getErrors = function() {
+  getErrors() {
     return this.response.result.error || this.response.stderr;
   }
 
-  this.getResult = function() {
+  getResult() {
     return this.response.result;
   }
 
-  this.getExecutionTime = function() {
+  getExecutionTime() {
     return this.response.execution_time;
   }
 
-  this.generateText = function(block) {
+  generateText(block) {
     let str = '<span';
-    if(this.isCompletedin(block)) {
-      str += '><small>Completado en ' + block.v + 'ms</small></span>'
+    if (this.isCompletedin(block)) {
+      str += `><small>Completado en ${block.v}ms</small></span>`;
     } else if(this.isDescribe(block) || this.isIt(block)) {
-      str += ' class="block-' + this.getStatusClass(block) + '">' + block.v;
-      if(this.isIt(block)) {
-        str += ' ' + this.generateStatsHTML(block.items);
+      str += ` class="block-${this.getStatusClass(block)}">${block.v}`;
+      if (this.isIt(block)) {
+        str += ` ${this.generateStatsHTML(block.items)}`;
       } 
-      str += '</span>'
+      str += '</span>';
     } else {
-      str += ' class="' + block.t + '"><i class="fa fa-' + (block.t === 'passed' ? 'check' : 'close') + '"></i>'+ block.v + '</span>';
+      str += ` class="${block.t}"><i class="fa fa-${(block.t === 'passed' ? 'check' : 'close')}"></i>${block.v}</span>`;
     }
     return str;
   }
 
-  this.passed = function(block) {
-    return block.filter(object => object.t === 'passed');
+  passed(block) {
+    return block.filter((object) => object.t === 'passed');
   }
 
-  this.failed = function(block) {
-    return block.filter(object => object.t === 'failed');
+  failed(block) {
+    return block.filter((object) => object.t === 'failed');
   }
 
-  this.generateStatsHTML = function(block) {
-    return '(<span class="passed">' + this.passed(block).length + ' Pasados</span>, <span class="failed">' + this.failed(block).length + ' Fallidos</failed>)';
+  generateStatsHTML(block) {
+    return `(
+      <span class="passed">${this.passed(block).length} Pasados</span>, 
+      <span class="failed">${this.failed(block).length} Fallidos</span>
+    )`;
   }
 
-  this.isDescribe = function(block) {
+  isDescribe(block) {
     return block.t === 'describe';
   }
 
-  this.isIt = function(block) {
+  isIt(block) {
     return block.t === 'it';
   }
 
-  this.isCompletedin = function(block) {
+  isCompletedin(block) {
     return block.t === 'completedin';
   }
 
-  this.getStatusClass = function(block) {
+  getStatusClass(block) {
     return block.p ? 'passed' : 'failed';
   }
 
-  this.convertProperties = function(output) {
-    let that = this;
-    output.forEach(function(block) {
-      block.text = that.generateText(block);
-      if(block.items) {
+  convertProperties(output) {
+    output.forEach((block) => {
+      block.text = this.generateText(block);
+      if (block.items) {
         block.children = block.items;
         delete block.items;
-        that.convertProperties(block.children);
+        this.convertProperties(block.children);
       }
     });
   }
 }
 
-export default Response
+export default Response;

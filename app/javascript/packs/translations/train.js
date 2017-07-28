@@ -1,11 +1,14 @@
-import axios from 'axios'
-import TabComponent from 'modules/TabComponent'
-import CodeEditor from 'modules/CodeEditor'
-import RunnerUI from 'modules/RunnerUI'
-import Router from 'modules/Router'
-import Progressbar from 'modules/Progressbar'
-import Notifier from 'modules/Notifier'
-import { setupScrollbars, initMarked } from 'helpers/utils'
+import axios from 'axios';
+import TabComponent from 'modules/TabComponent';
+import CodeEditor from 'modules/CodeEditor';
+import RunnerUI from 'modules/RunnerUI';
+import Router from 'modules/Router';
+import Progressbar from 'modules/Progressbar';
+import Notifier from 'modules/Notifier';
+import { setupScrollbars, initMarked } from 'helpers/utils';
+import { 
+  PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_PASSED_REDIRECT_TIME 
+} from 'config/constants';
 
 $(document).ready(function() {
   // setup perfectScrollbar for practice exercise section
@@ -46,7 +49,7 @@ $(document).ready(function() {
   });
 
   resetChallengeButton.click(function(e) {
-    let progressbar = new Progressbar({ delay: 400, step: 10 });
+    let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
     progressbar.start();
 
     axios.get(Router.challenge_path(), {}, { responseType: 'json' })
@@ -102,7 +105,7 @@ $(document).ready(function() {
         Notifier.success('Ejercicio Resuelto', 'Se ha registrado tu solución!');
         setTimeout(function() {
           Router.redirectTo(Router.challenge_solutions_path());
-        }, 3000);
+        }, CHALLENGE_PASSED_REDIRECT_TIME);
       }
     })
     .catch(function(error) {

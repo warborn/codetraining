@@ -1,14 +1,14 @@
-import TabComponent from 'modules/TabComponent'
-import CodeEditor from 'modules/CodeEditor'
-import RunnerUI from 'modules/RunnerUI'
-import ChallengeManager from 'modules/ChallengeManager'
-import { setupScrollbars, initMarked } from 'helpers/utils'
+import TabComponent from 'modules/TabComponent';
+import CodeEditor from 'modules/CodeEditor';
+import RunnerUI from 'modules/RunnerUI';
+import ChallengeManager from 'modules/ChallengeManager';
+import { setupScrollbars, initMarked } from 'helpers/utils';
 
 $(document).ready(function() { 
   // setup perfectScrollbar for markdown section
   setupScrollbars(['.scroll']);
   // setup marked for markdown
-  const marked = initMarked()
+  const marked = initMarked();
 
   // setup exercise description preview tabs
   let tabComponent = new TabComponent({
