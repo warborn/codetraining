@@ -7,14 +7,14 @@ import { RUNNER_PROGRESSBAR_DELAY,
 
 let RunnerUI = {
   init(config) {
-    this.rootSelector = config.root;
-    this.contentSelector = config.content;
-    this.treeView = null;
-    this.progressbar = new Progressbar({ delay: RUNNER_PROGRESSBAR_DELAY, step: RUNNER_PROGRESSBAR_STEP });
+    this._rootSelector = config.root;
+    this._contentSelector = config.content;
+    this._treeView = null;
+    this._progressbar = new Progressbar({ delay: RUNNER_PROGRESSBAR_DELAY, step: RUNNER_PROGRESSBAR_STEP });
   },
 
   sendRequest(config, callback) {
-    this.setup();
+    this._setup();
 
     if (typeof callback === 'function') { 
       callback();
@@ -23,11 +23,11 @@ let RunnerUI = {
     return new Promise((resolve, reject) => {
       runCode(config.url, config.data)
       .then((response) => {
-        this.successfulRequest.call(this, response);
+        this._successfulRequest.call(this, response);
         resolve(response);
       })
       .catch((error) => {
-        this.failedRequest.call(this, error);
+        this._failedRequest.call(this, error);
         reject(error);
       });
     });
@@ -37,86 +37,86 @@ let RunnerUI = {
     return resetChallengeCode();
   },
 
-  successfulRequest(res) {
-    this.displayResponse(new Response(res));
-    this.progressbar.finished();
+  _successfulRequest(res) {
+    this._displayResponse(new Response(res));
+    this._progressbar.finished();
   },
 
-  failedRequest(error) {
-    this.progressbar.finished();
+  _failedRequest(error) {
+    this._progressbar.finished();
   },
 
-  setResponse(response) {
-    this.response = response;
-    this.result = this.response.getResult();
+  _setResponse(response) {
+    this._response = response;
+    this._result = this._response.getResult();
   },
 
-  refreshTree() {
-    this.destroyTreeBox();
+  _refreshTree() {
+    this._destroyTreeBox();
 
-    this.treeView = new TreeView({
-      root: this.rootSelector,
-      tree: this.contentSelector
+    this._treeView = new TreeView({
+      root: this._rootSelector,
+      tree: this._contentSelector
     });
   },
 
-  destroyTreeBox() {
-    if (this.treeView && this.treeView.isAlive()) {
-      this.treeView.destroy();
+  _destroyTreeBox() {
+    if (this._treeView && this._treeView.isAlive()) {
+      this._treeView.destroy();
     }
   },
 
-  setup() {
-    this.displayPendingHeader();
-    this.destroyTreeBox();
-    $(this.contentSelector).empty();
-    this.progressbar.start();
+  _setup() {
+    this._displayPendingHeader();
+    this._destroyTreeBox();
+    $(this._contentSelector).empty();
+    this._progressbar.start();
   },
 
-  displayResponse(response) {
-    this.refreshTree();
-    this.setResponse(response);
-    this.displayResponseHeader();
+  _displayResponse(response) {
+    this._refreshTree();
+    this._setResponse(response);
+    this._displayResponseHeader();
     
-    if (this.response.hasEmptyCode()) {
-      this.displayEmptyCodeError();
-    } else if (this.response.hasErrors()) {
-      this.displayErrors();
+    if (this._response.hasEmptyCode()) {
+      this._displayEmptyCodeError();
+    } else if (this._response.hasErrors()) {
+      this._displayErrors();
     } else {
-      this.displayTree();
+      this._displayTree();
     }
-    this.displayBorder(this.result.completed);
+    this._displayBorder(this._result.completed);
   },
 
-  displayHeader(message) {
-    $(`${this.rootSelector} .header`).html(message);
+  _displayHeader(message) {
+    $(`${this._rootSelector} .header`).html(message);
   },
 
-  displayResponseHeader() {
-    this.displayHeader(`
-      Tiempo: ${this.response.getExecutionTime()}ms Pasados: ${this.result.passed} Fallidos: ${this.result.failed}
+  _displayResponseHeader() {
+    this._displayHeader(`
+      Tiempo: ${this._response.getExecutionTime()}ms Pasados: ${this._result.passed} Fallidos: ${this._result.failed}
     `);
   },
 
-  displayPendingHeader() {
-    this.displayHeader(`
+  _displayPendingHeader() {
+    this._displayHeader(`
       <p class="loading-dots">
         Estado: Ejecutando tu código<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
       </p>
     `);
   },
 
-  displayErrors() {
-    this.displayErrorBox(this.response.getErrors());
+  _displayErrors() {
+    this._displayErrorBox(this._response.getErrors());
   },
 
-  displayEmptyCodeError() {
-    this.displayErrorBox('No se envió código, no hay nada que ejecutar.');
+  _displayEmptyCodeError() {
+    this._displayErrorBox('No se envió código, no hay nada que ejecutar.');
   },
 
-  displayErrorBox(message) {
-    this.setOutputType('error-box');
-    const $root = $(this.contentSelector);
+  _displayErrorBox(message) {
+    this._setOutputType('error-box');
+    const $root = $(this._contentSelector);
     $root.empty();
     const $errorBlock = $('<div class="box"></div>');
     const $pre = $('<pre></pre>');
@@ -125,18 +125,18 @@ let RunnerUI = {
     $root.append($errorBlock);
   },
 
-  displayTree() {
-    this.setOutputType('treeview-box');
-    this.treeView.display(this.response.formatData());
+  _displayTree() {
+    this._setOutputType('treeview-box');
+    this._treeView.display(this._response.formatData());
   },
 
-  displayBorder(completed) {
-    let $border = $(`${this.rootSelector} .body`).removeClass('-passed -failed');
+  _displayBorder(completed) {
+    let $border = $(`${this._rootSelector} .body`).removeClass('-passed -failed');
     $border.addClass(completed ? '-passed' : '-failed');
   },
 
-  setOutputType(className) {
-    $(this.contentSelector)
+  _setOutputType(className) {
+    $(this._contentSelector)
       .removeClass('treeview-box error-box')
       .addClass(`content ${className}`);
   }

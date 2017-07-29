@@ -9,37 +9,37 @@ import { PROGRESSBAR_DELAY, PROGRESSBAR_STEP,
 
 class ChallengeManager {
   constructor(options) {
-    this.action = 'post'; // default action
-    this.saveBtn = $(options.selectors.save);
-    this.insertBtn = $(options.selectors.insert);
-    this.resetBtn = $(options.selectors.reset);
-    this.deleteBtn = $(options.selectors.delete);
-    this.form = new ChallengeForm(options.selectors.root, options.editors);
+    this._action = 'post'; // default action
+    this._saveBtn = $(options.selectors.save);
+    this._insertBtn = $(options.selectors.insert);
+    this._resetBtn = $(options.selectors.reset);
+    this._deleteBtn = $(options.selectors.delete);
+    this._form = new ChallengeForm(options.selectors.root, options.editors);
 
     // Setup event handlers
-    this.onSave();
-    this.onReset();
-    this.onDelete();
-    this.onInsertExample();
-    this.action = this.form.getAction();
+    this._onSave();
+    this._onReset();
+    this._onDelete();
+    this._onInsertExample();
+    this._action = this._form.getAction();
   }
 
-  onSave() {
-    this.saveBtn.click((e) => {
+  _onSave() {
+    this._saveBtn.click((e) => {
       e.preventDefault();
-      let data = this.form.getData();
+      let data = this._form.getData();
 
       let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
       progressbar.start();
 
-      const challengePromise = this.action === 'post' ? createChallenge(data) : updateChallenge(data);
+      const challengePromise = this._action === 'post' ? createChallenge(data) : updateChallenge(data);
       challengePromise
       .then((translation) => {
         progressbar.finished();
-        if (this.action === 'post') {
+        if (this._action === 'post') {
           Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
-          this.redirect(() => {
-            this.action = 'patch';
+          this._redirect(() => {
+            this._action = 'patch';
             Router.redirectTo(Router.edit_challenge_path(translation.challenge.id, translation.language));
           });
         } else {
@@ -54,15 +54,15 @@ class ChallengeManager {
     });
   }
 
-  onReset() {
-    this.resetBtn.click((e) => {
+  _onReset() {
+    this._resetBtn.click((e) => {
       e.preventDefault();
-      this.form.reset();
+      this._form.reset();
     });
   }
 
-  onDelete() {
-    this.deleteBtn.click((e) => {
+  _onDelete() {
+    this._deleteBtn.click((e) => {
       e.preventDefault();
       let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
       progressbar.start();
@@ -70,10 +70,10 @@ class ChallengeManager {
       deleteChallenge()
       .then((response) => {
         progressbar.finished();
-        if (this.action === 'patch') {
+        if (this._action === 'patch') {
           Notifier.success('Se eliminó correctamente', 'Puedes crear un nuevo ejercico ahora!');
-          this.redirect(() => {
-            this.action = 'post';
+          this._redirect(() => {
+            this._action = 'post';
             Router.redirectTo(Router.new_challenge_path());
           });
         }
@@ -85,19 +85,19 @@ class ChallengeManager {
     });
   }
 
-  onInsertExample() {
-    this.insertBtn.click(() => {
+  _onInsertExample() {
+    this._insertBtn.click(() => {
       getChallengeExample()
       .then((response) => {
         const example = response.data;
-        this.form.initialSolutionEditor.setValue(example.setup);
-        this.form.completeSolutionEditor.setValue(example.answer);
-        this.form.finalTestEditor.setValue(example.fixture);
+        this._form.initialSolutionEditor.setValue(example.setup);
+        this._form.completeSolutionEditor.setValue(example.answer);
+        this._form.finalTestEditor.setValue(example.fixture);
       });
     });
   }
 
-  redirect(callback) {
+  _redirect(callback) {
     setTimeout(callback, CHALLENGE_MANAGER_REDIRECT_TIME);
   }
 }

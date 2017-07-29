@@ -2,17 +2,17 @@ import { progressJs } from 'Progress.js';
 
 class Progressbar {
 	constructor(config) {
-	  this.bar = progressJs();
-	  this.delay = config.delay;
-	  this.step = config.step;
+	  this._bar = progressJs();
+	  this._delay = config.delay;
+	  this._step = config.step;
 	}
 
   start() {
-    this.bar.start().autoIncrease(this.step, this.delay);
+    this._bar.start().autoIncrease(this._step, this._delay);
   }
 
   finished() {
-    this.bar.end();
+    this._bar.end();
   }
 }
 

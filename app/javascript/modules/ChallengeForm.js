@@ -1,57 +1,57 @@
 class ChallengeForm {
   constructor(rootSelector, editors) {
-    this.rootSelector = rootSelector;
-    this.editors = editors;
+    this._rootSelector = rootSelector;
+    this._editors = editors;
 
-    this.attachEditors();
+    this._attachEditors();
+  }
+
+  getData() {
+    this._refreshEditors();
+    return this._inputsToObject(this._getInputs());
+  }
+
+  getAction() {
+    return $(`${this._rootSelector} input[name=_method]`).length > 0 ? 'patch' : 'post';
   }
 
   reset() {
     $('#challenge-form input').not(':hidden')
       .each((index, input) => input.value = '');
 
-    this.forEachEditor((editor) => editor.clear());
+    this._forEachEditor((editor) => editor.clear());
   }
 
-  getData() {
-    this.refreshEditors();
-    return this.inputsToObject(this.getInputs())
-  }
-
-  getAction() {
-    return $(`${this.rootSelector} input[name=_method]`).length > 0 ? 'patch' : 'post';
-  }
-
-  attachEditors() {
+  _attachEditors() {
     // attach each editor object to the ChallengeManager instance
-    this.forEachEditor(function(editor, editorName) {
+    this._forEachEditor(function(editor, editorName) {
       this[editorName] = editor;
     });
   }
 
-  forEachEditor(callback) {
-    for(let editorName in this.editors) {
-      if(this.editors.hasOwnProperty(editorName)) {     
-        callback.call(this, this.editors[editorName], editorName);
+  _forEachEditor(callback) {
+    for(let editorName in this._editors) {
+      if(this._editors.hasOwnProperty(editorName)) {     
+        callback.call(this, this._editors[editorName], editorName);
       }
     }
   }
 
-  refreshEditors() {
-    this.forEachEditor((editor) => editor.save());
+  _refreshEditors() {
+    this._forEachEditor((editor) => editor.save());
   }
 
-  getInputs() {
+  _getInputs() {
     let selector = ['input', 'select', 'textarea']
-      .map((name) => `${this.rootSelector} ${name}`)
+      .map((name) => `${this._rootSelector} ${name}`)
       .join(', ');
 
     return $(selector).toArray();
   }
 
-  inputsToObject(inputs) {
+  _inputsToObject(inputs) {
     return inputs.reduce(function(prev, current) {
-      if(current.name) {
+      if (current.name) {
         prev[current.name] = current.value;
       }
       return prev;

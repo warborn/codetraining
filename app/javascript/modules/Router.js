@@ -41,21 +41,21 @@ let Router = {
     return `/challenges/example/${language}`;
   },
 
-  // Get the matches that correspond to the challenge id and language name from URL
-  challengeURLMatches() {
-    return window.location.pathname.match(/challenges\/(\d+)\/(?:train|edit)\/([a-zA-Z-_\+#]+)/);
-  },
-
   // Extract challenge id from URL
   getChallengeID() {
-    let matches = this.challengeURLMatches();
+    let matches = this._challengeURLMatches();
     return matches[1];
   },
 
   // Extract language name from URL
   getLanguage: function() {
-    let matches = this.challengeURLMatches();
+    let matches = this._challengeURLMatches();
     return matches[2];
+  },
+
+  // Get the matches that correspond to the challenge id and language name from URL
+  _challengeURLMatches() {
+    return window.location.pathname.match(/challenges\/(\d+)\/(?:train|edit)\/([a-zA-Z-_\+#]+)/);
   }
 }
 

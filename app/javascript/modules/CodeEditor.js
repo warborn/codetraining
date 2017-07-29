@@ -4,7 +4,7 @@ class CodeEditor {
   constructor(selector, options, value) {
     $(selector).siblings().remove();
     
-    this.editor = CodeMirrorFactory.create(
+    this._editor = CodeMirrorFactory.create(
       $(selector)[0],
       options
     );
@@ -19,12 +19,12 @@ class CodeEditor {
   }
 
   setValue(value) {
-    this.editor.doc.setValue(value);
+    this._editor.doc.setValue(value);
   }
 
   getValue() {
     this.save();
-    return this.editor.doc.getValue();
+    return this._editor.doc.getValue();
   }
 
   clear() {
@@ -32,11 +32,11 @@ class CodeEditor {
   }
 
   save() {
-    this.editor.save();
+    this._editor.save();
   }
 
   refresh() {
-    this.editor.refresh();
+    this._editor.refresh();
   }
 }
 

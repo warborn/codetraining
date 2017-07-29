@@ -1,5 +1,5 @@
 let Notifier = {
-  settings: {
+  _settings: {
     // settings
     newest_on_top: true,
     allow_dismiss: true,
@@ -20,32 +20,32 @@ let Notifier = {
   },
 
   fromErrors(title, errors) {
-    this.error(title, this.generateHTMLList(errors), false);
+    this.error(title, this._generateHTMLList(errors), false);
   },
 
   error(title, message) {
-    this.showNotification('danger', title, message);
+    this._showNotification('danger', title, message);
   },
 
   success(title, message) {
-    this.showNotification('success', title, message);
+    this._showNotification('success', title, message);
   },
 
-  showNotification(type, title, message, wrap = true) {
+  _showNotification(type, title, message, wrap = true) {
     if (wrap) {
       message = `<p class="messages">${message}</p>`;
     }
 
-    this.settings.type = `code ${type}`;
+    this._settings.type = `code ${type}`;
 
     $.notify({
       // options
       title: title,
       message: message
-    }, this.settings);
+    }, this._settings);
   },
 
-  generateHTMLList: function(array) {
+  _generateHTMLList: function(array) {
     const items = array.map((e) => `<li>${e}</li>`);
 
     return `<ul class="messages">${items.join('')}</ul>`;

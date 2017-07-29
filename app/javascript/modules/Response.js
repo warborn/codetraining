@@ -5,7 +5,7 @@ class Response {
   }
 
   formatData() {
-    this.convertProperties(this.output);
+    this._convertProperties(this.output);
     return this.output;
   }
 
@@ -29,14 +29,14 @@ class Response {
     return this.response.execution_time;
   }
 
-  generateText(block) {
+  _generateText(block) {
     let str = '<span';
-    if (this.isCompletedin(block)) {
+    if (this._isCompletedin(block)) {
       str += `><small>Completado en ${block.v}ms</small></span>`;
-    } else if(this.isDescribe(block) || this.isIt(block)) {
-      str += ` class="block-${this.getStatusClass(block)}">${block.v}`;
-      if (this.isIt(block)) {
-        str += ` ${this.generateStatsHTML(block.items)}`;
+    } else if(this._isDescribe(block) || this._isIt(block)) {
+      str += ` class="block-${this._getStatusClass(block)}">${block.v}`;
+      if (this._isIt(block)) {
+        str += ` ${this._generateStatsHTML(block.items)}`;
       } 
       str += '</span>';
     } else {
@@ -45,44 +45,44 @@ class Response {
     return str;
   }
 
-  passed(block) {
+  _passed(block) {
     return block.filter((object) => object.t === 'passed');
   }
 
-  failed(block) {
+  _failed(block) {
     return block.filter((object) => object.t === 'failed');
   }
 
-  generateStatsHTML(block) {
+  _generateStatsHTML(block) {
     return `(
-      <span class="passed">${this.passed(block).length} Pasados</span>, 
-      <span class="failed">${this.failed(block).length} Fallidos</span>
+      <span class="passed">${this._passed(block).length} Pasados</span>, 
+      <span class="failed">${this._failed(block).length} Fallidos</span>
     )`;
   }
 
-  isDescribe(block) {
+  _isDescribe(block) {
     return block.t === 'describe';
   }
 
-  isIt(block) {
+  _isIt(block) {
     return block.t === 'it';
   }
 
-  isCompletedin(block) {
+  _isCompletedin(block) {
     return block.t === 'completedin';
   }
 
-  getStatusClass(block) {
+  _getStatusClass(block) {
     return block.p ? 'passed' : 'failed';
   }
 
-  convertProperties(output) {
+  _convertProperties(output) {
     output.forEach((block) => {
-      block.text = this.generateText(block);
+      block.text = this._generateText(block);
       if (block.items) {
         block.children = block.items;
         delete block.items;
-        this.convertProperties(block.children);
+        this._convertProperties(block.children);
       }
     });
   }

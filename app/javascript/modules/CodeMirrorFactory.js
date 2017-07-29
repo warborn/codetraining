@@ -5,7 +5,7 @@ import 'codemirror/mode/markdown/markdown';
 
 // create code mirror editors with default configuration
 let CodeMirrorFactory = {
-  defaults: {
+  _defaults: {
     lineNumbers: true,
     scrollbarStyle: 'overlay',
     theme: 'one-dark',
@@ -14,7 +14,7 @@ let CodeMirrorFactory = {
   },
   // return an instance of CodeMirror
   create(textArea, options) {
-    let config = options ? {...this.defaults, ...options} : this.defaults;
+    let config = options ? {...this._defaults, ...options} : this._defaults;
     let editor = CodeMirror.fromTextArea(textArea, config);
 
     if (options && options.size) {

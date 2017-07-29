@@ -1,15 +1,15 @@
 class TabComponent {
   constructor(config) {
-    this.root = config.root;
-    this.tabs = config.tabs;
+    this._root = config.root;
+    this._tabs = config.tabs;
 
-    $(`${this.root} a`).click((e) => {
+    $(`${this._root} a`).click((e) => {
       e.preventDefault();
       let id = e.target.href.replace(/.+#/g, '');
       let tabContent = $(`#${id}`).parent();
 
-      if (this.tabs && this.tabs[id]) {
-        this.tabs[id](tabContent);
+      if (this._tabs && this._tabs[id]) {
+        this._tabs[id](tabContent);
       }
 
       $(e.target).tab('show');
@@ -17,7 +17,7 @@ class TabComponent {
   }
 
   shown(callback) {
-    $(`${this.root} a`).on('shown.bs.tab', callback)
+    $(`${this._root} a`).on('shown.bs.tab', callback)
   }
 }
 
