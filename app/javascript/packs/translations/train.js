@@ -1,4 +1,3 @@
-import axios from 'axios';
 import TabComponent from 'modules/TabComponent';
 import CodeEditor from 'modules/CodeEditor';
 import RunnerUI from 'modules/RunnerUI';
@@ -39,9 +38,9 @@ $(document).ready(function() {
     }
   });
 
-  var resetChallengeButton = $('#reset-btn');
-  var exampleTestButton = $('#example-btn');
-  var finalTestButton = $('#attempt-btn');
+  const resetChallengeButton = $('#reset-btn');
+  const exampleTestButton = $('#example-btn');
+  const finalTestButton = $('#attempt-btn');
 
   RunnerUI.init({
     root: '#output',
@@ -51,18 +50,18 @@ $(document).ready(function() {
   resetChallengeButton.click(function(e) {
     let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
     progressbar.start();
+    
+    RunnerUI.resetChallengeCode()
+      .then(function(response) {
+        codeEditor.setValue(response.initial_solution);
+        testEditor.setValue(response.example_fixture);
+        progressbar.finished();
+      })
+      .catch(function(error) {
+        console.error(error.response);
+        progressbar.finished();
+      })
 
-    axios.get(Router.challenge_path(), {}, { responseType: 'json' })
-    .then(function(response) {
-      console.log(response);
-      codeEditor.setValue(response.data.initial_solution);
-      testEditor.setValue(response.data.example_fixture);
-      progressbar.finished();
-    })
-    .catch(function(error) {
-      console.log(error.response);
-      progressbar.finished();
-    });
   });
   
   exampleTestButton.click(function(e) {
@@ -81,7 +80,7 @@ $(document).ready(function() {
       //
     })
     .catch(function(error) {
-      console.log(error);
+      console.error(error);
     });
   });
 
@@ -101,7 +100,7 @@ $(document).ready(function() {
 
     RunnerUI.sendRequest(runnerData)
     .then(function(response) {
-      if(response.result.completed) {
+      if (response.result.completed) {
         Notifier.success('Ejercicio Resuelto', 'Se ha registrado tu solución!');
         setTimeout(function() {
           Router.redirectTo(Router.challenge_solutions_path());
@@ -109,7 +108,7 @@ $(document).ready(function() {
       }
     })
     .catch(function(error) {
-      console.log(error);
+      console.error(error);
     });
   });
 

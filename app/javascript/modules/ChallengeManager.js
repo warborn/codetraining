@@ -1,11 +1,11 @@
-import axios from 'axios';
 import Router from './Router';
 import ChallengeForm from './ChallengeForm';
 import Progressbar from './Progressbar';
 import Notifier from './Notifier';
-import { 
-  PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_MANAGER_REDIRECT_TIME
-} from 'config/constants';
+import { createChallenge, updateChallenge, deleteChallenge, 
+  getChallengeExample } from 'helpers/api';
+import { PROGRESSBAR_DELAY, PROGRESSBAR_STEP, 
+  CHALLENGE_MANAGER_REDIRECT_TIME } from 'config/constants';
 
 class ChallengeManager {
   constructor(options) {
@@ -28,28 +28,26 @@ class ChallengeManager {
     this.saveBtn.click((e) => {
       e.preventDefault();
       let data = this.form.getData();
-      let saveURL = Router.save_challenge_path(this.action);
 
       let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
       progressbar.start();
-      axios[this.action](saveURL, {
-        challenge: data
-      }, { responseType: 'json' })
-      .then((response) => {
-        let translation = response.data;
+
+      const challengePromise = this.action === 'post' ? createChallenge(data) : updateChallenge(data);
+      challengePromise
+      .then((translation) => {
         progressbar.finished();
         if (this.action === 'post') {
           Notifier.success('Se guardó correctamente', 'Ahora puedes editar tu reto!');
-          setTimeout(() => {
+          this.redirect(() => {
             this.action = 'patch';
             Router.redirectTo(Router.edit_challenge_path(translation.challenge.id, translation.language));
-          }, CHALLENGE_MANAGER_REDIRECT_TIME);
+          });
         } else {
           Notifier.success('Se editó correctamente', 'Se han guardado tus cambios!');
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         Notifier.fromErrors('No se pudo guardar', error.response.data.errors);
         progressbar.finished();
       });
@@ -66,31 +64,30 @@ class ChallengeManager {
   onDelete() {
     this.deleteBtn.click((e) => {
       e.preventDefault();
-      let deleteURL = Router.delete_challenge_path();
       let progressbar = new Progressbar({ delay: PROGRESSBAR_DELAY, step: PROGRESSBAR_STEP });
       progressbar.start();
-      axios.delete(deleteURL, {}, 
-        { responseType: 'json' })
+
+      deleteChallenge()
       .then((response) => {
         progressbar.finished();
         if (this.action === 'patch') {
           Notifier.success('Se eliminó correctamente', 'Puedes crear un nuevo ejercico ahora!');
-          setTimeout(() => {
+          this.redirect(() => {
             this.action = 'post';
             Router.redirectTo(Router.new_challenge_path());
-          }, CHALLENGE_MANAGER_REDIRECT_TIME);
+          });
         }
       })
       .catch((error) => {
         progressbar.finished();
-        console.log(error.response);
+        console.error(error.response);
       });
     });
   }
 
   onInsertExample() {
     this.insertBtn.click(() => {
-      axios.get(Router.example_path(), {}, { responseType: 'json' })
+      getChallengeExample()
       .then((response) => {
         const example = response.data;
         this.form.initialSolutionEditor.setValue(example.setup);
@@ -98,6 +95,10 @@ class ChallengeManager {
         this.form.finalTestEditor.setValue(example.fixture);
       });
     });
+  }
+
+  redirect(callback) {
+    setTimeout(callback, CHALLENGE_MANAGER_REDIRECT_TIME);
   }
 }
 

@@ -37,7 +37,7 @@ let Router = {
   },
 
   // Examples show action
-  example_path(language = 'javascript') {
+  example_path(language) {
     return `/challenges/example/${language}`;
   },
 

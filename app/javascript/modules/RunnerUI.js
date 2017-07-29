@@ -1,30 +1,27 @@
-import Runner from './Runner';
 import Progressbar from './Progressbar';
 import TreeView from './TreeView';
 import Response from './Response';
-import { 
-  RUNNER_PROGRESSBAR_DELAY, RUNNER_PROGRESSBAR_STEP 
-} from 'config/constants';
+import { runCode, resetChallengeCode } from 'helpers/api'
+import { RUNNER_PROGRESSBAR_DELAY, 
+  RUNNER_PROGRESSBAR_STEP } from 'config/constants';
 
 let RunnerUI = {
   init(config) {
     this.rootSelector = config.root;
     this.contentSelector = config.content;
     this.treeView = null;
-    this.runner = new Runner();
     this.progressbar = new Progressbar({ delay: RUNNER_PROGRESSBAR_DELAY, step: RUNNER_PROGRESSBAR_STEP });
   },
 
   sendRequest(config, callback) {
     this.setup();
-    this.runner.setConfig(config);
 
     if (typeof callback === 'function') { 
       callback();
     }
 
     return new Promise((resolve, reject) => {
-      this.runner.send()
+      runCode(config.url, config.data)
       .then((response) => {
         this.successfulRequest.call(this, response);
         resolve(response);
@@ -34,6 +31,10 @@ let RunnerUI = {
         reject(error);
       });
     });
+  },
+
+  resetChallengeCode() {
+    return resetChallengeCode();
   },
 
   successfulRequest(res) {
