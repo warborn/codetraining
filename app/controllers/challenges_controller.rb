@@ -2,6 +2,7 @@ class ChallengesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_translation, only: [:edit, :update]
   before_action :set_language, only: [:new, :create]
+  before_action :set_categories_and_ranks, only: [:new, :edit]
 
   def index
     @challenges = Challenge.includes(:user).all
@@ -16,7 +17,6 @@ class ChallengesController < ApplicationController
     @translation = Translation.new
     @translation.challenge = Challenge.new
     @translation.language = @language
-    @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
     render :manage
   end
   
@@ -33,7 +33,6 @@ class ChallengesController < ApplicationController
   end
 
   def edit
-    @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
     render :manage
   end
 
@@ -74,5 +73,10 @@ class ChallengesController < ApplicationController
 
   def set_language
     @language = Language.find_by_name('javascript')
+  end
+
+  def set_categories_and_ranks
+    @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
+    @ranks = [1, 2, 3, 4]
   end
 end
