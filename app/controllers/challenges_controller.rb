@@ -41,7 +41,7 @@ class ChallengesController < ApplicationController
     if @translation.challenge.update_attributes(challenge_params)
       render json: @translation, status: :created
     else
-      render json: { errors: @challenge.errors.full_messages }, status: 422
+      render json: { errors: @translation.challenge.errors.full_messages }, status: 422
     end
   end
 
