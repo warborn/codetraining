@@ -1,5 +1,6 @@
 .code-output {
 	> .body {
+		min-height: 100%;
 		background-color: $output-bg;
 		@include output;
 	}

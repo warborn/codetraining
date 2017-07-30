@@ -1,0 +1,33 @@
+.train-options {
+	> .btn {
+		font-weight: 400;
+		font-size: 0.9rem;
+		border-radius: 4px;
+		padding: 0.5rem 0.75rem;
+		color: #fff;
+		// background-color: #61A7DA;
+		background-color: #23282A;
+		outline: none;
+		border: none;
+		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+	}
+
+	> .btn:hover {
+		cursor: pointer;
+		transition: all .2s ease-in-out;
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+		transform: scale(1.03);
+	}
+
+	> .btn.reset:hover {
+		background-color: #DA6161;
+	}
+
+	> .btn.test:hover {
+		background-color: #DA8B61;
+	}
+
+	> .btn.attempt:hover {
+		background-color: #43CD84;
+	}
+}

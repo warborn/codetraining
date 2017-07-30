@@ -1,5 +1,6 @@
 .markdown-preview {
 	> .body {
+		min-height: 100%;
   	background-color: $preview-bg;
 		@include output;
 	}

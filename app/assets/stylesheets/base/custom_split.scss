@@ -1,0 +1,29 @@
+.gutter {
+  flex-basis: 5px;
+  background-color: rgb(36, 40, 42);
+  background-repeat: no-repeat;
+  background-position: 50%;
+
+  &:hover {
+    background-color: #232323;
+    transition: all .3s ease-in-out;
+  }
+
+  &.gutter-horizontal {
+    cursor: ew-resize;
+    background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+
+    &:hover {
+    	cursor: ew-resize;
+    }
+	}
+
+	&.gutter-vertical {
+    cursor: ns-resize;
+    background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+
+    &:hover {
+    	cursor: ns-resize;
+    }
+	}
+}

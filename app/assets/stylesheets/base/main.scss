@@ -8,12 +8,41 @@
  		@media-queries 
 */
 
+/** @group general */
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
 body {
+	background-color: #252830;
+	color: #C4C7D0;
   display: none;
 }
 
-/* utilities */
+section {
+	margin: 40px 0;
+}
 
+span i,
+a i {
+	margin-right: 5px;
+}
+
+a {
+	color: #1997C6;
+}
+
+a:hover {
+	color: #1585AF;
+	text-decoration: none;
+}
+
+.container-fluid {
+	height: 100%;
+}
+
+/* utilities */
 
 .passed {
 	color: $passed-color;
@@ -21,11 +50,6 @@ body {
 
 .failed {
 	color: $failed-color;
-}
-
-.scroll {
-	position: relative;
-	height: 530px;
 }
 
 .border {
@@ -55,43 +79,71 @@ body {
 	}
 }
 
-/** practice exercise section */
-
-.practice-exercise {
-	.tab-content {
-		box-shadow: 0 25px 10px -16px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
-	}
-
-	.tab-content .tab-pane .body {
-		min-height: 530px;
-	}
-
-	.details {
-		margin-bottom: 20px;
-	}
-
-	.card-block {
-		padding: 0;
-	}
-
-	.exercise-solution {
-		height: 220px;
-	}
-
-	.exercise-tests {
-		height: 170px;
-	}
-}
-
 .create-exercise {
 	.nav.nav-tabs {
 		border-color: $dark-blue-color;
 	}
 }
 
-/* @group media-queries */
-@media (min-width: 992px) { 
-	.practice-exercise .details {
-		margin-bottom: 0;
+/** train challenge section */
+
+.flex-wrapper {
+	display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  min-height:100%;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.train-challenge {
+	& {
+    flex:2;
+    display: flex;
+    margin: 0;
+		height: 100%;
+	}
+	
+	.tab-content {
+		height: calc(100% - 42px);
+
+		.tab-pane {
+			height: 100%;
+		}
+	}
+
+	.flex-column {
+    flex: 1 1;
+    overflow: auto;
+	}
+
+	.code-column {
+		min-width: 442px;
+	}
+
+	.details-column {
+		min-width: 215px;
+	}
+
+	.code-tab {
+		height: calc(100% - 49px);
+
+		.header {
+			padding: 8px 16px;
+			background-color: #2B3033;
+			color: #DEDEDE;
+	  	font-weight: 300;
+		}
+
+		.body {
+			height: 100%;
+		}
+
+		.title {
+			margin-top: 5px;
+		}
 	}
 }
+
+

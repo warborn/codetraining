@@ -11,6 +11,7 @@ let CodeMirrorFactory = {
     theme: 'one-dark',
     mode: 'javascript',
     matchBrackets: true,
+    // lineWrapping: true
   },
   // return an instance of CodeMirror
   create(textArea, options) {

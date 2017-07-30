@@ -12,7 +12,7 @@ class TreeView {
   }
 
   isAlive() {
-    return this.tree !== null;
+    return this._tree !== null;
   }
 
   destroy() {

@@ -8,6 +8,7 @@ import { setupScrollbars, initMarked } from 'helpers/utils';
 import { 
   PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_PASSED_REDIRECT_TIME 
 } from 'config/constants';
+import Split from 'split.js';
 
 $(document).ready(function() {
   // setup perfectScrollbar for practice exercise section
@@ -21,9 +22,9 @@ $(document).ready(function() {
 
   // setup codemirror code and test areas
   let codeEditor = new CodeEditor('#code-area', 
-    { size: { width: '100%', height: 250 } }, $('#code-area').val());
+    { size: { width: '100%', height: '100%' } }, $('#code-area').val());
   let testEditor = new CodeEditor('#test-area', 
-    { size: { width: '100%', height: 150 } }, $('#test-area').val());
+    { size: { width: '100%', height: '100%' } }, $('#test-area').val());
 
   // setup exercise details tabs
   let tabComponent = new TabComponent({
@@ -110,6 +111,22 @@ $(document).ready(function() {
     .catch(function(error) {
       console.error(error);
     });
+  });
+
+  // Setup resizable panels
+  Split(['#panel-one', '#panel-two'], {
+    elementStyle: function (dimension, size, gutterSize) {
+        return { 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)' }
+    },
+    gutterStyle: function (dimension, gutterSize) {
+        return { 'flex-basis':  gutterSize + 'px' }
+    },
+    sizes: [35, 65]
+  });
+
+  Split(['#panel-three', '#panel-four'], {
+    direction: 'vertical',
+    sizes: [60, 40]
   });
 
 });
