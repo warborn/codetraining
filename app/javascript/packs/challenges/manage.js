@@ -3,6 +3,7 @@ import CodeEditor from 'modules/CodeEditor';
 import RunnerUI from 'modules/RunnerUI';
 import ChallengeManager from 'modules/ChallengeManager';
 import { setupScrollbars, initMarked } from 'helpers/utils';
+import Split from 'split.js'
 
 $(document).ready(function() { 
   // setup perfectScrollbar for markdown section
@@ -12,22 +13,32 @@ $(document).ready(function() {
 
   // setup exercise description preview tabs
   let tabComponent = new TabComponent({
-    root: '#description-preview-tab',
+    root: '#manage-challenge-tab',
     tabs: {
+      details: function(tabContent) {
+        tabContent.removeClass('output');
+      },
       preview: function(tabContent) {
         markdownPreview.html(marked(markdownEditor.getValue()));
         tabContent.removeClass('output');
       },
       'markdown-preview': function(tabContent) {
         tabContent.addClass('output');
+      },
+      output: function(tabContent) {
+        tabContent.addClass('output');
       }
     }
   });
 
+  tabComponent.shown(function() {
+    markdownEditor.refresh();
+  })
+
   // setup code editor for markdown description
   let markdownPreview = $('#preview .content');
   let markdownEditor = new CodeEditor('#markdown-area', 
-    { mode: 'markdown', lineNumbers: false, theme: 'material' });
+    { mode: 'markdown', lineNumbers: false, lineWrapping: true, theme: 'material' });
 
   // setup test cases tabs
   new TabComponent({ root: '#challenge-solution-tab' })
@@ -62,6 +73,8 @@ $(document).ready(function() {
 
   const validateButton = $('#validate-btn');
   validateButton.click(function(e) {
+    $('#manage-challenge-tab a[href="#output"]').tab('show');
+
     let runnerData = {
       url: '/run',
       data: {
@@ -97,6 +110,22 @@ $(document).ready(function() {
       exampleTestEditor: exampleTestEditor,
       finalTestEditor: finalTestEditor
     }
+  });
+
+  // Setup resizable panels
+  Split(['#panel-one', '#panel-two'], {
+    elementStyle: function (dimension, size, gutterSize) {
+        return { 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)' }
+    },
+    gutterStyle: function (dimension, gutterSize) {
+        return { 'flex-basis':  gutterSize + 'px' }
+    },
+    sizes: [35, 65]
+  });
+
+  Split(['#panel-three', '#panel-four'], {
+    direction: 'vertical',
+    sizes: [60, 40]
   });
 
 });

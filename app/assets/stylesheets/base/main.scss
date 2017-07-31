@@ -40,6 +40,7 @@ a:hover {
 
 .container-fluid {
 	height: 100%;
+	padding: 0;
 }
 
 /* utilities */
@@ -60,6 +61,16 @@ a:hover {
 	width: 100%;
 }
 
+.flex-wrapper {
+	display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  min-height:100%;
+  max-height: 100%;
+  max-width: 100%;
+}
+
 /** @group layout */
 
 /** exercise details section */
@@ -70,32 +81,86 @@ a:hover {
 	background-color: $preview-bg;
 }
 
-/** create exercise section */
-.create-exercise .tab-content .tab-pane {
-	height: 330px;
+.manage-challenge {
+	& {
+    flex:2;
+    display: flex;
+    margin: 0;
+	}
+
+	&,
+	.tab-content .tab-pane,
+	.code-column .body,
+	.details-column #markdown-description .body,
+	.details-column .body .content {
+		height: 100%;
+	}
+
+	.nav.nav-tabs {
+		border-color: $dark-blue-color;
+	}
 	
-	.body {
-		min-height: 330px;
+	.tab-content {
+		height: calc(100% - 42px);
+	}
+
+	.flex-column {
+    flex: 1 1;
+    overflow: auto;
+	}
+
+	.code-column {
+		min-width: 690px;
+	}
+
+	.details-column {
+		min-width: 383px;
+		background-color: #24282A;
 	}
 }
 
-.create-exercise {
-	.nav.nav-tabs {
-		border-color: $dark-blue-color;
+.form-fields {
+	& {
+		padding: 10px;
+	}
+
+	.form-group {
+		margin-bottom: 0.5rem;
+	}
+
+	label {
+		color: #3F494A;
+		margin-bottom: 0.25rem;
+	}
+
+	input,
+	select {
+		background-color: #1C2021;
+		color: #E0E0E0;
+		border: 1px solid transparent;
+		outline: none;
+		transition: 0.3s ease background-color,0.3s ease border-color;
+		// padding: 4px 8px;
+		// font-size: 0.85rem;
+	}
+
+	input:focus,
+	select:focus {
+		background-color: #1C2021;
+		color: #E0E0E0;
+	}
+
+	select option {
+		background-color: #1C2021;
+	}
+
+	textarea:focus, select:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: #44667F;
+    outline: 0 none;
 	}
 }
 
 /** train challenge section */
-
-.flex-wrapper {
-	display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  align-content: stretch;
-  min-height:100%;
-  max-height: 100%;
-  max-width: 100%;
-}
 
 .train-challenge {
 	& {

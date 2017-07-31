@@ -21,7 +21,7 @@ let CodeMirrorFactory = {
     if (options && options.size) {
       editor.setSize(options.size.width, options.size.height);
     } else {
-      editor.setSize('100%', 330);
+      editor.setSize('100%', '100%');
     }
 
     return editor;

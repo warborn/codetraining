@@ -16,7 +16,7 @@ class ChallengeForm {
   }
 
   reset() {
-    $('#challenge-form input').not(':hidden')
+    $(`${this._rootSelector} input`).not(':hidden')
       .each((index, input) => input.value = '');
 
     this._forEachEditor((editor) => editor.clear());
