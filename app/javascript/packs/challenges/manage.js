@@ -46,10 +46,10 @@ $(document).ready(function() {
       });
 
   // setup code editor for challenge solutions
-  let completeSolutionEditor = new CodeEditor('#complete-solution-area');
+  let completeSolutionEditor = new CodeEditor('#complete-solution-area', { lineWrapping: true });
 
   // setup code editor for challenge solutions
-  let initialSolutionEditor = new CodeEditor('#initial-solution-area');
+  let initialSolutionEditor = new CodeEditor('#initial-solution-area', { lineWrapping: true });
 
   // setup test cases tabs
   new TabComponent({ root: '#test-cases-tab' })
@@ -59,10 +59,10 @@ $(document).ready(function() {
       });
 
   // setup code editor for challenge solutions
-  let finalTestEditor = new CodeEditor('#final-test-area');
+  let finalTestEditor = new CodeEditor('#final-test-area', { lineWrapping: true });
 
   // setup code editor for challenge solutions
-  let exampleTestEditor = new CodeEditor('#example-test-area');
+  let exampleTestEditor = new CodeEditor('#example-test-area', { lineWrapping: true });
 
   RunnerUI.init({
     root: '#output',
@@ -117,6 +117,13 @@ $(document).ready(function() {
     },
     gutterStyle: function (dimension, gutterSize) {
         return { 'flex-basis':  gutterSize + 'px' }
+    },
+    onDragEnd: function() {
+      markdownEditor.refresh();
+      initialSolutionEditor.refresh();
+      completeSolutionEditor.refresh();
+      exampleTestEditor.refresh();
+      finalTestEditor.refresh();
     },
     sizes: [35, 65]
   });

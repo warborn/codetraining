@@ -18,10 +18,8 @@ $(document).ready(function() {
   $('#description .content')[0].innerHTML = marked(markdown);
 
   // setup codemirror code and test areas
-  let codeEditor = new CodeEditor('#code-area', 
-    { size: { width: '100%', height: '100%' } }, $('#code-area').val());
-  let testEditor = new CodeEditor('#test-area', 
-    { size: { width: '100%', height: '100%' } }, $('#test-area').val());
+  let codeEditor = new CodeEditor('#code-area', { lineWrapping: true }, $('#code-area').val());
+  let testEditor = new CodeEditor('#test-area', { lineWrapping: true }, $('#test-area').val());
 
   // setup challenge details tabs
   let tabComponent = new TabComponent({
@@ -117,6 +115,10 @@ $(document).ready(function() {
     },
     gutterStyle: function (dimension, gutterSize) {
         return { 'flex-basis':  gutterSize + 'px' }
+    },
+    onDragEnd: function() {
+      codeEditor.refresh();
+      testEditor.refresh();
     },
     sizes: [35, 65]
   });
