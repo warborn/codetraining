@@ -12,6 +12,7 @@
 html, body {
 	height: 100%;
 	margin: 0;
+	font-size: 16px;
 }
 
 body {
@@ -39,12 +40,11 @@ a:hover {
 }
 
 .container-fluid {
-	height: 100%;
+	height: calc(100% - 51.78px);
 	padding: 0;
 }
 
 /* utilities */
-
 .passed {
 	color: $passed-color;
 }
@@ -66,29 +66,41 @@ a:hover {
   flex-direction: column;
   align-items: stretch;
   align-content: stretch;
-  min-height:100%;
+  height: 100%;
+  min-height: 100%;
   max-height: 100%;
   max-width: 100%;
+}
+
+.flex-column {
+  flex: 1 1;
+}
+
+.scroll,
+.fast-scroll {
+	position: relative;
+	overflow: hidden;
 }
 
 /** @group layout */
 
 /** exercise details section */
-
 .exercise-description {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background-color: $preview-bg;
 }
 
+/** manage challenge section */
 .manage-challenge {
 	& {
     flex:2;
     display: flex;
     margin: 0;
+		height: 100%;
+		max-height: 100%;
 	}
 
-	&,
 	.tab-content .tab-pane,
 	.code-column .body,
 	.details-column #markdown-description .body,
@@ -104,13 +116,12 @@ a:hover {
 		height: calc(100% - 42px);
 	}
 
-	.flex-column {
-    flex: 1 1;
-    overflow: auto;
+	.code-column {
+		min-width: 665px;
 	}
 
-	.code-column {
-		min-width: 690px;
+	.code-tab-buttons .tab-content {
+		height: calc(100% - 85px);
 	}
 
 	.details-column {
@@ -161,30 +172,26 @@ a:hover {
 }
 
 /** train challenge section */
-
 .train-challenge {
 	& {
     flex:2;
     display: flex;
     margin: 0;
 		height: 100%;
+		max-height: 100%;
+	}
+
+	.tab-content .tab-pane,
+	.code-tab .body {
+		height: 100%;
 	}
 	
 	.tab-content {
 		height: calc(100% - 42px);
-
-		.tab-pane {
-			height: 100%;
-		}
-	}
-
-	.flex-column {
-    flex: 1 1;
-    overflow: auto;
 	}
 
 	.code-column {
-		min-width: 442px;
+		min-width: 468px;
 	}
 
 	.details-column {
@@ -192,7 +199,11 @@ a:hover {
 	}
 
 	.code-tab {
-		height: calc(100% - 49px);
+		height: calc(100% - 40px);
+
+		&.code-tab-buttons {
+			height: calc(100% - 49px);
+		}
 
 		.header {
 			padding: 8px 16px;
@@ -201,14 +212,8 @@ a:hover {
 	  	font-weight: 300;
 		}
 
-		.body {
-			height: 100%;
-		}
-
 		.title {
 			margin-top: 5px;
 		}
 	}
 }
-
-

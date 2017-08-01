@@ -2,16 +2,14 @@ import TabComponent from 'modules/TabComponent';
 import CodeEditor from 'modules/CodeEditor';
 import RunnerUI from 'modules/RunnerUI';
 import ChallengeManager from 'modules/ChallengeManager';
-import { setupScrollbars, initMarked } from 'helpers/utils';
+import { initMarked } from 'helpers/utils';
 import Split from 'split.js'
 
 $(document).ready(function() { 
-  // setup perfectScrollbar for markdown section
-  setupScrollbars(['.scroll']);
   // setup marked for markdown
   const marked = initMarked();
 
-  // setup exercise description preview tabs
+  // setup challenge description preview tabs
   let tabComponent = new TabComponent({
     root: '#manage-challenge-tab',
     tabs: {
@@ -38,7 +36,7 @@ $(document).ready(function() {
   // setup code editor for markdown description
   let markdownPreview = $('#preview .content');
   let markdownEditor = new CodeEditor('#markdown-area', 
-    { mode: 'markdown', lineNumbers: false, lineWrapping: true, theme: 'material' });
+    { mode: 'markdown', lineWrapping: true, theme: 'material' });
 
   // setup test cases tabs
   new TabComponent({ root: '#challenge-solution-tab' })

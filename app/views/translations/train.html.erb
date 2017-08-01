@@ -7,7 +7,7 @@
 			</ul>
 
 			<div class="tab-content">
-			  <div class="tab-pane active markdown-preview" id="description" role="tabpanel">
+			  <div class="tab-pane active markdown-preview fast-scroll" id="description" role="tabpanel">
 			  	<div class="body">
 			  		<h5><%= @translation.challenge.name %></h5>
 			  		<div class="content marked-code">
@@ -20,7 +20,7 @@
 				    </div>
 			  	</div>
 			  </div>
-			  <div class="tab-pane code-output" id="output" role="tabpanel">
+			  <div class="tab-pane code-output fast-scroll" id="output" role="tabpanel">
 			  	<%= render partial: 'shared/code_output' %>
 			  </div>
 			</div>
@@ -28,7 +28,7 @@
 
 		<div class="flex-column code-column" id="panel-two">
 			<div id="panel-three">
-				<div class="code-tab">
+				<div class="code-tab code-tab-buttons">
 					<div class="header d-flex flex-row justify-content-between">
 						<div class="mr-3 title">Solución</div>
 						<div class="train-options">
@@ -38,7 +38,7 @@
 						</div>
 					</div>
 					<div class="body">
-						<textarea class="exercise-solution" id="code-area"><%= @translation.initial_solution %></textarea>
+						<textarea id="code-area"><%= @translation.initial_solution %></textarea>
 					</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 						Pruebas
 					</div>
 					<div class="body">
-						<textarea class="exercise-tests" id="test-area"><%= @translation.example_fixture %></textarea>
+						<textarea id="test-area"><%= @translation.example_fixture %></textarea>
 					</div>
 				</div>
 			</div>

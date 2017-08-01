@@ -1,13 +1,22 @@
 .markdown-description {
 	> .body {
 		min-height: 100%;
-		padding: 10px 0 0 15px;
+		padding: 10px 0 0 0;
 		background-color: $output-bg;
 	}
 
 	.CodeMirror { 
 		color: $markdown-editor-color;
 		background-color: $output-bg;
-		font-size: 1.1rem;
+		font-size: 0.875rem !important;
+	}
+
+	.CodeMirror .CodeMirror-gutters {
+	   background-color: transparent; 
+	}
+
+	.CodeMirror .CodeMirror-linenumber {
+		padding: 0 5px 0 0;
+	  color: #4E4E4E;
 	}
 }

@@ -12,24 +12,26 @@
   </head>
   
   <body>
-    <% if current_user %>
-      <%= render partial: 'shared/nav' %>
-    <% else %>
-      <%= link_to 'Inicia Sesión',  new_user_session_path %>
-      <%= link_to 'Registrate', new_user_registration_path %>
-    <% end %>
-    
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <div class="scroll" style="height: 100%;">
+      <% if current_user %>
+        <%= render partial: 'shared/nav' %>
+      <% else %>
+        <%= link_to 'Inicia Sesión',  new_user_session_path %>
+        <%= link_to 'Registrate', new_user_registration_path %>
+      <% end %>
+      
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
 
-	  <div class="container-fluid">
-	    <%= yield %>
-	  </div>
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
 
-    <%= yield :javascript %>
+      <%= yield :javascript %>
+    </div>
   </body>
 </html>

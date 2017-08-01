@@ -1,0 +1,8 @@
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  transition: 1s linear left;
+  /* maybe other vendor-prefixed transitions */
+}
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  transition: 1s linear top;
+  /* maybe other vendor-prefixed transitions */
+}

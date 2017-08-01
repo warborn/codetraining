@@ -4,17 +4,14 @@ import RunnerUI from 'modules/RunnerUI';
 import Router from 'modules/Router';
 import Progressbar from 'modules/Progressbar';
 import Notifier from 'modules/Notifier';
-import { setupScrollbars, initMarked } from 'helpers/utils';
+import { initMarked } from 'helpers/utils';
 import { 
   PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_PASSED_REDIRECT_TIME 
 } from 'config/constants';
 import Split from 'split.js';
 
 $(document).ready(function() {
-  // setup perfectScrollbar for practice exercise section
-  setupScrollbars(['.scroll']);
-
-  // setup marked and highlightjs library to use markdown for exercise details
+  // setup marked and highlightjs library to use markdown for challenge details
   const marked = initMarked();
 
   let markdown = $('#description .content input[type=hidden]').val();
@@ -26,7 +23,7 @@ $(document).ready(function() {
   let testEditor = new CodeEditor('#test-area', 
     { size: { width: '100%', height: '100%' } }, $('#test-area').val());
 
-  // setup exercise details tabs
+  // setup challenge details tabs
   let tabComponent = new TabComponent({
     root: '#details-tab',
     tabs: {

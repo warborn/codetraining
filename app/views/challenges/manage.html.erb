@@ -46,24 +46,31 @@
 			  	</div>
 			  </div>
 
-			  <div class="tab-pane markdown-preview" id="preview" role="tabpanel">
+			  <div class="tab-pane markdown-preview fast-scroll" id="preview" role="tabpanel">
 			  	<div class="body">
 			  		<div class="content marked-code">
 				  	</div>
 			  	</div>
 			  </div>
 
-			   <div class="tab-pane code-output" id="output" role="tabpanel">
+			   <div class="tab-pane code-output fast-scroll" id="output" role="tabpanel">
 			  	<%= render partial: 'shared/code_output' %>
 			  </div>
 			</div>
 		</div>
 
 		<div class="code-column flex-column" id="panel-two">
-			<div class="manage-options">
+			<div class="code-tab code-tab-buttons" id="panel-three">
+							<div class="manage-options">
 				<ul class="list d-flex justify-content-start">
 					<li class="item" id="save-btn">
 						<i class="fa fa-file-o"></i>Guardar
+					</li>
+					<li class="item" id="validate-btn">
+						<i class="fa fa-check"></i>Validar
+					</li>
+					<li class="item" id="insert-btn">
+						<i class="fa fa-code"></i>Insertar Ejemplo
 					</li>
 					<li class="item" id="reset-btn">
 						<i class="fa fa-refresh"></i>Reiniciar
@@ -73,16 +80,8 @@
 						<i class="fa fa-trash"></i>Eliminar
 					</li>
 					<% end %>
-					<li class="item" id="validate-btn">
-						<i class="fa fa-check"></i>Validar
-					</li>
-					<li class="item" id="insert-btn">
-						<i class="fa fa-code"></i>Insertar Ejemplo
-					</li>
 				</ul>
 			</div>
-
-			<div class="code-tab" id="panel-three">
 				<ul class="nav nav-tabs" id="challenge-solution-tab">
 					<li class="nav-item"><a href="#complete-solution" class="nav-link active">Solución Final</a></li>
 					<li class="nav-item"><a href="#initial-solution" class="nav-link">Solución Inicial</a></li>

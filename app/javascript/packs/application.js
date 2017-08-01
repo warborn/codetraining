@@ -7,6 +7,10 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import { setupScrollbars } from 'helpers/utils';
+
 $(document).ready(function() {
   $('body').css('display', 'block');
+	setupScrollbars(['.scroll']);
+	setupScrollbars(['.fast-scroll'], true);
 });
