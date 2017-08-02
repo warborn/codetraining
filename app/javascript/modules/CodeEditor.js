@@ -22,6 +22,10 @@ class CodeEditor {
     this._editor.doc.setValue(value);
   }
 
+  setOption(option, value) {
+    this._editor.setOption(option, value);
+  }
+
   getValue() {
     this.save();
     return this._editor.doc.getValue();

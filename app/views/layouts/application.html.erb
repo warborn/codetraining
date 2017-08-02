@@ -12,7 +12,8 @@
   </head>
   
   <body>
-    <div class="scroll" style="height: 100%;">
+    <div class="main-container scroll">
+      <span class="compress-button"><i class="fa fa-compress"></i></span>
       <% if current_user %>
         <%= render partial: 'shared/nav' %>
       <% else %>

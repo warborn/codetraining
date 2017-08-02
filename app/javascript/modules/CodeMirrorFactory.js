@@ -1,4 +1,8 @@
 import CodeMirror from 'codemirror';
+import 'codemirror/keymap/sublime';
+import 'codemirror/addon/comment/comment';
+import 'codemirror/addon/display/fullscreen';
+import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/markdown/markdown';
@@ -11,6 +15,8 @@ let CodeMirrorFactory = {
     theme: 'one-dark',
     mode: 'javascript',
     matchBrackets: true,
+    autoCloseBrackets: true,
+    keyMap: 'sublime'
     // lineWrapping: true
   },
   // return an instance of CodeMirror

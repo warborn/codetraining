@@ -27,3 +27,17 @@ export function initMarked() {
 
   return marked;
 }
+
+export function bindCodeMirrorFullScreen(editors) {
+  $('.expander-button').click(function(e) {
+    const editorNumber = this.dataset.editor;
+    editors[editorNumber - 1].setOption('fullScreen', true);
+    $('.compress-button').attr('data-editor', editorNumber).show();
+  });
+
+  $('.compress-button').click(function() {
+    const editorNumber = this.dataset.editor;
+    editors[editorNumber - 1].setOption('fullScreen', false);
+    $('.compress-button').removeAttr('data-editor').hide();
+  });
+}

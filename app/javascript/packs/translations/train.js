@@ -4,7 +4,7 @@ import RunnerUI from 'modules/RunnerUI';
 import Router from 'modules/Router';
 import Progressbar from 'modules/Progressbar';
 import Notifier from 'modules/Notifier';
-import { initMarked } from 'helpers/utils';
+import { initMarked, bindCodeMirrorFullScreen } from 'helpers/utils';
 import { 
   PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_PASSED_REDIRECT_TIME 
 } from 'config/constants';
@@ -20,6 +20,10 @@ $(document).ready(function() {
   // setup codemirror code and test areas
   let codeEditor = new CodeEditor('#code-area', { lineWrapping: true }, $('#code-area').val());
   let testEditor = new CodeEditor('#test-area', { lineWrapping: true }, $('#test-area').val());
+
+  // Array reference of the editors
+  let editors = [codeEditor, testEditor];
+  bindCodeMirrorFullScreen(editors);
 
   // setup challenge details tabs
   let tabComponent = new TabComponent({
@@ -123,9 +127,9 @@ $(document).ready(function() {
     sizes: [35, 65]
   });
 
-  Split(['#panel-three', '#panel-four'], {
+  const verticalPanels = Split(['#panel-three', '#panel-four'], {
     direction: 'vertical',
-    sizes: [60, 40]
+    sizes: [60, 40],
+    minSize: [49, 40]
   });
-
 });

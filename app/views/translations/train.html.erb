@@ -30,7 +30,10 @@
 			<div id="panel-three">
 				<div class="code-tab code-tab-buttons">
 					<div class="header d-flex flex-row justify-content-between">
-						<div class="mr-3 title">Solución</div>
+						<div class="mr-3 title">
+							Solución
+							<span class="expander-button -spaced" data-editor='1'><i class="fa fa-expand"></i></span>
+						</div>
 						<div class="train-options">
 							<button id="reset-btn" type="button" class="btn btn-primary reset">Reiniciar</button>
 							<button id="example-btn" type="button" class="btn btn-primary test">Probar Código</button>
@@ -46,6 +49,7 @@
 				<div class="code-tab">
 					<div class="header">
 						Pruebas
+						<span class="expander-button -spaced" data-editor='2'><i class="fa fa-expand"></i></span>
 					</div>
 					<div class="body">
 						<textarea id="test-area"><%= @translation.example_fixture %></textarea>

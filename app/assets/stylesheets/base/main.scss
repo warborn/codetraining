@@ -84,6 +84,11 @@ a:hover {
 
 /** @group layout */
 
+.main-container {
+	height: 100%;
+	position: relative;
+}
+
 /** exercise details section */
 .exercise-description {
 	padding-top: 20px;
@@ -125,7 +130,7 @@ a:hover {
 	}
 
 	.details-column {
-		min-width: 383px;
+		min-width: 414px;
 		background-color: #24282A;
 	}
 }
@@ -191,7 +196,7 @@ a:hover {
 	}
 
 	.code-column {
-		min-width: 468px;
+		min-width: 516px;
 	}
 
 	.details-column {
@@ -215,5 +220,14 @@ a:hover {
 		.title {
 			margin-top: 5px;
 		}
+	}
+}
+
+.manage-challenge .expander-button,
+.train-challenge .expander-button {
+	margin-left: 7px;
+
+	&.-spaced {
+		margin-left: 25px;
 	}
 }

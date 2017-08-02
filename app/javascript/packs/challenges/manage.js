@@ -2,7 +2,7 @@ import TabComponent from 'modules/TabComponent';
 import CodeEditor from 'modules/CodeEditor';
 import RunnerUI from 'modules/RunnerUI';
 import ChallengeManager from 'modules/ChallengeManager';
-import { initMarked } from 'helpers/utils';
+import { initMarked, bindCodeMirrorFullScreen } from 'helpers/utils';
 import Split from 'split.js'
 
 $(document).ready(function() { 
@@ -63,6 +63,16 @@ $(document).ready(function() {
 
   // setup code editor for challenge solutions
   let exampleTestEditor = new CodeEditor('#example-test-area', { lineWrapping: true });
+
+  // Array reference of the editors
+  let editors = [
+    markdownEditor,
+    completeSolutionEditor,
+    initialSolutionEditor, 
+    finalTestEditor,
+    exampleTestEditor, 
+  ];
+  bindCodeMirrorFullScreen(editors);
 
   RunnerUI.init({
     root: '#output',
@@ -130,7 +140,8 @@ $(document).ready(function() {
 
   Split(['#panel-three', '#panel-four'], {
     direction: 'vertical',
-    sizes: [60, 40]
+    sizes: [60, 40],
+    minSize: [84, 42]
   });
 
 });
