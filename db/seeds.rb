@@ -1,11 +1,19 @@
-user = User.new(
-		:username              => 'ejemplo',
-    :email                 => "email@email.com",
-    :password              => "password",
-    :password_confirmation => "password"
-)
-user.skip_confirmation!
-user.save!
+users = []
+
+2.times do |i|
+	user = User.new(
+			:username              => "ejemplo#{i}",
+	    :email                 => "email#{i}@email.com",
+	    :password              => "password",
+	    :password_confirmation => "password"
+	)
+	user.skip_confirmation!
+	user.save!
+
+	users << user
+end
+
+user = users.first
 
 javascript = Language.create(name: 'javascript')
 puts 'Language created!'

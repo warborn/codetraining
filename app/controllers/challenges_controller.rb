@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_owner, only: [:edit, :update, :destroy]
   before_action :set_translation, only: [:edit, :update]
   before_action :set_language, only: [:new, :create]
   before_action :set_categories_and_ranks, only: [:new, :edit]
@@ -58,6 +59,13 @@ class ChallengesController < ApplicationController
   end
 
   private
+
+  def verify_owner
+    challenge = Challenge.find(params[:id])
+    if challenge.user_id != current_user.id
+      redirect_to root_path, status: 303
+    end
+  end
 
   def challenge_params
     params.require(:challenge).permit(:name, :description, :category, :rank, :tags)
