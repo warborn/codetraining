@@ -34,7 +34,7 @@ class CodeRunnerService
 
 		def attempted_fixture(params)
 			if params[:attempt]
-				Translation.by_language_and_challenge(@language_name, @challenge_id).final_fixture
+				Translation.by_challenge_and_language(@challenge_id, @language_name).final_fixture
 			else
 				params[:fixture]
 			end

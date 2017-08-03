@@ -8,7 +8,7 @@ class RunnerController < ApplicationController
 
     if params[:attempt]
       # find current user's solution
-      translation = Translation.by_language_and_challenge(params[:language], params[:challenge_id])
+      translation = Translation.by_challenge_and_language(params[:challenge_id], params[:language])
       solution = current_user.solutions.draft_by_translation(translation).first
 
       if solution

@@ -30,6 +30,6 @@ class TranslationsController < ApplicationController
 
 	private
 		def set_translation
-	    @translation = Translation.by_language_and_challenge('javascript', params[:id])
+	    @translation = Translation.by_challenge_and_language(params[:id], 'javascript')
 	  end
 end

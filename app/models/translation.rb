@@ -7,7 +7,7 @@ class Translation < ApplicationRecord
   scope :language, lambda { |language_name| joins(:language).where(["languages.name = ?", language_name]) }
   scope :challenge, lambda { |challenge_id| joins(:challenge).where(["challenges.id = ?", challenge_id]) }
 
-  def self.by_language_and_challenge(language_name, challenge_id)
+  def self.by_challenge_and_language(challenge_id, language_name)
   	self.language(language_name).merge(self.challenge(challenge_id)).first
   end
 end
