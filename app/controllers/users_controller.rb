@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 	def solutions
 		@solutions = current_user
 									.solutions
+									.completed
 									.includes(translation: [:challenge, :language])
 									.order('challenges.id, solutions.created_at DESC')
 	end

@@ -10,10 +10,22 @@ class TranslationsController < ApplicationController
 	end
 
 	def solutions
-		@solutions = @translation.solutions.first_of_each_user
+		@solutions = @translation.solutions.completed.first_of_each_user
 	end
 
 	def train
+		# find existing solution draft from user
+		if solution_draft = current_user.solutions.draft_by_translation(@translation).first
+			@solution = solution_draft
+		else
+			# set new solution draft to user
+			@solution = current_user.solutions.build({
+        answer: @translation.initial_solution,
+        fixture: @translation.example_fixture
+      })
+      @solution.translation = @translation
+      @solution.save
+		end
 	end
 
 	private

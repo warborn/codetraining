@@ -10,7 +10,7 @@ class ChallengesController < ApplicationController
   end
 
   def show
-    @solutions_count = Solution.joins(translation: [:challenge]).where('challenges.id = ?', params[:id]).count
+    @solutions_count = Solution.completed.joins(translation: [:challenge]).where('challenges.id = ?', params[:id]).count
     @challenge = Challenge.includes(:user).includes(translations: [:language]).find(params[:id])
   end
 

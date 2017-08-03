@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="body">
-						<textarea id="code-area"><%= @translation.initial_solution %></textarea>
+						<textarea id="code-area"><%= @solution.answer %></textarea>
 					</div>
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 						<span class="expander-button -spaced" data-editor='2'><i class="fa fa-expand"></i></span>
 					</div>
 					<div class="body">
-						<textarea id="test-area"><%= @translation.example_fixture %></textarea>
+						<textarea id="test-area"><%= @solution.fixture %></textarea>
 					</div>
 				</div>
 			</div>
