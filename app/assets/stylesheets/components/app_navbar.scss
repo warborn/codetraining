@@ -1,15 +1,9 @@
 .app-navbar {
-	background-color: #24282A !important;
+	background-color: $light-body-bg-color !important;
 	font-size: 0.94rem;
 	font-weight: 400;
 	padding: 0.4rem 1rem;
-	border-bottom: 1px solid #1C2022;
-
-	// position: fixed;
- //  top: 0;
- //  right: 0;
- //  left: 0;
- //  z-index: 1030;
+	border-bottom: 1px solid $body-bg-color;
 
   > .navbar-toggler {
 	  color: rgba(255, 255, 255, 0.5);

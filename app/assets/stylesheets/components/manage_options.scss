@@ -1,6 +1,6 @@
 .manage-options {
 	& {
-		background-color: #1C2022;
+		background-color: $body-bg-color;
 		border-bottom: 1px solid #121516;
 	}
 
@@ -13,14 +13,14 @@
 
 	> .list > .item {
 		padding: 8px 12px;
-		border-bottom: 2px solid #1C2022;
+		border-bottom: 2px solid $body-bg-color;
 	}
 
 	> .list > .item:hover {
 		color: #fff;
 		cursor: pointer;
 		transition: all .3s ease-in-out;
-		border-bottom: 2px solid #00BCD4;
+		border-bottom: 2px solid $primary-color;
 	}
 
 	> .list > .item i {

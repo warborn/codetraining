@@ -1,4 +1,4 @@
-export const WHEEL_SPEED = 0.1;
+export const WHEEL_SPEED = 0.7;
 export const FAST_WHEEL_SPEED = 0.8;
 export const MAX_SCROLLBAR_LENGTH = 250;
 export const PROGRESSBAR_DELAY = 400;

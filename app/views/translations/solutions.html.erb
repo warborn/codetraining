@@ -1,9 +1,14 @@
 <section class="exercise-solutions row"><!-- solutions  -->
-	<div class="col-sm-12">
-		<h4><%= @translation.challenge.name %></h4>
-		<div class="border">
-			<%= render partial: 'shared/solution', collection: @solutions, as: :solution %>
+	<div class="col-sm-12 col-lg-10 offset-lg-1">
+		<div class="challenge-header">
+			<div class="language">
+				<%= devicon_svg 'javascript' %>
+			</div>
+			<div class="title scale">
+				<%= link_to @translation.challenge.name, challenge_path(@translation.challenge) %>
+			</div>
 		</div>
+		<%= render partial: 'shared/solution', collection: @solutions, as: :solution %>
 	</div>
 	
 </section><!-- end solutions -->

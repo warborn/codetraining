@@ -1,27 +1,28 @@
 <section class="user-solutions row"><!-- solutions  -->
-	<div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
-		<div class="border">
-			<% @solutions.each do |solution| %>
-			<div class="solution-box">
-				<div class="user mb-2">
-					<span>
+	<div class="col-sm-12 col-md-12 col-lg-10 offset-lg-1">
+		<% @solutions.each do |solution| %>
+			<div class="mb-3 solution-box">
+				<div class="language">
+					<%= devicon_svg 'javascript' %>
+				</div>
+				<div class="name scale">
 					<%= link_to solution.translation.challenge.name, challenge_path(solution.translation.challenge) %>
-					</span>
-					<span><small><%= solution.translation.language.name %>:</small></span>
 				</div>
 				<div class="answer" id="answer_<%= solution.id %>">
 					<div class="body">
 						<div class="content marked-code">
-							<input type="hidden" value="<%= solution.answer %>">
+								<input type="hidden" value="<%= solution.answer %>">
 						</div>
 					</div>
-					<span><small>Hace <%= time_ago_in_words(solution.created_at) %></small></span>
+					<span class="time-ago">
+						Hace <%= time_ago_in_words(solution.created_at) %>
+					</span>
 				</div>
 			</div>
-			<% end%>
-		</div>
+		<% end%>
 	</div>
 	
 </section><!-- end solutions -->
 
 <%= javascript_pack_tag 'shared/solutions' %>
+

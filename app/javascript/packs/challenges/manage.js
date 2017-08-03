@@ -2,10 +2,12 @@ import TabComponent from 'modules/TabComponent';
 import CodeEditor from 'modules/CodeEditor';
 import RunnerUI from 'modules/RunnerUI';
 import ChallengeManager from 'modules/ChallengeManager';
-import { initMarked, bindCodeMirrorFullScreen } from 'helpers/utils';
+import { setFullScreenWindow, initMarked, 
+  bindCodeMirrorFullScreen } from 'helpers/utils';
 import Split from 'split.js'
 
-$(document).ready(function() { 
+$(document).ready(function() {
+  setFullScreenWindow();
   // setup marked for markdown
   const marked = initMarked();
 
@@ -141,7 +143,7 @@ $(document).ready(function() {
   Split(['#panel-three', '#panel-four'], {
     direction: 'vertical',
     sizes: [60, 40],
-    minSize: [84, 42]
+    minSize: [84, 0]
   });
 
 });

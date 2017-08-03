@@ -3,3 +3,9 @@
 	font-size: 0.9em;
 	padding: 25px 15px;
 }
+
+// common style for the challenge title inside boxes
+@mixin challenge-box-name {
+	font-size: 1.25rem;
+	margin-bottom: 20px;
+}

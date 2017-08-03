@@ -1,9 +1,29 @@
 .solution-box {
 	padding: 10px 20px;
-	background-color: $preview-bg;
+	background-color: $light-body-bg-color;
 	border-bottom: 1px solid #272727;
+	border-left: 3px solid $primary-color;
+	box-shadow: 0 2px 14px 0 rgba(0,0,0,0.24);
 
-	> .user span a{
-		color: #fff
+	&.-borderless {
+		border: none;
+	}
+
+	> .name {
+		@include challenge-box-name;
+		display: inline-block;
+	}
+
+	> .language {
+		display: inline-block;
+		margin-right: 5px;
+		position: relative;
+		top: 8px;
+		width: 30px;
+	}
+
+	.time-ago {
+		color: #6B6B6B;
+		font-size: 0.9rem;
 	}
 }

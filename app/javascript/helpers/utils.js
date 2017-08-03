@@ -41,3 +41,10 @@ export function bindCodeMirrorFullScreen(editors) {
     $('.compress-button').removeAttr('data-editor').hide();
   });
 }
+
+// Expand the container to the full width of the screen
+export function setFullScreenWindow() {
+  $('.container-fluid').addClass('full-width');
+  // remove perfect-scrollbar
+  $('.container-fluid').perfectScrollbar('destroy');
+}

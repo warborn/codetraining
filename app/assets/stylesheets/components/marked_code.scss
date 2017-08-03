@@ -1,7 +1,7 @@
 .marked-code {
 	pre:not([class]) {
-		background-color: $output-bg;
 		color: $markdown-preview-color;
+		background-color: $atom-bg-color;
 		width: 100%;
 		display: block;
 		padding: 15px 15px;

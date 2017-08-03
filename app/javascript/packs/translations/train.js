@@ -4,13 +4,14 @@ import RunnerUI from 'modules/RunnerUI';
 import Router from 'modules/Router';
 import Progressbar from 'modules/Progressbar';
 import Notifier from 'modules/Notifier';
-import { initMarked, bindCodeMirrorFullScreen } from 'helpers/utils';
-import { 
-  PROGRESSBAR_DELAY, PROGRESSBAR_STEP, CHALLENGE_PASSED_REDIRECT_TIME 
-} from 'config/constants';
+import { setFullScreenWindow, initMarked, 
+  bindCodeMirrorFullScreen } from 'helpers/utils';
+import { PROGRESSBAR_DELAY, PROGRESSBAR_STEP, 
+  CHALLENGE_PASSED_REDIRECT_TIME } from 'config/constants';
 import Split from 'split.js';
 
 $(document).ready(function() {
+  setFullScreenWindow();
   // setup marked and highlightjs library to use markdown for challenge details
   const marked = initMarked();
 
@@ -130,6 +131,6 @@ $(document).ready(function() {
   const verticalPanels = Split(['#panel-three', '#panel-four'], {
     direction: 'vertical',
     sizes: [60, 40],
-    minSize: [49, 40]
+    minSize: [49, 0]
   });
 });

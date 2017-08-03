@@ -42,6 +42,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem "font-awesome-rails"
 
+gem 'devicon-rails'
+
 # CodeRunner module to execute code using the codewars-runenr CLI
 gem 'code_runner', git: 'https://github.com/warborn/code_runner'
 

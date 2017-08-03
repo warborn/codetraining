@@ -1088,7 +1088,7 @@ code-point-at@^1.0.0:
 
 "codemirror-one-dark-theme@https://github.com/warborn/codemirror-one-dark-theme.git":
   version "1.0.4"
-  resolved "https://github.com/warborn/codemirror-one-dark-theme.git#fc27baba13474a99094195e5515bd05231e68ae3"
+  resolved "https://github.com/warborn/codemirror-one-dark-theme.git#9889cadb5960be36bd9e17effb79e0893bcd7282"
 
 codemirror@^5.28.0:
   version "5.28.0"
@@ -1516,6 +1516,10 @@ detect-indent@^4.0.0:
 detect-node@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
+
+devicon-2.2@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/devicon-2.2/-/devicon-2.2-2.2.0.tgz#d639f8626ece73dab20bb267a83cf3d6b65c1720"
 
 diffie-hellman@^5.0.0:
   version "5.0.2"

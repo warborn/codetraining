@@ -12,7 +12,7 @@
   </head>
   
   <body>
-    <div class="main-container scroll">
+    <div class="main-container">
       <span class="compress-button"><i class="fa fa-compress"></i></span>
       <% if current_user %>
         <%= render partial: 'shared/nav' %>
@@ -28,7 +28,7 @@
         <p class="alert"><%= alert %></p>
       <% end %>
 
-      <div class="container-fluid">
+      <div class="container-fluid scroll">
         <%= yield %>
       </div>
 

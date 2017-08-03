@@ -1,0 +1,21 @@
+.challenge-preview {
+	border-left: 3px solid $primary-color;
+	border-radius: 2px;
+	background-color: $light-body-bg-color;
+	padding: 15px;
+	box-shadow: 0 2px 14px 0 rgba(0,0,0,0.24);
+
+	&:hover {
+		background-color: #282D2F;
+	}
+
+	> .name {
+		@include challenge-box-name;
+	}
+
+	> .description {
+		font-size: 0.875rem;
+		color: rgba(255,255,255,0.8);
+		margin-bottom: 20px;
+	}
+}

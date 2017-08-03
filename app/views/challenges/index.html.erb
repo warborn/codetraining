@@ -1,34 +1,36 @@
-<section class="row"><!-- exercise list-->
-	<div class="col-sm-12 col-md-12 col-lg-12">
-		<h3 class="mb-4">Ejercicios</h3>
-		
-		<form action="#" class="inline-form">
-			<div class="form-group row">
-				<div class="col-lg-3">
-					<label class="sr-only">Nivel</label>
-					<select class="form-control mb-xs-5 mb-sm-3">
-						<option disabled selected="selected">Nivel</option>
-						<option value="0">1</option>
-						<option value="1">2</option>
-						<option value="2">3</option>
-						<option value="3">4</option>
-					</select>
+<!-- <div class="container"> -->
+	<section class="row"><!-- exercise list-->
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<h3 class="mb-4">Ejercicios</h3>
+			
+			<!-- <form action="#" class="inline-form">
+				<div class="form-group row">
+					<div class="col-lg-3">
+						<label class="sr-only">Nivel</label>
+						<select class="form-control mb-xs-5 mb-sm-3">
+							<option disabled selected="selected">Nivel</option>
+							<option value="0">1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+							<option value="3">4</option>
+						</select>
+					</div>
+					<div class="col-lg-3">
+						<label class="sr-only">Categoria</label>
+						<select class="form-control mb-xs-5 mb-sm-3">
+							<option disabled selected="selected">Categoria</option>
+							<option value="0">Algoritmos</option>
+							<option value="1">Arreglos</option>
+							<option value="2">Funciones</option>
+							<option value="3">Ordenamiento</option>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<button type="submit" class="btn btn-outline-success btn-block">Filtrar</button>
+					</div>
 				</div>
-				<div class="col-lg-3">
-					<label class="sr-only">Categoria</label>
-					<select class="form-control mb-xs-5 mb-sm-3">
-						<option disabled selected="selected">Categoria</option>
-						<option value="0">Algoritmos</option>
-						<option value="1">Arreglos</option>
-						<option value="2">Funciones</option>
-						<option value="3">Ordenamiento</option>
-					</select>
-				</div>
-				<div class="col-lg-2">
-					<button type="submit" class="btn btn-outline-success btn-block">Filtrar</button>
-				</div>
-			</div>
-		</form>
-		<%= render partial: 'shared/challenge_details', collection: @challenges, as: :challenge %>
-	</div>
-</section><!-- end exercise list section -->
+			</form> -->
+			<%= render partial: 'shared/challenge_details', collection: @challenges, as: :challenge %>
+		</div>
+	</section><!-- end exercise list section -->
+<!-- </div> -->

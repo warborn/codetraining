@@ -16,8 +16,8 @@ html, body {
 }
 
 body {
-	background-color: #252830;
-	color: #C4C7D0;
+	background-color: $body-bg-color;
+	color: $text-color;
   display: none;
 }
 
@@ -31,17 +31,21 @@ a i {
 }
 
 a {
-	color: #1997C6;
+	color: #EBEBEB;
 }
 
-a:hover {
-	color: #1585AF;
-	text-decoration: none;
-}
+
 
 .container-fluid {
 	height: calc(100% - 51.78px);
-	padding: 0;
+
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		color: #EBEBEB;
+		text-decoration: none;
+	}
 }
 
 /* utilities */
@@ -82,11 +86,43 @@ a:hover {
 	overflow: hidden;
 }
 
+.scale {
+	transition: all .2s ease-in-out;
+}
+
+.scale:hover {
+	transform: scale(1.03);
+}
+
+.full-width {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
 /** @group layout */
 
 .main-container {
 	height: 100%;
 	position: relative;
+}
+
+.challenge-header {
+	margin-bottom: 20px;
+
+	.language {
+		width: 100px;
+		margin: 0 auto;
+	}
+
+	.title {
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	.title a {
+		color: #fff;
+	}
 }
 
 /** exercise details section */
@@ -131,7 +167,7 @@ a:hover {
 
 	.details-column {
 		min-width: 414px;
-		background-color: #24282A;
+		background-color: $light-body-bg-color;
 	}
 }
 

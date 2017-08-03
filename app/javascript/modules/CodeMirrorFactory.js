@@ -4,6 +4,7 @@ import 'codemirror/addon/comment/comment';
 import 'codemirror/addon/display/fullscreen';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/scroll/simplescrollbars';
+import 'codemirror/addon/selection/active-line';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/markdown/markdown';
 
@@ -16,7 +17,8 @@ let CodeMirrorFactory = {
     mode: 'javascript',
     matchBrackets: true,
     autoCloseBrackets: true,
-    keyMap: 'sublime'
+    keyMap: 'sublime',
+    styleActiveLine: true
     // lineWrapping: true
   },
   // return an instance of CodeMirror
