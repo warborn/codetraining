@@ -1,21 +1,30 @@
 .challenge-preview {
-	border-left: 3px solid $primary-color;
 	border-radius: 2px;
 	background-color: $light-body-bg-color;
-	padding: 15px;
-	box-shadow: 0 2px 14px 0 rgba(0,0,0,0.24);
+	padding: 10px 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 	&:hover {
 		background-color: #282D2F;
 	}
 
-	> .name {
+	> .header .name {
 		@include challenge-box-name;
+		font-weight: 500;
+		color: #a3d8d6;
 	}
 
 	> .description {
-		font-size: 0.875rem;
-		color: rgba(255,255,255,0.8);
-		margin-bottom: 20px;
+		font-size: 1rem;
+		font-weight: 500;
+		color: #dadada;
+		margin-bottom: 17px;
 	}
+
+	> .description .user { 
+		color: #afafaf;
+	}
+	
+	> .description .key { margin-left: 10px; color: #afafaf; }
+	> .description .value { color: #fff; }
 }
