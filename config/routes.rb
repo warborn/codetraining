@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-  root 'pages#index'
+  # root 'pages#index'
+  authenticated :user do
+    root to: 'challenges#index'
+  end
+    
+  devise_scope :user do
+    unauthenticated :user do
+      root to: 'devise/sessions#new'
+    end
+  end
 
   post 'run', to: 'runner#run'
 

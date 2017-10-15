@@ -16,9 +16,6 @@
       <span class="compress-button"><i class="fa fa-compress"></i></span>
       <% if current_user %>
         <%= render partial: 'shared/nav' %>
-      <% else %>
-        <%= link_to 'Inicia Sesión',  new_user_session_path %>
-        <%= link_to 'Registrate', new_user_registration_path %>
       <% end %>
       
       <% if notice %>
