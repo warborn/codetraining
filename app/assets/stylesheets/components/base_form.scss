@@ -1,0 +1,118 @@
+.base-form {
+	background-color: $form-bg-color;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+	border-radius: 3px;
+	padding-bottom: 40px;
+
+	.header { 
+		width: 100%;
+		padding: 10px 15px;
+		border-bottom: 1px solid #201D1D;
+	}
+
+	.header .title { 
+		color: $form-fg-color;
+		font-size: 1.375rem;
+		font-weight: 300;
+		margin: 0;
+	}
+
+	.body {
+		padding: 40px 40px 25px;
+	}
+
+	.field {
+		background-color: $form-input-bg-color;
+		width: 100%;
+		color: $form-fg-color;
+		border-radius: 3px;
+		margin-bottom: 40px;
+
+		&:last-child { margin-bottom: 0; }
+	}
+
+	.field.-nobg {
+		background-color: transparent;
+	}
+	.field.-checkbox { margin-top: -10px; margin-bottom: 20px; }
+
+	.field .icon { 
+		margin-left: 12px;
+		font-size: 1.125rem;
+	}
+	
+	.field .input {
+		background-color: transparent !important;
+		border: none;
+		padding: 8px 8px 8px 0;
+		font-size: 1.125rem;
+		color: $form-fg-color;
+		-webkit-text-fill-color: $form-fg-color !important;
+
+		&:focus { outline:none }
+	}
+
+	.field .input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $form-input-bg-color inset;
+	}
+
+	.field .checkbox {
+		display: none;
+	}
+
+	.field .checkbox + .label {
+		color: $form-fg-color;
+		font-size: 1rem;
+		cursor: pointer;
+	}
+
+	.field .checkbox + .label:before {
+		background-color: $form-input-bg-color;
+	  font: 1rem sans-serif;
+	  content: "\00a0";
+	  display: inline-block;
+	  vertical-align: top;
+	  padding: 0;
+	  height: 17px;
+	  width: 17px;
+	  margin: 3px 15px 0 0;
+	}
+	.field .checkbox:checked + .label:before {
+	  color: $form-fg-color;
+	  content: "\2713";
+	  text-align: center;
+	}
+
+	.field .button {
+		width: 100%;
+		background-color: $form-input-bg-color;
+		box-shadow: 0px 2px 2px $form-button-shadow-color;
+		color: $form-fg-color;
+		padding: 8px;
+		border: none;
+		border-radius: 3px;
+		font-size: 1.125rem;
+    outline:none;
+
+		&:hover { background-color: $form-button-hover-color; }
+	}
+
+	.separator {
+		height: 1px;
+		background-color: $form-button-hover-color;
+		width: 90%;
+		margin: 15px auto;
+	}
+
+	.links .link {
+		display: block;
+		margin-bottom: 2px;
+		font-size: 1rem;
+		font-weight: 300;
+		color: #979797;
+		text-align: center;
+
+		&:hover { color: $form-fg-color; }
+		&:last-child { margin-bottom: 0; }
+	}
+}
