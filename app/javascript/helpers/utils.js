@@ -44,6 +44,7 @@ export function bindCodeMirrorFullScreen(editors) {
 
 // Expand the container to the full width of the screen
 export function setFullScreenWindow() {
+  $('.container-fluid').css({'height': 'calc(100% - 51.78px)'});
   $('.container-fluid').addClass('full-width');
   // remove perfect-scrollbar
   $('.container-fluid').perfectScrollbar('destroy');
