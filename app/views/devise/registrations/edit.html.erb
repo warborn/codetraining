@@ -1,46 +1,47 @@
-<section class="row">
+<section class="row"><!-- register -->
   <div class="col-sm-12 col-md-10 col-lg-4 offset-md-1 offset-lg-4">
-    <div class="card">
-      <div class="card-block">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= devise_error_messages! %>
-          <div class="form-group">
-            <%= f.label :name %><br />
-            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
-          </div>
+    <%= devise_error_messages! %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'base-form' }) do |f| %>
+      <div class="header">
+        <p class="title">Actualiza tu información</p>
+      </div>
 
-          <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, class: 'form-control' %>
-          </div>
+      <div class="body">
+        <div class="field">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <%= f.text_field :name, autofocus: true, placeholder: 'Nombre', class: 'input' %>
+        </div>
 
-          <div class="form-group">
-            <%= f.label :password %> <i>(déjala en blanco si no deseas cambiarla)</i>
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-            <% if @minimum_password_length %>
-              <br />
-              <em><%= @minimum_password_length %> caracteres como mínimo</em>
-            <% end %>
-          </div>
+        <div class="field">
+          <span class="icon"><i class="fa fa-envelope-o"></i></span>
+          <%= f.email_field :email, class: 'input' %>
+        </div>
 
-          <div class="form-group">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-          </div>
+        <div class="field">
+          <span class="icon"><i class="fa fa-lock"></i></span>
+          <%= f.password_field :password, autocomplete: "off", placeholder: 'Contraseña',  class: 'input' %>
+        </div>
 
-          <div class="form-group">
-            <%= f.label :current_password %> <i>(necesitamos tu contraseña actual para realizar los cambios)</i>
-            <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
-          </div>
-          
-          <div class="form-group">
-            <%= f.submit "Actualizar Información", class: 'btn btn-outline-primary' %>
-          </div>
-        <% end %>
-        <div class="col-sm-12-col-lg-6">
-          <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro de esto?" }, method: :delete, class: 'btn btn-outline-danger' %>
+        <div class="field">
+          <span class="icon"><i class="fa fa-lock"></i></span>
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirmar contraseña', class: 'input' %>
+        </div>
+
+        <div class="field">
+          <span class="icon"><i class="fa fa-lock"></i></span>
+          <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Contraseña actual', class: 'input' %>
+        </div>
+        
+        <div class="field -nobg">
+          <button class="base-button -blue">Actualizar Información</button>
         </div>
       </div>
+
+      <div class="separator"></div>
+
+    <div class="links">
+      <%= link_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro de esto?" }, method: :delete, class: 'link' %>
     </div>
+    <% end %>
   </div>
-</section>
+</section><!-- end register section-->

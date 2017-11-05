@@ -14,7 +14,7 @@
 			  			<input type="hidden" value="<%= @translation.challenge.description %>">
 				  	</div>
 				  	<hr />
-				  	<div class="challenge-tags">
+				  	<div class="challenge-tags -plain">
 						  <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
 							<%= render partial: 'shared/tags', collection: @translation.challenge.splitted_tags, as: :tag %>
 				    </div>
