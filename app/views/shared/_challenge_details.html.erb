@@ -1,26 +1,27 @@
-<div class="mb-4 challenge-preview flex-column align-items-start">
+<div class="mb-2 challenge-preview flex-column align-items-start">
   <div class="header d-flex w-100 justify-content-between">
     <%= link_to challenge.name, challenge_path(challenge), class: 'name scale' =%> 
 
-    <% if current_user == challenge.user %>
+   <!--  <% if current_user == challenge.user %>
     <%= link_to 'Editar Ejercicio', edit_challenge_translation_path(challenge, 'javascript') %>
-    <% end %>
+    <% end %> -->
   </div>
 
-  <div class="description">
-    <span class="user">
-      <%= link_to "/users/#{challenge.user.username}" do %>
-      <i class="fa fa-user" aria-hidden="true"></i><%= challenge.user.username %></a>
-      <% end %>
-    </span>  
-    <span class="key">Nivel: </span><span class="value"><%= challenge.rank %></span>
-    <span class="key">Disciplina: </span><span class="value"><%= challenge.category %></span>
+  <div class="description"> 
+    <!-- <span class="key">Nivel: </span><span class="value"><%= challenge.rank %></span> -->
+    <span class="key">Dificultad: </span><span class="value">Fácil</span>
+    <span class="key">Disciplina: </span><span class="value"><%= challenge.category.titleize %></span>
   </div>
   
-  <% if challenge.splitted_tags.any? %>
-  <div class="challenge-tags">
-    <span class="icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-    <%= render partial: 'shared/tags', collection: challenge.splitted_tags, as: :tag %>
+  <div class="footer d-flex justify-content-start">
+    <span class="ml-2 user">
+      <i class="icon fa fa-user-circle-o" aria-hidden="true"></i>
+      <%= link_to challenge.user.username, "/users/#{challenge.user.username}", class: 'username' %>
+    </span> 
+    <% if challenge.splitted_tags.any? %>
+    <div class="ml-3 challenge-tags -plain">
+      <%= render partial: 'shared/tags', collection: challenge.splitted_tags, as: :tag %>
+    </div>
+    <% end %>
   </div>
-  <% end %>
 </div>

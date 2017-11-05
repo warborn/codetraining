@@ -1,0 +1,48 @@
+.challenge-filter {
+	background-color: #242626;
+	border-radius: 3px;
+	padding: 28px 25px;
+	color: #B5B5B5;
+	font-weight: 400;
+
+	> .field { margin-bottom: 20px; }
+
+	> .field .label, 
+	> .field .control { display: inline-block; }
+	
+	> .field .label { width: 30%; }
+
+	> .field .control {
+		background-color: #191B1B;
+		width: calc(100% - 112px);
+		padding-left: 10px;
+		border-radius: 3px;
+
+		&.-full {
+			width: 100%;
+		}
+	}
+
+	> .field .control .icon { margin-right: 10px; }
+	> .field .control .input {
+		font-weight: 400;
+		width: calc(100% - 36px);
+		color: #B5B5B5;
+		background-color: transparent !important;
+		border: none;
+		padding: 8px 8px 8px 0;
+		font-size: 0.938rem;
+		-webkit-text-fill-color: $form-fg-color !important;
+
+		&:focus { outline:none }
+	}
+
+	> .field .control .input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #191B1B inset;
+	}
+
+	> .field .control select.input {
+		background-color: #191B1B !important;
+		color: #B5B5B5;;
+	}
+}

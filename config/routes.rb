@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   post 'run', to: 'runner#run'
 
+  get 'challenges/search', to: 'challenges#search'
   resources :challenges
   get 'challenges/:id/train/:language', to: 'translations#train', as: 'train_challenge'
   get 'challenges/:id/solutions/:language', to: 'translations#solutions', as: 'solutions_challenge'

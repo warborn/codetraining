@@ -181,7 +181,7 @@ a {
 	}
 
 	label {
-		color: #3F494A;
+		color: #AAB6B6;
 		margin-bottom: 0.25rem;
 	}
 
@@ -268,8 +268,15 @@ a {
 	}
 }
 
-.challenge-details {
-	.actions .base-button {
-		width: 48%;
-	}
+// .challenge-details {
+.actions .base-button {
+	width: 48%;
+}
+// }
+
+.challenges-found {
+	color: #DADADA;
+	font-size: 1rem;
+	margin-bottom: 18px;
+	display: block;
 }

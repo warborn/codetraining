@@ -4,9 +4,10 @@ class ChallengesController < ApplicationController
   before_action :set_translation, only: [:edit, :update]
   before_action :set_language, only: [:new, :create]
   before_action :set_categories_and_ranks, only: [:new, :edit]
+  before_action :set_search_options, only: [:index, :search]
 
   def index
-    @challenges = Challenge.includes(:user).all
+    @challenges = Challenge.includes(:user).order(created_at: :desc).all
   end
 
   def show
@@ -55,6 +56,12 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def search
+    finder = ChallengeFinder.new(params)
+    @challenges = finder.perform!
+    render :index
+  end
+
   def train
   end
 
@@ -86,5 +93,18 @@ class ChallengesController < ApplicationController
   def set_categories_and_ranks
     @categories = Category.pluck(:name).map { |category| [category.capitalize, category] }
     @ranks = [1, 2, 3, 4]
+  end
+
+  def set_search_options
+    @tag = params[:tag] || '0'
+    @order = params[:order_by]
+    @name = params[:q]
+
+    @tags = ['operadores', 'control-de-flujo', 'ciclos', 'funciones', 'arreglos'].map do |tag|
+      [tag.titleize, tag]
+    end
+    @tags.unshift(['Selecciona una etiqueta', '0'])
+
+    @order_by = [['Más Reciente', 'latest'], ['Más Antiguo', 'oldest'], ['Fáciles', 'easiest'], ['Difíciles', 'hardest'], ['Nombre', 'name']]
   end
 end

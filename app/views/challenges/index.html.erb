@@ -1,36 +1,36 @@
-<!-- <div class="container"> -->
-	<section class="row"><!-- exercise list-->
-		<div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
-			<!-- <h3 class="mb-4">Ejercicios</h3> -->
-			
-			<!-- <form action="#" class="inline-form">
-				<div class="form-group row">
-					<div class="col-lg-3">
-						<label class="sr-only">Nivel</label>
-						<select class="form-control mb-xs-5 mb-sm-3">
-							<option disabled selected="selected">Nivel</option>
-							<option value="0">1</option>
-							<option value="1">2</option>
-							<option value="2">3</option>
-							<option value="3">4</option>
-						</select>
-					</div>
-					<div class="col-lg-3">
-						<label class="sr-only">Categoria</label>
-						<select class="form-control mb-xs-5 mb-sm-3">
-							<option disabled selected="selected">Categoria</option>
-							<option value="0">Algoritmos</option>
-							<option value="1">Arreglos</option>
-							<option value="2">Funciones</option>
-							<option value="3">Ordenamiento</option>
-						</select>
-					</div>
-					<div class="col-lg-2">
-						<button type="submit" class="btn btn-outline-success btn-block">Filtrar</button>
-					</div>
+<section class="row"><!-- challenges list -->
+	<div class="ml-lg-2 col-sm-12 col-md-12 col-lg-4">
+			<%= form_tag({ controller: 'challenges', action: 'search'}, method: 'get', class: 'challenge-filter') do %>
+			<div class="field">
+				<div class="control -full">
+    			<i class="icon fa fa-search" aria-hidden="true"></i>
+					<%= text_field_tag 'q', @name, class: 'input', placeholder: 'Buscar por nombre' %>
 				</div>
-			</form> -->
-			<%= render partial: 'shared/challenge_details', collection: @challenges, as: :challenge %>
-		</div>
-	</section><!-- end exercise list section -->
-<!-- </div> -->
+			</div>
+			<div class="field">
+				<label class="label">Ordenar por</label>
+				<div class="control">
+    			<i class="icon fa fa-sort-amount-asc" aria-hidden="true"></i>
+					<%= select_tag 'order_by', options_for_select(@order_by, @order), class: 'input' %>
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">Etiquetas</label>
+				<div class="control">
+    			<i class="icon fa fa-tags" aria-hidden="true"></i>
+					<%= select_tag 'tag', options_for_select(@tags, {selected: @tag, disabled: '0'}), class: 'input' %>
+				</div>
+			</div>
+			<div class="actions d-flex justify-content-between">
+				<button type="submit" class="base-button -blue -small">Buscar</button>
+				<button class="base-button -gray -small" id="reset">Limpiar</button>
+			</div>
+		<% end %>
+	</div>
+	<div class="ml-lg-3 col-sm-12 col-md-12 col-lg-7">
+		<span class="challenges-found"><%= "#{@challenges.size} Ejercicios Encontrados "%></span>
+		<%= render partial: 'shared/challenge_details', collection: @challenges, as: :challenge %>
+	</div>
+</section><!-- end challenges list section -->
+
+<%= javascript_pack_tag 'challenges/index' %>

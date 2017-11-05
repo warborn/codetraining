@@ -3,6 +3,11 @@ let Router = {
     window.location.replace(url);
   },
 
+  // Challenges index action
+  challenges_path() {
+    return '/challenges';
+  },
+
   // Challenges show action
   challenge_path() {
     return `/challenges/${this.getChallengeID()}/show/${this.getLanguage()}`;
