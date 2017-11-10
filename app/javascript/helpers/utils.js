@@ -3,10 +3,10 @@ import hljs from 'highlight.js';
 import marked from 'marked';
 import { WHEEL_SPEED, FAST_WHEEL_SPEED, MAX_SCROLLBAR_LENGTH } from 'config/constants';
 
+// Use the Perfect Scrollbar's jQuery adaptor
+Ps($)
+
 export function setupScrollbars(selectors, fastSpeed = false) {
-  // Use the jQuery adaptor
-  Ps($)
-  
   selectors.forEach(function(selector) {
     $(selector).perfectScrollbar({
       wheelSpeed: fastSpeed ? FAST_WHEEL_SPEED : WHEEL_SPEED,
