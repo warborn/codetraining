@@ -34,7 +34,7 @@
     "codemirror-one-dark-theme": "https://github.com/warborn/codemirror-one-dark-theme.git",
     "devicon-2.2": "^2.2.0",
     "font-awesome": "^4.7.0",
-    "gijgo": "^1.4.0",
+    "gijgo": "1.4.0",
     "highlight.js": "^9.12.0",
     "jquery": "^3.2.1",
     "jquery-ujs": "^1.2.2",
