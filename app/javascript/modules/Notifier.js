@@ -1,3 +1,5 @@
+import 'bootstrap-notify/bootstrap-notify';
+
 let Notifier = {
   _settings: {
     // settings

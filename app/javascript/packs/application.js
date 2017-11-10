@@ -7,6 +7,12 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import '../application.sass';
+
+import 'jquery';
+import 'jquery-ujs';
+import 'bootstrap';
+
 import { setupScrollbars } from 'helpers/utils';
 
 $(document).ready(function() {

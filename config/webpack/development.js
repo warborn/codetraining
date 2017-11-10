@@ -3,8 +3,9 @@
 const merge = require('webpack-merge')
 const sharedConfig = require('./shared.js')
 const { settings, output } = require('./configuration.js')
+const environment = require('./environment.js')
 
-module.exports = merge(sharedConfig, {
+module.exports = merge(environment, {
   devtool: 'cheap-eval-source-map',
 
   output: {

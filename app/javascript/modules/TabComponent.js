@@ -1,3 +1,5 @@
+import 'bootstrap/js/src/tab';
+
 class TabComponent {
   constructor(config) {
     this._root = config.root;
