@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project
 
-Things you may want to cover:
+Codewars-like platform built with Ruby on Rails based on  the [codewars-runner-cli](https://github.com/codewars/codewars-runner-cli/tree/master).
 
-* Ruby version
+This project was created with the intention of developing a complex web application that uses the following technologies:
 
-* System dependencies
+* Docker
+* Ruby on Rails
+* Webpack
+* In-app code editor
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I worked on it in **2017** while I was a student, here's a [presentation](https://slides.com/warborn/codetraining) that demonstrates the features.
